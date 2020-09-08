@@ -1,12 +1,13 @@
 import express from 'express'
-import {homeC} from "./../controllers/index"
+
+import HomeController  from "../controllers/home.controller";
 
 let router = express.Router();
 
-let webRouter = (app)=>{
-    app.use("/",router);
-    //Router dùng để truy cập Home
-    router.get("/",homeC.homepage);
+let webRouter = (app) => {
+    app.use("/", router);
+    //index route
+    router.get("/", HomeController.homepage);
 }
 
 module.exports = webRouter;

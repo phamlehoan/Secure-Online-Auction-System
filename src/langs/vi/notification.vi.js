@@ -1,5 +1,6 @@
-//Các thông báo về lỗi của hệ thống sẽ lưu ở đây
-//Example
+/**
+ * Define all constants for VI location
+ */
 const messageError = {
     password: "Bạn nhập sai mật khẩu",
 }

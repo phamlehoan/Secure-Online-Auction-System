@@ -1,1 +1,0 @@
-//Tạo các hàm liên kết đến database để phục vụ cho các controller

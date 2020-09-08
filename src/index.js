@@ -1,23 +1,31 @@
+//config environment variables
+require("dotenv").config();
+
 import express from "express";
-import dotenv from "dotenv";
+import morgan from "morgan";
+import bodyParser from "body-parser";
+
 import configViewEngine from "./configs/viewEngine"
 import Router from "./routers/web" 
 
-//-------Khởi tạo--------
-//Sử dụng biến môi trường
-dotenv.config();
-//Khỏi tạo express
+
+//initialize application instance
 let app = express();
 //-----------------------
 
 //------Middleware-------
-//Cấu hình view Engine
+//app view engine configuration
 configViewEngine(app);
 //-----------------------
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan("dev"));
 
-//Sử dụng Router
+//app routers
 Router(app);
 
-app.listen(process.env.APP_PORT,()=>{
-    console.log(`Server running at http://${process.env.APP_HOST}:${process.env.APP_PORT}/`);
+const APP_HOST = process.env.APP_HOST || "localhost";
+const APP_PORT = process.env.APP_PORT || 3000;
+
+app.listen(APP_PORT, APP_HOST, () => {
+    console.log(`Server running at http://${APP_HOST}:${APP_PORT}/`);
 })
