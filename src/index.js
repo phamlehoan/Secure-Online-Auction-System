@@ -7,6 +7,7 @@ import bodyParser from "body-parser";
 
 import configViewEngine from "./configs/viewEngine"
 import Router from "./routers/web" 
+import dbConfig from "./configs/db.config";
 
 
 //initialize application instance
@@ -16,6 +17,10 @@ let app = express();
 //------Middleware-------
 //app view engine configuration
 configViewEngine(app);
+
+//connect database
+dbConfig();
+
 //-----------------------
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
