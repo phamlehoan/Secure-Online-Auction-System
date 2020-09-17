@@ -1,5 +1,6 @@
 //config environment variables
 require("dotenv").config();
+var path = require('path');
 
 import express from "express";
 import morgan from "morgan";
@@ -20,6 +21,16 @@ configViewEngine(app);
 
 //connect database
 dbConfig();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+//public files
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/product')));
+app.use(express.static(path.join(__dirname, 'public/account')));
+app.use(express.static(path.join(__dirname, 'public/manage')));
 
 //-----------------------
 app.use(bodyParser.urlencoded({ extended: true }));
