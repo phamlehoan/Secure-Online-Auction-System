@@ -1,14 +1,17 @@
 //config environment variables
-require("dotenv").config();
 
 import express from "express";
 import morgan from "morgan";
 import bodyParser from "body-parser";
+import dotenv from 'dotenv';
+import connectFlash from 'connect-flash';
 
 import configViewEngine from "./configs/viewEngine"
 import Router from "./routers/web" 
 import dbConfig from "./configs/db.config";
+import sessionConfig from "./configs/session.config"
 
+dotenv.config();
 
 //initialize application instance
 let app = express();
@@ -21,9 +24,13 @@ configViewEngine(app);
 //connect database
 dbConfig();
 
+//connect session
+sessionConfig(app);
+
 //-----------------------
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(morgan("dev"));
+app.use(connectFlash());
+// app.use(morgan("dev"));
 
 //app routers
 Router(app);
