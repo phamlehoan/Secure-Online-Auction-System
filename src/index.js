@@ -5,11 +5,14 @@ var path = require('path');
 import express from "express";
 import morgan from "morgan";
 import bodyParser from "body-parser";
+import connectFlash from 'connect-flash';
 
 import configViewEngine from "./configs/viewEngine"
 import Router from "./routers/web" 
 import dbConfig from "./configs/db.config";
+import sessionConfig from "./configs/session.config"
 
+dotenv.config();
 
 //initialize application instance
 let app = express();
@@ -22,18 +25,18 @@ configViewEngine(app);
 //connect database
 dbConfig();
 
+//connect session
+sessionConfig(app);
+=======
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 //public files
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public/product')));
-app.use(express.static(path.join(__dirname, 'public/account')));
-app.use(express.static(path.join(__dirname, 'public/manage')));
 
 //-----------------------
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(connectFlash());
 app.use(morgan("dev"));
 
 //app routers
