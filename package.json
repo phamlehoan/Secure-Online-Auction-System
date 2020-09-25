@@ -1,0 +1,40 @@
+{
+  "name": "secure-online-auction-system",
+  "version": "1.0.0",
+  "description": "Backend of SOSA",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node src/index.js",
+    "dev": "nodemon --exec babel-node src/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoanvn1999/Secure-Online-Auction-System.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoanvn1999/Secure-Online-Auction-System/issues"
+  },
+  "homepage": "https://github.com/hoanvn1999/Secure-Online-Auction-System#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^2.4.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.6.1",
+    "mongoose": "^5.10.4",
+    "morgan": "^1.10.0",
+    "uuid": "^8.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^2.0.4"
+  }
+}

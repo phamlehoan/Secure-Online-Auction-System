@@ -1,0 +1,10 @@
+<% if (errors != "") { %>
+    <% errors.forEach(element => { %>
+        <div class="alert alert-danger"><%-element %> </div>
+    <% })} %>
+<% if (success != "") { %>
+    <% success.forEach(element => {%>
+        <div class="alert alert-success"><%-element  %> </div>
+    <%})} %>
+
+  
