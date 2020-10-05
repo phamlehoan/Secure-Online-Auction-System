@@ -12,7 +12,6 @@ import Router from "./routers/web"
 import dbConfig from "./configs/db.config";
 import sessionConfig from "./configs/session.config"
 
-dotenv.config();
 
 //initialize application instance
 let app = express();
@@ -27,7 +26,7 @@ dbConfig();
 
 //connect session
 sessionConfig(app);
-=======
+//=======
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
