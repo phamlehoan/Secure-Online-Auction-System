@@ -1,24 +1,19 @@
-var express = require('express');
-var router = express.Router();
+import express from "express";
+
+import ProductController from "../controllers/product.controller";
+
+let router = express.Router();
 
 /* GET list products page. */
-router.get('/', function(req, res, next) {
-  res.render('Product/listProduct', { title: 'SOAS. - List Products' });
-});
+router.get('/', ProductController.getListProduct);
 
 /* GET product details page. */
-router.get('/details', function(req, res, next) {
-  res.render('Product/productDetails', { title: 'SOAS. - Product Details' });
-});
+router.get('/details', ProductController.getListDetails);
 
 /* GET cart page. */
-router.get('/cart', function(req, res, next) {
-  res.render('Product/cart', { title: 'SOAS. - Cart' });
-});
+router.get('/cart', ProductController.getCart);
 
 /* GET winning product page. */
-router.get('/winning-product', function(req, res, next) {
-  res.render('Product/winningProduct', { title: 'SOAS. - Winning Products' });
-});
+router.get('/winning-product', ProductController.winningProduct);
 
 module.exports = router;

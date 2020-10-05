@@ -1,12 +1,23 @@
-import userModel from './../models/user.model';
 import bcrypt from 'bcrypt';
-import {v4 as uuidv4} from 'uuid';
-import {notiRes} from './../langs/us/notification.us'
+import { v4 as uuidv4 } from 'uuid';
+
+import userModel from './../models/user.model';
+import { notiRes } from './../langs/us/notification.us';
 
 const AuthService = {};
 let saltRound = 7;
+
+/**
+ * 
+ * 
+ * @param {String} name 
+ * @param {String} email 
+ * @param {String} pass 
+ * @param {String} protocol 
+ * @param {String} host 
+ */
 AuthService.postRegister = (name, email, pass, protocol, host)=>{
-    return new Promise(async (resolve,reject)=>{
+    return new Promise(async (resolve, reject)=>{
         let checkEmail = await userModel.findUserbyEmail(email);
         if(checkEmail){
             if(checkEmail.deletedAt != null)
@@ -21,7 +32,7 @@ AuthService.postRegister = (name, email, pass, protocol, host)=>{
             username : name,
             local: {
                 email: email,
-                password: bcrypt.hashSync(pass,salt),
+                password: bcrypt.hashSync(pass, salt),
                 token: uuidv4()
             }
         };
