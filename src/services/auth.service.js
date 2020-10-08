@@ -1,6 +1,7 @@
 import userModel from './../models/user.model';
 import bcrypt from 'bcrypt';
 import { notiRes } from './../langs/us/notification.us'
+const jwt = require("jsonwebtoken");
 
 const AuthService = {};
 
@@ -15,7 +16,6 @@ AuthService.login = (name, email, pass, protocol, host) => {
       if (!user.local.isActived)
         return reject(notiRes.activeUser);
     }
-    console.log(user)
     bcrypt.compare(pass, user.password, (err, result) => {
       if (err) {
         return reject (notiRes.invalidlUser);
@@ -31,12 +31,9 @@ AuthService.login = (name, email, pass, protocol, host) => {
             expiresIn: "1h"
           }
         );
-        return res.status(200).json({
-          message: successUser,
-          token: token
-        });
+        return resolve(notiRes.successUser, token);
       }
-      return reject (notiRes.invalidlUser);
+      return reject(notiRes.invalidlUser);
     });
   })
 }

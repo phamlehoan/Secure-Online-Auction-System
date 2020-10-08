@@ -11,6 +11,8 @@ let webRouter = (app) => {
     //index route
     router.get("/", HomeController.homepage);
 
+    router.get("/register", AuthController.getLogin);
+
     //Router post login
     router.post("/login", AuthValid.checkLogin, AuthController.login);
 }
