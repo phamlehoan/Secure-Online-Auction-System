@@ -91,6 +91,18 @@ const UserSchema = new Schema({
   },
 });
 
+UserSchema.statics ={
+  createItem(item){
+    return this.create(item)
+  },
+  findUserbyEmail(email){
+    return this.findOne({"local.email":email}).exec();
+  },
+  findUserById(id){
+    return this.findById(id).exec();
+  }
+}
 const UserModel =  mongoose.model("Users", UserSchema);
+
 
 export default UserModel;
