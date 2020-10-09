@@ -4,9 +4,6 @@ import {regisErr} from './../langs/us/notification.us';
 const AuthValid = {}
 
 AuthValid.checkRegister = [
-    check("name",regisErr.username)
-        .isLength({min:3, max:30})
-        .matches(/^[\s0-9a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/),
     check("email", regisErr.email)
         .isEmail()
         .trim(),

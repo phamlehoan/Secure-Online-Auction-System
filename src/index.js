@@ -10,6 +10,7 @@ import configViewEngine from "./configs/viewEngine"
 import Router from "./routers/web" 
 import dbConfig from "./configs/db.config";
 import sessionConfig from "./configs/session.config"
+import passport from 'passport';
 
 dotenv.config();
 
@@ -31,6 +32,10 @@ sessionConfig(app);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(connectFlash());
 // app.use(morgan("dev"));
+
+//Sử dụng passport để xác thực tài khoản
+app.use(passport.initialize());
+app.use(passport.session());
 
 //app routers
 Router(app);

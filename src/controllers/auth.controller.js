@@ -26,18 +26,59 @@ AuthController.postRegister = async(req,res)=>{
         return res.redirect("register");
     }
     try {
-       let registerSuccess = await authService.postRegister(req.body.name, req.body.email, req.body.pass, req.protocol,req.get('host'));
+       let registerSuccess = await authService.postRegister(req.body.email, req.body.pass, req.protocol,req.get('host'));
         arrSucc.push(registerSuccess);
         req.flash('success',arrSucc);
-        console.log("Đăng ký thành công");
         res.redirect("register")
     } catch (error) {
         arrErr.push(error);
         req.flash('errors',arrErr);
-        console.log("Đăng ký thất bại");
         res.redirect("register")
     }
 
+}
+AuthController.getLogin = (req,res)=>{
+    return res.render("auth/login/login",{
+        //Gửi 2 biến lên để thông báo trong alert
+        errors: req.flash("errors"),
+        success:req.flash("success")
+    });
+}
+
+AuthController.activeAccount = async(req,res)=>{
+    let arrErr= []; //Create arrray to contain err
+    let arrSucc=[]; //Create array để chứa thông báo thành công
+    try {
+        //Lấy thông báo từ database, nếu không lỗi sẽ có thông báo success
+        let activeSucc = await authService.activeAccount(req.params.token)
+        arrSucc.push(activeSucc);
+        //Lưu mảng thành công vào flash để đẩy lên phía client
+        req.flash('success',arrSucc);
+        res.redirect('/login');
+    } catch (error) {
+        arrErr.push(error);
+        req.flash("errors",arrErr);
+        res.redirect('/login');
+    }
+}
+
+//Controller của router đăng xuất
+AuthController.getLogout = (req,res)=>{
+    req.logout();
+    req.flash("success",transSucc.logoutSucess)
+    res.redirect("/login")
+}
+//Kiểm tra xem đã Login hay chưa
+AuthController.checkLoggedIn = (req,res,next)=>{
+    if(!req.isAuthenticated())
+        return res.redirect("/login");
+    next();
+}
+//Kiểm tra xem đã logout hay chưa
+AuthController.checkLoggedOut = (req,res,next)=>{
+    if(req.isAuthenticated())
+        return res.redirect("/");
+    next();
 }
 
 export default AuthController;
