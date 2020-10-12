@@ -16,7 +16,7 @@ const {
     MONGO_PORT,
   } = process.env;
 
-  const MONGO_CONNECTION_STRING = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}/${MONGO_DB_NAME}?${MONGO_OPTIONS}`;
+  const MONGO_CONNECTION_STRING = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB_NAME}?${MONGO_OPTIONS}`;
 
 //Cấu hình sessionStore
 let sessionStore = new mongoDBStrore({
@@ -37,4 +37,5 @@ let configSession = (app) =>{
         cookie: { maxAge: 1000*60*60*24} // Set thời gian sống cho cookie là 1 ngày
     }));
 };
+
 module.exports = configSession;

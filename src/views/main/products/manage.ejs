@@ -1,0 +1,79 @@
+<!-- header -->
+<%- include("../common/header/header.ejs"); %>
+<!-- breadcrumb -->
+<%- include("../common/menu/menu.ejs"); %>
+    <!-- Shop Section Begin -->
+    <!-- Product Section Begin -->
+    <section class="shop-cart spad">
+        <div class="container bg-white p-5 rounded">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shop__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Products</th>
+                                    <th>Category</th>
+                                    <th>Current price</th>
+                                    <th>Expected price</th>
+                                    <th>Control</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span>
+                                            <i class="fa fa-check-circle text-success"></i>
+                                        </span>
+                                    </td>
+                                    <td class="cart__product__item">
+                                        <img src="/img/shop-cart/cp-1.jpg" alt="">
+                                        <div class="cart__product__item__title">
+                                            <h6>Chain bucket bag</h6>
+                                            <div class="rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="cart__category">Fashion</td>
+                                    <td class="cart__price">$ 150.0</td>
+                                    <td class="cart__total">$ 300.0</td>
+                                    <td class="cart__close d-flex mt-4">
+                                        <button class="btn btn-success mr-1">
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </button>
+                                        <button class="btn btn-danger mr-1">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                        <button class="btn btn-info">
+                                            <i class="fa fa-play" aria-hidden="true" title="Start Livestream"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="cart__btn">
+                        <a href="#">Bidding</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="cart__btn update__btn">
+                        <a href="#"><span class="icon_loading"></span> Update list</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+<!-- footer -->
+<%- include("../common/footer/footer.ejs"); %>

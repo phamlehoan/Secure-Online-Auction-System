@@ -1,26 +1,21 @@
 import express from 'express'
-import AuthValid from '../validation/auth.validation'
 
-import HomeController  from "../controllers/home.controller";
-import AuthController from "../controllers/auth.controller";
-
-import productRoute from "./product";
-import accountRoute from "./account";
+import productRoute from "./product.route";
+import accountRoute from "./account.route";
+import userRoute from "./user.route";
 
 let router = express.Router();
 
 let webRouter = (app) => {
   
-  //index route
+    //index route
     app.use("/", router);
   
-    router.get("/register", AuthController.getRegister);
-  
-    //Router post from register
-    router.post("/register", AuthValid.checkRegister, AuthController.postRegister);
-  
+    //register
+    app.use("/register", userRoute)
+
     //product route
-    app.use("/product", productRoute);
+    app.use("/products", productRoute);
   
     //account route
     app.use("/", accountRoute);
