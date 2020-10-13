@@ -29,7 +29,7 @@ let webRouter = (app) => {
     //Router Logout system
     router.get("/logout",AuthController.checkLoggedIn,AuthController.getLogout)
     //Router Homepage
-    router.get("/",HomeController.getHomepage)
+    router.get("/",AuthController.checkUser,HomeController.getHomepage)
     //Router view Profile
     router.get("/profile",AuthController.checkLoggedIn,HomeController.getProfile)
 

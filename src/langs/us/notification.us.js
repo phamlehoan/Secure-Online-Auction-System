@@ -39,6 +39,7 @@ const loginError = {
 }
 const loginSuccess = {
     loginSuccess: "The account is logged in successfully.",
+    logoutSuccess: "The account is logged out successfully.",
 }
 
 export const regisErr = registerError;
