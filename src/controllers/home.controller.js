@@ -4,17 +4,20 @@
 const HomeController = {};
 
 HomeController.getHomepage = (req,res) =>{
-    console.log(req.user);
-    return res.render("main/home/home")
+    return res.render("main/home/home",{
+        data: req.flash("data")
+    })
 }
 
 HomeController.getProfile = (req,res)=>{
-    return res.render("main/profile/profile")
+    return res.render("main/profile/profile",{
+        data: req.flash("data"),
+        user: req.user,
+        errors: req.flash("errors"),
+        success:req.flash("success")
+    })
 }
-HomeController.data = (req,res,next)=>{
-    req.flash("data",req.user);
-    next(); 
-}
+
 
 
 export default HomeController;

@@ -1,8 +1,10 @@
 import express from 'express';
 import AuthValid from '../validation/auth.validation';
+import UserValid from '../validation/user.validation';
 import passport from 'passport';
 import HomeController  from "../controllers/home.controller";
 import AuthController from "../controllers/auth.controller";
+import UserController from "../controllers/user.controller";
 import initPassportLocal from "./../controllers/passport.controller/local"
 
 initPassportLocal();
@@ -29,12 +31,12 @@ let webRouter = (app) => {
     //Router Logout system
     router.get("/logout",AuthController.checkLoggedIn,AuthController.getLogout)
     //Router Homepage
-    router.get("/",HomeController.getHomepage)
+    router.get("/",AuthController.checkUser,HomeController.getHomepage)
     //Router view Profile
-    router.get("/profile",AuthController.checkLoggedIn,HomeController.getProfile)
-
-    
-
+    router.get("/profile",AuthController.checkLoggedIn,AuthController.checkUser,UserController.getProfile)
+    router.put("/profile/user/update",AuthController.checkLoggedIn,AuthController.checkUser,UserValid.checkUserUpdate,UserController.updateProfile);
+    //Router change password
+    router.get("/change-password",AuthController.checkLoggedIn,AuthController.checkUser,UserController.getChangePass)
 }
 
 module.exports = webRouter;

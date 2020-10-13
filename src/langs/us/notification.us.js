@@ -39,10 +39,23 @@ const loginError = {
 }
 const loginSuccess = {
     loginSuccess: "The account is logged in successfully.",
+    logoutSuccess: "The account is logged out successfully.",
 }
-
+const updateUser = {
+    err : {
+        username : "Username limited from 1-30 characters and does not contain special characters",
+        firstname: "First Name limited from 1-15 characters and does not contain special characters",
+        lastname: "Last Name limited from 1-15 characters and does not contain special characters",
+        gender: "Woaa!!! You are hacker ?",
+        district: "District limited from 1-30 characters",
+        detailAddress: "Detail address limited from 1-100 characters",
+        city: "City limited from 1-30 characters",
+        phone: "Number phone is number and limited from 10-11 characters",
+    }
+}
 export const regisErr = registerError;
 export const notiRes = notificationRegister;
 export const transMail = translateMail;
 export const loginErr = loginError;
 export const loginSucc = loginSuccess;
+export const updateUserMess = updateUser;

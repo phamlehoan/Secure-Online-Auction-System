@@ -1,5 +1,6 @@
 import authService from './../services/auth.service';
 import {validationResult} from 'express-validator';
+import {loginSucc} from './../langs/us/notification.us'
 
 const AuthController = {};
 
@@ -65,7 +66,7 @@ AuthController.activeAccount = async(req,res)=>{
 //Controller của router đăng xuất
 AuthController.getLogout = (req,res)=>{
     req.logout();
-    req.flash("success",transSucc.logoutSucess)
+    req.flash("success",loginSucc.logoutSuccess)
     res.redirect("/login")
 }
 //Kiểm tra xem đã Login hay chưa
@@ -78,6 +79,17 @@ AuthController.checkLoggedIn = (req,res,next)=>{
 AuthController.checkLoggedOut = (req,res,next)=>{
     if(req.isAuthenticated())
         return res.redirect("/");
+    next();
+}
+AuthController.checkUser = (req,res,next)=>{
+    if(req.user)
+    {
+        req.flash("data",true);
+    }
+    else    
+    {
+        req.flash("data",false);
+    }
     next();
 }
 

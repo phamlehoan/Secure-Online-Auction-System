@@ -19,7 +19,7 @@ export default () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
-      useFindAndModify: true,
+      useFindAndModify: false,
     })
     .then(() => {
       console.log("mongodb connected");

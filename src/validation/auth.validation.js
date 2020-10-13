@@ -13,8 +13,7 @@ AuthValid.checkRegister = [
     check("re_pass",regisErr.confirmPassword)
         .custom((value,{req})=>{
             return value === req.body.pass;
-        })
+    })
 ];
 
 export default AuthValid;
-

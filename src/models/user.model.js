@@ -15,7 +15,7 @@ const UserSchema = new Schema({
     default: "male",
   },
   phone: {
-    type: Number,
+    type: String,
     default: null,
   },
   avatarUrl: {
@@ -37,7 +37,22 @@ const UserSchema = new Schema({
       address: String,
       fontCardUrl: String,
       backCardUrl: String
-    }
+    },
+    firstname:{
+      type: String,
+    },
+    lastname:{
+      type: String,
+    },
+    dob:{
+      type: String,
+      default: "1900-01-01"
+    },
+    address:{
+      city: String,
+      district: String,
+      detailAddress: String
+    },
   },
   local: {
     email: {
@@ -99,14 +114,19 @@ UserSchema.statics ={
   findToken(token){
     return this.findOne({"local.token": token})
   },
+  updateUserInfo(id,file)
+  {
+    console.log("Vao dayy");
+      return this.findByIdAndUpdate(id,file).exec();
+  },
   //Tìm user có token và sửa lại active = true và xóa token
   activeAccount(token){
     return this.findOneAndUpdate({
-        "local.token": token
+        "local.token": token,
     },
     {
         "local.token": null,
-        "local.isActive": true,
+        "local.isActived": true,
     }).exec();
 },
 }
