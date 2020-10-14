@@ -1,18 +1,17 @@
 //config environment variables
+require("dotenv").config();
+var path = require('path');
 
 import express from "express";
 import morgan from "morgan";
 import bodyParser from "body-parser";
-import dotenv from 'dotenv';
 import connectFlash from 'connect-flash';
 
 import configViewEngine from "./configs/viewEngine"
 import Router from "./routers/web" 
 import dbConfig from "./configs/db.config";
 import sessionConfig from "./configs/session.config"
-import passport from 'passport';
 
-dotenv.config();
 
 //initialize application instance
 let app = express();
@@ -27,15 +26,17 @@ dbConfig();
 
 //connect session
 sessionConfig(app);
+//=======
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+//public files
+app.use(express.static(path.join(__dirname, 'public')));
 
 //-----------------------
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(connectFlash());
-// app.use(morgan("dev"));
-
-//Sử dụng passport để xác thực tài khoản
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(morgan("dev"));
 
 //app routers
 Router(app);

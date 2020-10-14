@@ -2,13 +2,13 @@
  * Define user schema
  */
 import mongoose from "mongoose";
-import bcrypt from 'bcrypt';
 
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   username: {
     type: String,
+    required: true
   },
   gender: {
     type: String,
@@ -83,37 +83,14 @@ const UserSchema = new Schema({
 });
 
 UserSchema.statics ={
-  //Tạo mới user
   createItem(item){
     return this.create(item)
   },
-  //Tìm user bằng email
   findUserbyEmail(email){
     return this.findOne({"local.email":email}).exec();
   },
-  //Tìm user bằng id
   findUserById(id){
     return this.findById(id).exec();
-  },
-  //Tìm token
-  findToken(token){
-    return this.findOne({"local.token": token})
-  },
-  //Tìm user có token và sửa lại active = true và xóa token
-  activeAccount(token){
-    return this.findOneAndUpdate({
-        "local.token": token
-    },
-    {
-        "local.token": null,
-        "local.isActive": true,
-    }).exec();
-},
-}
-UserSchema.methods = {
-  //Hàm so sánh mật khẩu
-  comparePass(password){
-        return bcrypt.compare(password,this.local.password);
   }
 }
 const UserModel =  mongoose.model("Users", UserSchema);

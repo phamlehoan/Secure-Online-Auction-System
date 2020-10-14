@@ -7,9 +7,20 @@ dotenv.config();
 //Tạo mongoStrre để lưu session vào database
 let mongoDBStrore = MongoDBStore(session);
 
+const {
+    MONGO_USERNAME,
+    MONGO_PASSWORD,
+    MONGO_HOST,
+    MONGO_DB_NAME,
+    MONGO_OPTIONS,
+    MONGO_PORT,
+  } = process.env;
+
+  const MONGO_CONNECTION_STRING = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB_NAME}?${MONGO_OPTIONS}`;
+
 //Cấu hình sessionStore
 let sessionStore = new mongoDBStrore({
-    uri: `mongodb://${process.env.MONGO_HOST}:${process.env.MONGO_PORT}/${process.env.MONGO_DB_NAME}`,
+    uri: MONGO_CONNECTION_STRING,
     collection: 'mySessions',
     autoReconnect: true,
     autoRemove: "native"
@@ -26,4 +37,5 @@ let configSession = (app) =>{
         cookie: { maxAge: 1000*60*60*24} // Set thời gian sống cho cookie là 1 ngày
     }));
 };
+
 module.exports = configSession;

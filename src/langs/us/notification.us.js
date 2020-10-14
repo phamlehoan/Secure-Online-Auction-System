@@ -44,6 +44,3 @@ const loginSuccess = {
 
 export const regisErr = registerError;
 export const notiRes = notificationRegister;
-export const transMail = translateMail;
-export const loginErr = loginError;
-export const loginSucc = loginSuccess;

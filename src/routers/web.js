@@ -1,14 +1,14 @@
-import express from 'express';
-import AuthValid from '../validation/auth.validation';
-import passport from 'passport';
-import HomeController  from "../controllers/home.controller";
-import AuthController from "../controllers/auth.controller";
-import initPassportLocal from "./../controllers/passport.controller/local"
+import express from 'express'
 
-initPassportLocal();
+import productRoute from "./product.route";
+import accountRoute from "./account.route";
+import userRoute from "./user.route";
+
 let router = express.Router();
 
 let webRouter = (app) => {
+  
+    //index route
     app.use("/", router);
     //Router view register
     router.get("/register", AuthController.getRegister);
@@ -32,9 +32,15 @@ let webRouter = (app) => {
     router.get("/",AuthController.checkUser,HomeController.getHomepage)
     //Router view Profile
     router.get("/profile",AuthController.checkLoggedIn,HomeController.getProfile)
+  
+    //register
+    app.use("/register", userRoute);
 
-    
-
+    //product route
+    app.use("/products", productRoute);
+  
+    //account route
+    app.use("/", accountRoute);
 }
 
 module.exports = webRouter;

@@ -27,15 +27,18 @@ const ProductSchema = new Schema({
     type: String,
   },
   categories: {
-    name: String,
-    code: String,
-    required: true
+    name: {
+      type: String,
+      required: true
+    }
   },
+  image: String,
   tags: Array,
   priceStep: String,
   priceMethod: String,
   outbidPrice: Number,
   status: String,
+  userId: String,
   createdAt: {
     type: Number,
     default: Date.now,

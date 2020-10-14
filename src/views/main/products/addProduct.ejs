@@ -1,0 +1,203 @@
+<!-- header -->
+<%- include("../common/header/header.ejs"); %>
+<!-- menu -->
+<%- include("../common/menu/menu.ejs"); %>
+    <!-- Adding product Section Begin -->
+    <section class="product spad">
+        <div class="container rounded bg-white p-5">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h4>New product</span></h4>
+                    </div>
+                </div>
+            </div>
+            <form action="/products/add" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="form-group col-lg-8 col-md-8">
+                    <label for="prd-name" class="text-left font-weight-bold">Product name</label>
+                    <input type="text" name="name" id="prd-name" class="form-control"
+                        placeholder="Product name">
+                </div>
+                <div class="form-group col-lg-4 col-md-4">
+                    <label for="prd-type" class="text-left font-weight-bold">Product type</label>
+                    <select class="form-control" id="prd-type" name="category">
+                        <% categories.forEach(category => { %>
+                        <option value="<%- category.code %>"><%- category.value%></option>
+                        <%})%>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-8">
+                    <div class="font-weight-bold label">Images</div>
+                    <div class="row">
+                        <div id="preview"></div>
+                        <label class="btn">
+                            <img src="/img/product/related/newImage.png" style="width: 80px;"
+                                alt="Add new image">
+                            <input id="file-input" name="file" type="file" multiple hidden>
+                        </label>
+                    </div>
+                    <script type="text/javascript">
+                        var evImage = document.getElementById('file-input');
+                        evImage.onchange = function () {
+                            var preview = document.querySelector('#preview');
+
+                            if (this.files) {
+                                [].forEach.call(this.files, readAndPreview);
+                            }
+
+                            function readAndPreview(file) {
+
+                                // Make sure `file.name` matches our extensions criteria
+                                if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                                    return alert(file.name + " is not an image");
+                                } // else...
+
+                                var reader = new FileReader();
+
+                                reader.addEventListener("load", function () {
+                                    var image = new Image();
+                                    image.height = 100;
+                                    image.title = file.name;
+                                    image.src = this.result;
+                                    image.classList.add('p-3');
+                                    preview.appendChild(image);
+                                });
+
+                                reader.readAsDataURL(file);
+
+                            }
+
+                        }
+                    </script>
+                </div>
+                <div class="form-group col-4">
+                    <label for="hashtags" class="text-left font-weight-bold">Hashtag</label>
+                    <input type="text" id="hashtags" autocomplete="off" class="form-control"
+                        placeholder="To find products easier">
+                    <div class="tag-container"></div>
+                    <style>
+                        .tag-container {
+                        display: flex;
+                        flex-flow: row wrap;
+                        }
+
+                        .tag{
+                        pointer-events: none;
+                        background-color: #242424;
+                        color: white;
+                        padding: 6px;
+                        margin: 5px;
+                        }
+
+                        .tag::before {
+                        pointer-events: all;
+                        display: inline-block;
+                        content: 'x';  
+                        height: 20px;
+                        width: 20px;
+                        margin-right: 6px;
+                        text-align: center;
+                        color: #ccc;
+                        background-color: #111;
+                        cursor: pointer;
+                        }
+                    </style>
+                    <script>
+                        let input, hashtagArray, container, t;
+
+                        input = document.querySelector('#hashtags');
+                        container = document.querySelector('.tag-container');
+                        hashtagArray = [];
+
+                        input.addEventListener('keyup', () => {
+                            if (event.which == 13 && input.value.length > 0) {
+                                var text = document.createTextNode(input.value);
+                                var p = document.createElement('p');
+                                container.appendChild(p);
+                                p.appendChild(text);
+                                p.classList.add('tag');
+                                input.value = '';
+
+                                let deleteTags = document.querySelectorAll('.tag');
+
+                                for (let i = 0; i < deleteTags.length; i++) {
+                                    deleteTags[i].addEventListener('click', () => {
+                                        container.removeChild(deleteTags[i]);
+                                    });
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="start-price" class="text-left font-weight-bold">Reserve Price</label>
+                            <input type="text" class="form-control" id="start-price" name="reservePrice" class="text-left font-weight-bold" placeholder="10000.0&#8363">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="price-step" class="text-left font-weight-bold">Price step</label>
+                            <input type="text" class="form-control" id="price-step" name="priceStep" class="text-left font-weight-bold" placeholder="5000.0&#8363">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="row">
+                        <!-- <div class="form-group col-6">
+                            <label for="exp-price" class="text-left font-weight-bold">Expectation Price</label>
+                            <input type="text" class="form-control" id="exp-price" name="exp-price" class="text-left font-weight-bold" placeholder="5000.0&#8363">
+                        </div> 
+                        <div class="form-group col-6 pt-4 mt-3">
+                            <input type="checkbox" class="custom-control-input" id="hide-exp-price">
+                            <label class="custom-control-label" for="hide-exp-price">Hide expectation price</label>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-lg-6 col-md-6">
+                    <label for="start-datetime-local-input" class="text-left font-weight-bold">Start time</label>
+                    <input class="form-control" name="startTime" type="datetime-local" value="2020-08-19T13:45:00"
+                        id="start-datetime-local-input">
+                </div>
+                <div class="form-group col-lg-6 col-md-6">
+                    <label for="end-datetime-local-input" class="text-left font-weight-bold">End time</label>
+                    <input class="form-control" name="endTime" type="datetime-local" value="2020-08-19T13:45:00"
+                        id="end-datetime-local-input">
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="form-group col-12">
+                    <label for="prd-condition" class="text-left font-weight-bold">Product Description</label>
+                    <input type="text" class="form-control" id="prd-condition" name="" class="text-left font-weight-bold" placeholder="Description of the product's condition">
+                </div>
+            </div> -->
+            <div class="row">
+                <div class="form-group col-12">
+                    <label for="prd-description" class="font-weight-bold">Description</label>
+                    <input type="text" name="description" id="prd-description" class="form-control">
+                    <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
+                    <script>
+                        CKEDITOR.replace('prd-description');
+                    </script>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 text-right">
+                    <button type="submit" class="btn btn-info">Submit</button>
+                </div>
+                <div class="col-6 text-left">
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    </section>
+<!-- Adding product Section End -->
+<!-- footer -->
+<%- include("../common/footer/footer.ejs"); %>
