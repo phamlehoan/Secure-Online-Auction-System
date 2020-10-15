@@ -1,5 +1,5 @@
 import authService from './../services/auth.service';
-import {validationResult} from 'express-validator';
+import { validationResult } from 'express-validator';
 
 const UserController = {};
 

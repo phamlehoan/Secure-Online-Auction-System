@@ -34,7 +34,7 @@ let configSession = (app) =>{
         store: sessionStore,
         resave: true,
         saveUninitialized: false,
-        cookie: { maxAge: 1000*60*60*24} // Set thời gian sống cho cookie là 1 ngày
+        cookie: { maxAge: 1000 * 60 * 60 * 24 } // Set thời gian sống cho cookie là 1 ngày
     }));
 };
 
