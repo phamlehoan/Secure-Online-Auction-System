@@ -1,0 +1,1461 @@
+.cam-box{
+    position: relative;
+}
+
+.cam-box .player-controls{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+.player-controls-wrapper{
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.player-controls-wrapper .player-controls-left {
+    padding: 20px 0 0 20px;
+}
+
+.player-controls-wrapper .player-controls-right{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+
+.web-rtc-player-wrapper {
+    height: 100%;
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.web-rtc-player-wrapper .web-rtc-player {
+    width: 100%
+}
+
+.web-rtc-player {
+    position: relative;
+    width: 100%
+}
+
+.web-rtc-player .web-rtc-content {
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column
+}
+
+.web-rtc-player .web-rtc-content-wrapper {
+    -webkit-align-self: center;
+    align-self: center;
+    height: 100%;
+    position: relative;
+    width: 100%
+}
+
+.web-rtc-player .web-rtc-content-wrapper .private-timer {
+    bottom: inherit;
+    display: block;
+    left: 14px;
+    position: absolute;
+    right: inherit;
+    top: 14px
+}
+
+.web-rtc-player .web-rtc-content-wrapper .broadcast-expand-button {
+    position: absolute;
+    right: 5px;
+    top: 5px
+}
+
+.web-rtc-player .web-rtc-settings,
+.web-rtc-player .web-rtc-settings-bottom {
+    display: none
+}
+
+.web-rtc-player .video-element-wrapper,
+.web-rtc-player .web-rtc-video-element {
+    height: 100%;
+    width: 100%
+}
+
+.web-rtc-player .web-rtc-playing {
+    height: 100%;
+    position: relative;
+    width: 100%
+}
+
+.web-rtc-player .web-rtc-broadcasting {
+    height: 100%;
+    position: relative;
+    width: 100%
+}
+
+.web-rtc-player .web-rtc-broadcasting .web-rtc-video-element {
+    height: 100%;
+    position: relative
+}
+
+.web-rtc-player .web-rtc-broadcasting video {
+    background-color: transparent;
+    position: relative;
+    width: 100%
+}
+
+.web-rtc-player.cam-to-cam:not(.settings) .web-rtc-broadcasting {
+    display: block
+}
+
+.web-rtc-player.cam-to-cam:not(.settings) .web-rtc-playing {
+    display: block
+}
+
+.web-rtc-player.cam-to-cam:not(.settings).expanded-in-cam-to-cam .web-rtc-playing,
+.web-rtc-player.cam-to-cam:not(.settings):not(.expanded-in-cam-to-cam) .web-rtc-broadcasting {
+    bottom: 10px;
+    box-shadow: 1px 1px 5px #000;
+    height: auto;
+    position: absolute;
+    left: 10px;
+    width: 20%;
+    z-index: 103
+}
+
+.web-rtc-player.cam-to-cam:not(.settings).expanded-in-cam-to-cam .web-rtc-playing .loader,
+.web-rtc-player.cam-to-cam:not(.settings):not(.expanded-in-cam-to-cam) .web-rtc-broadcasting .loader {
+    max-height: 100%;
+    max-width: 50%
+}
+
+.web-rtc-player.cam-to-cam:not(.settings).expanded-in-cam-to-cam .web-rtc-playing .loader>.fading-circle,
+.web-rtc-player.cam-to-cam:not(.settings):not(.expanded-in-cam-to-cam) .web-rtc-broadcasting .loader>.fading-circle {
+    height: auto !important;
+    max-width: 100%;
+    padding-top: 100%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%)
+}
+
+.web-rtc-player.settings .cam-2-voice-replacer {
+    display: none
+}
+
+.web-rtc-player.settings .web-rtc-content-wrapper {
+    -webkit-align-self: flex-start;
+    align-self: flex-start
+}
+
+.web-rtc-player.settings .web-rtc-content-wrapper .private-timer {
+    display: none
+}
+
+.web-rtc-player.settings .web-rtc-playing {
+    display: none
+}
+
+.web-rtc-player.settings .web-rtc-broadcasting {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-flex-basis: 50%;
+    flex-basis: 50%;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0
+}
+
+.web-rtc-player.settings .web-rtc-video-remote-wrapper {
+    display: none
+}
+
+.web-rtc-player.settings .web-rtc-settings {
+    background: #2b2b2b;
+    height: 100%;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.web-rtc-player.settings .web-rtc-settings .video-element-wrapper {
+    padding: 10px;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-flex-basis: 60%;
+    flex-basis: 60%;
+    -webkit-flex-grow: 0;
+    flex-grow: 0;
+    -webkit-flex-shrink: 1;
+    flex-shrink: 1
+}
+
+.web-rtc-player.settings .web-rtc-settings .video-element-wrapper .web-rtc-settings-video-element {
+    height: auto
+}
+
+.web-rtc-player.settings .web-rtc-settings .web-rtc-settings-controls {
+    padding: 10px;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-flex-basis: 40%;
+    flex-basis: 40%;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0
+}
+
+.web-rtc-player.settings .web-rtc-settings .web-rtc-controls {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-flex-basis: 40%;
+    flex-basis: 40%;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0
+}
+
+.web-rtc-player.settings .web-rtc-settings .web-rtc-control {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column
+}
+
+.web-rtc-player.settings .web-rtc-settings .web-rtc-control .error {
+    color: #f14b57;
+    margin: 5px;
+    font-size: .75rem;
+    line-height: .938rem
+}
+
+.web-rtc-player.settings .web-rtc-settings .web-rtc-control-label {
+    color: #8d8d8d;
+    display: block;
+    margin-left: 5px;
+    font-size: .813rem;
+    line-height: 1.25rem
+}
+
+.web-rtc-player.settings .web-rtc-settings .web-rtc-control-label .web-rtc-help {
+    height: 14px;
+    margin-left: 5px;
+    width: 14px;
+    font-size: .688rem;
+    line-height: .75rem
+}
+
+.web-rtc-player.settings .web-rtc-settings .web-rtc-control-select {
+    margin: 5px 0;
+    width: 100%
+}
+
+.web-rtc-player.touch {
+    padding: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.web-rtc-player.touch .web-rtc-content {
+    -webkit-align-items: center;
+    align-items: center;
+    height: auto;
+    -webkit-justify-content: center;
+    justify-content: center;
+    width: 100%
+}
+
+.web-rtc-player.touch .web-rtc-content-wrapper {
+    overflow: hidden
+}
+
+.web-rtc-player.touch .video-element-wrapper {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.web-rtc-player.touch .web-rtc-broadcasting {
+    position: relative;
+    width: 100%
+}
+
+.web-rtc-player.mirror .web-rtc-broadcasting video {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1)
+}
+
+@media screen and (max-width:1023px) {
+
+    .web-rtc-player.cam-to-cam:not(.settings).expanded-in-cam-to-cam .web-rtc-playing,
+    .web-rtc-player.cam-to-cam:not(.settings):not(.expanded-in-cam-to-cam) .web-rtc-broadcasting {
+        width: 15%
+    }
+}
+
+@media screen and (max-width:479px) {
+
+    .web-rtc-player.cam-to-cam:not(.settings).expanded-in-cam-to-cam .web-rtc-playing,
+    .web-rtc-player.cam-to-cam:not(.settings):not(.expanded-in-cam-to-cam) .web-rtc-broadcasting {
+        width: 15%
+    }
+
+    .web-rtc-player.settings {
+        padding: 0
+    }
+
+    .web-rtc-player.settings .web-rtc-broadcasting>.video-element-wrapper {
+        display: none
+    }
+
+    .web-rtc-player.settings .web-rtc-settings {
+        -webkit-flex-direction: column-reverse;
+        flex-direction: column-reverse;
+        position: relative
+    }
+
+    .web-rtc-player.settings .web-rtc-settings .video-element-wrapper {
+        padding: 0
+    }
+}
+
+.web-rtc-supported-wrapper {
+    -webkit-align-items: center;
+    align-items: center;
+    height: 100%;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    padding: 20px 0;
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column
+}
+
+.web-rtc-supported {
+    -webkit-align-items: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column
+}
+
+.web-rtc-supported .supported-title {
+    line-height: 28px;
+    margin: 10px 0;
+    font-size: 1.5rem
+}
+
+.web-rtc-supported .supported-description {
+    line-height: 20px;
+    margin: 10px 0;
+    font-size: .875rem
+}
+
+.web-rtc-supported .icon-wrong {
+    fill: #eab744;
+    margin: 70px 0 20px
+}
+
+.web-rtc-supported .browsers-wrapper {
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    margin: 50px 0 60px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.web-rtc-supported .browser {
+    height: 60px;
+    margin: 0 10px;
+    min-width: 250px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.web-rtc-supported .browser .browser-icon-wrapper {
+    background-color: #5b5b5b;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    margin-right: 2px;
+    padding: 10px;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-flex-basis: auto;
+    flex-basis: auto;
+    -webkit-flex-grow: 0;
+    flex-grow: 0;
+    -webkit-flex-shrink: 1;
+    flex-shrink: 1
+}
+
+.web-rtc-supported .browser .browser-icon-wrapper .icon {
+    fill: #303133;
+    height: 100%;
+    margin: 0;
+    width: 40px
+}
+
+.web-rtc-supported .browser .browser-description-wrapper {
+    background-color: #5b5b5b;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    color: #f8f8f8;
+    padding: 10px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-flex-basis: auto;
+    flex-basis: auto;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0
+}
+
+.web-rtc-supported .browser .browser-description-wrapper .browser-title {
+    line-height: 24px;
+    font-size: 1.125rem
+}
+
+.web-rtc-supported .browser .browser-description-wrapper .browser-download {
+    line-height: 18px;
+    opacity: .8;
+    font-size: .75rem
+}
+
+.web-rtc-supported .browser:hover {
+    text-decoration: none
+}
+
+.web-rtc-supported .browser:hover .browser-icon-wrapper {
+    background-color: #6e6e6e
+}
+
+.web-rtc-supported .browser:hover .browser-description-wrapper {
+    background-color: #6e6e6e
+}
+
+@media screen and (min-width:1281px) and (max-width:1650px) {
+    .web-rtc-supported .icon-wrong {
+        margin: 20px 0
+    }
+
+    .web-rtc-supported .browser {
+        height: 60px;
+        min-width: 200px
+    }
+
+    .web-rtc-supported .browser .browser-description-wrapper .browser-title {
+        line-height: 20px;
+        font-size: 1rem
+    }
+
+    .web-rtc-supported .browser .browser-description-wrapper .browser-download {
+        line-height: 16px;
+        opacity: .8;
+        font-size: .688rem
+    }
+}
+
+@media screen and (min-width:1024px) and (max-width:1280px) {
+    .web-rtc-supported .icon-wrong {
+        margin: 0 0 10px
+    }
+
+    .web-rtc-supported .browsers-wrapper {
+        margin: 20px 0 30px
+    }
+
+    .web-rtc-supported .browser {
+        height: 50px;
+        min-width: 170px
+    }
+
+    .web-rtc-supported .browser .browser-description-wrapper .browser-title {
+        line-height: 18px;
+        font-size: .875rem
+    }
+
+    .web-rtc-supported .browser .browser-description-wrapper .browser-download {
+        line-height: 14px;
+        opacity: .8;
+        font-size: .625rem
+    }
+
+    .web-rtc-supported .browser .browser-icon-wrapper .icon {
+        height: 100%;
+        width: 30px
+    }
+}
+
+@media screen and (max-width:600px) {
+    .web-rtc-supported .icon-wrong {
+        margin: 10px 0 20px
+    }
+
+    .web-rtc-supported .supported-title {
+        line-height: 22px;
+        margin: 0;
+        font-size: 1.125rem
+    }
+
+    .web-rtc-supported .supported-description {
+        line-height: 16px;
+        font-size: .75rem
+    }
+
+    .web-rtc-supported .browsers-wrapper {
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        margin: 0;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+        flex-direction: column
+    }
+
+    .web-rtc-supported .browsers-wrapper .browser {
+        margin-bottom: 10px
+    }
+}
+
+@media screen and (max-width:480px) {
+    .web-rtc-supported .icon-wrong {
+        margin: 0;
+        -webkit-transform: scale(.7);
+        transform: scale(.7)
+    }
+
+    .web-rtc-supported .supported-title {
+        line-height: 18px;
+        margin: 0;
+        font-size: .875rem
+    }
+
+    .web-rtc-supported .supported-description {
+        line-height: 14px;
+        font-size: .688rem
+    }
+
+    .web-rtc-supported .browser {
+        height: 40px;
+        min-width: 170px
+    }
+
+    .web-rtc-supported .browser .browser-description-wrapper {
+        padding: 5px
+    }
+
+    .web-rtc-supported .browser .browser-description-wrapper .browser-title {
+        line-height: 14px;
+        font-size: .75rem
+    }
+
+    .web-rtc-supported .browser .browser-description-wrapper .browser-download {
+        line-height: 14px;
+        opacity: .8;
+        font-size: .625rem
+    }
+
+    .web-rtc-supported .browser .browser-icon-wrapper .icon {
+        height: 100%;
+        width: 20px
+    }
+}
+
+.view-cam-controls {
+    -webkit-align-items: center;
+    align-items: center;
+    background-color: #303133;
+    box-shadow: none;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column
+}
+
+.view-cam-controls .view-cam-controls-status {
+    -webkit-align-items: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .1);
+    color: rgba(248, 248, 248, .9);
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding: 6px 20px;
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    line-height: 1.5rem;
+    font-size: .688rem
+}
+
+.view-cam-controls .view-cam-controls-toolbox {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.view-cam-controls .view-cam-controls-toolbox .btn {
+    margin-bottom: 0;
+    line-height: 1.875rem
+}
+
+.view-cam-controls .view-cam-controls-toolbox .player-toolbox-icon-item {
+    width: 32px;
+    height: 32px
+}
+
+.view-cam-controls .view-cam-controls-toolbox .control {
+    margin: 0 6px
+}
+
+.view-cam-controls .view-cam-controls-wrapper {
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    min-height: 50px;
+    padding: 15px 20px;
+    position: relative;
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.view-cam-controls .view-cam-controls-wrapper .view-cam-buttons-wrapper {
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    -webkit-align-items: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.view-cam-controls .view-cam-controls-wrapper .view-cam-buttons-wrapper .chat-actions {
+    width: 40px;
+    height: 40px;
+    margin: 0
+}
+
+.view-cam-controls .controls {
+    -webkit-align-items: flex-end;
+    align-items: flex-end;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+    position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.view-cam-controls .controls .proposal {
+    -webkit-align-items: center;
+    align-items: center;
+    box-sizing: border-box;
+    color: #f8f8f8;
+    display: inline-block;
+    line-height: 42px;
+    opacity: .8;
+    padding: 0 20px;
+    vertical-align: top;
+    font-size: .688rem;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.view-cam-controls .controls .proposal .loader {
+    display: inline-block;
+    margin-right: 20px;
+    vertical-align: -6px
+}
+
+.view-cam-controls .controls .proposal-cancel {
+    -webkit-align-items: center;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 36px;
+    -webkit-justify-content: center;
+    justify-content: center;
+    opacity: .7;
+    width: 36px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.view-cam-controls .controls .proposal-cancel .icon {
+    fill: #f8f8f8;
+    height: 16px;
+    margin: 0;
+    width: 16px
+}
+
+.view-cam-controls .controls .proposal-cancel:hover {
+    background-color: rgba(24, 24, 24, .3)
+}
+
+.view-cam-controls .controls .controls-block {
+    -webkit-align-items: center;
+    align-items: center;
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.view-cam-controls .controls .icon.icon-envelope-bubble,
+.view-cam-controls .controls .icon.icon-gift {
+    height: 18px;
+    width: 18px
+}
+
+.view-cam-controls .controls.controls-fixed .send-pm-mobile {
+    background-color: rgba(255, 255, 255, .8);
+    opacity: .8;
+    padding: 0 11px
+}
+
+.view-cam-controls .controls.controls-fixed .send-pm-mobile .icon-envelope-bubble {
+    fill: rgba(0, 0, 0, .6);
+    margin: 0
+}
+
+.view-cam-controls .controls.controls-fixed .icon-gift {
+    opacity: .6
+}
+
+.view-cam-controls .controls .btn-apply-alter {
+    background: #d44848;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    transition: all 90ms ease-in-out 0s
+}
+
+.view-cam-controls .controls .btn-apply-alter>.icon {
+    fill: #000;
+    display: flex;
+    
+    transition: all 90ms ease-in-out 0s;
+}
+
+.view-cam-controls .controls .btn-apply-alter.hover,
+.view-cam-controls .controls .btn-apply-alter:hover {
+    background: #fff;
+    color: #000
+}
+
+.view-cam-controls .controls .btn-apply-alter.hover>.icon,
+.view-cam-controls .controls .btn-apply-alter:hover>.icon {
+    fill: #000
+}
+
+.view-cam-controls .controls .btn-apply-alter.active,
+.view-cam-controls .controls .btn-apply-alter.focus,
+.view-cam-controls .controls .btn-apply-alter:active,
+.view-cam-controls .controls .btn-apply-alter:focus {
+    background: #c5d448;
+    color: #000
+}
+
+.view-cam-controls .controls .btn-apply-alter.active>.icon,
+.view-cam-controls .controls .btn-apply-alter.focus>.icon,
+.view-cam-controls .controls .btn-apply-alter:active>.icon,
+.view-cam-controls .controls .btn-apply-alter:focus>.icon {
+    fill: #000
+}
+
+.view-cam-controls .controls .btn-apply-alter .btn-loader-overlay {
+    color: #000;
+    background-color: #c5d448
+}
+
+.view-cam-controls .controls .btn-outline {
+    border-color: #e9b872
+}
+
+.view-cam-controls .controls .btn-outline:active,
+.view-cam-controls .controls .btn-outline:focus {
+    background-color: transparent
+}
+
+.view-cam-controls .controls .btn-outline:hover {
+    background-color: #e9b872;
+    color: #000 !important
+}
+
+.view-cam-controls .controls .group-show-btn {
+    -webkit-align-items: center;
+    align-items: center;
+    border-color: rgba(128, 128, 128, .6);
+    border-width: 2px;
+    margin-left: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.view-cam-controls .controls .group-show-btn .icon {
+    fill: #fff !important;
+    transition: none;
+    width: 26px
+}
+
+.view-cam-controls .controls .group-show-btn .icon.icon-ticket {
+    height: 18px
+}
+
+.view-cam-controls .controls .group-show-btn .pale,
+.view-cam-controls .controls .group-show-btn .private-show-timer {
+    opacity: .6
+}
+
+.view-cam-controls .controls .group-show-btn:active,
+.view-cam-controls .controls .group-show-btn:focus {
+    background-color: transparent
+}
+
+.view-cam-controls .controls .group-show-btn:hover {
+    background-color: rgba(128, 128, 128, .6);
+    border-color: transparent;
+    color: #fff !important
+}
+
+.view-cam-controls .controls .tokens-left {
+    display: -webkit-flex;
+    display: flex;
+    margin-left: 20px
+}
+
+.view-cam-controls .controls .tokens-left-text {
+    -webkit-align-items: center;
+    align-items: center;
+    color: #fdfdfd;
+    vertical-align: baseline;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row
+}
+
+.view-cam-controls .controls .tokens-left-amount {
+    color: #ef4b56;
+    margin-bottom: 10px;
+    padding-left: 5px
+}
+
+.view-cam-controls .controls.for-private,
+.view-cam-controls .controls.for-spy {
+    color: #fff;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end
+}
+
+.view-cam-controls .controls.for-private .btn,
+.view-cam-controls .controls.for-spy .btn {
+    line-height: 1.875rem
+}
+
+.view-cam-controls .group-show-dropdown-mobile .dropdown-content {
+    border-radius: 0;
+    padding: 20px
+}
+
+.view-cam-controls .group-show-dropdown-mobile .dropdown-content:after {
+    border-width: 6px;
+    left: 80%;
+    -webkit-transform: translate(-50%, -6px) rotate(45deg);
+    transform: translate(-50%, -6px) rotate(45deg)
+}
+
+.view-cam-controls .group-show-dropdown-xhl .dropdown-content {
+    background-color: #fff;
+    box-shadow: 0 1px 0 rgba(79, 79, 79, .4);
+    color: #4f4f4f
+}
+
+.view-cam-controls .group-show-dropdown-xhl .dropdown-content .group-show-announce-rate {
+    color: #4f4f4f
+}
+
+.view-cam-controls .group-show-dropdown-xhl .dropdown-content .group-show-announce-head {
+    border-bottom: 1px solid rgba(140, 140, 140, .4)
+}
+
+.view-cam-controls .group-show-dropdown-xhl .dropdown-content:after {
+    border-color: #fff transparent transparent #fff
+}
+
+.view-cam-controls .button-text {
+    display: none
+}
+
+@media screen and (max-width:1023px) {
+    .view-cam-controls {
+        -webkit-align-items: center;
+        align-items: center
+    }
+
+    .view-cam-controls .view-cam-controls-wrapper {
+        padding: 10px
+    }
+
+    .view-cam-controls .controls .btn {
+        box-sizing: border-box;
+        line-height: 34px
+    }
+}
+
+@media screen and (max-width:639px) {
+    .view-cam .controls-wrapper {
+        min-height: 0
+    }
+
+    .view-cam-controls .controls {
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap
+    }
+
+    .view-cam-controls .controls .controls-block>.btn,
+    .view-cam-controls .controls .tokens-left>.btn,
+    .view-cam-controls .controls .tokens-left>div {
+        margin-bottom: 10px
+    }
+}
+
+@media screen and (max-width:479px) {
+    .view-cam-controls {
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        padding: 0
+    }
+
+    .view-cam-controls .view-cam-controls-wrapper {
+        -webkit-justify-content: flex-end;
+        justify-content: flex-end
+    }
+
+    .view-cam-controls .view-cam-controls-wrapper .view-cam-buttons-wrapper {
+        width: 100%
+    }
+
+    .view-cam-controls .group-show-btn .icon-group {
+        display: none !important
+    }
+
+    .view-cam-controls .controls {
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-flex-direction: row-reverse;
+        flex-direction: row-reverse;
+        -webkit-justify-content: right;
+        justify-content: right;
+        width: 100%
+    }
+
+    .view-cam-controls .controls .btn {
+        line-height: 34px;
+        padding: 0 13px
+    }
+
+    .view-cam-controls .controls .btn:first-child {
+        margin-left: 10px;
+        margin-right: 0
+    }
+
+    .view-cam-controls .controls .proposal {
+        line-height: 34px;
+        padding: 0 10px
+    }
+
+    .view-cam-controls .controls .group-show-btn>.icon {
+        display: none
+    }
+}
+
+@media screen and (max-width:320px) {
+    .view-cam-controls .view-cam-controls-wrapper {
+        padding-bottom: 5px;
+        padding-top: 5px
+    }
+
+    .view-cam-controls .controls>.btn,
+    .view-cam-controls .controls>div {
+        margin-bottom: 5px;
+        margin-top: 5px
+    }
+}
+
+@media screen and (min-width:1024px) {
+
+    .view-cam-controls .chat-actions,
+    .view-cam-controls .chat-actions-wrapper {
+        display: none
+    }
+
+    .view-cam-controls .view-cam-buttons-wrapper {
+        -webkit-order: 1;
+        order: 1
+    }
+
+    .view-cam-controls .button-text {
+        display: inline
+    }
+
+    .view-cam-controls .button-text-short {
+        display: none
+    }
+}
+
+.winner{
+    -webkit-align-items: center;
+    align-items: center;
+    background-color: #212121;
+    box-shadow: none;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.winner span{
+    font-weight: 400;
+    font-family: "Montserrat", sans-serif;    
+    font-size: .813rem;
+}
+
+.model-chat-controls {
+    background: #383838;
+    bottom: 0;
+    height: 60px;
+    left: 0;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+.model-chat-controls .input-message-wrapper {
+    background: #000;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    bottom: 0;
+    box-sizing: border-box;
+    height: 40px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-flex-basis: auto;
+    flex-basis: auto;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    -webkit-flex-shrink: 1;
+    flex-shrink: 1;
+    transition: all 120ms ease-in-out 0s;
+}
+
+.model-chat-controls .buttons-wrapper {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-flex-basis: auto;
+    flex-basis: auto;
+    -webkit-flex-grow: 0;
+    flex-grow: 0;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+}
+
+.model-chat-controls .input-message-wrapper input.input {
+    background-color: transparent;
+    border: none;
+    height: 100%;
+    padding-right: 10px;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -webkit-flex-basis: auto;
+    flex-basis: auto;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    -webkit-flex-shrink: 1;
+    flex-shrink: 1;
+    font-size: .813rem;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.btn-send {
+    height: 36px;
+    margin: 1px;
+    max-width: 200px;
+    pointer-events: all;
+    background: #4c88bc;
+    color: #fcfcfc;
+    transition: all 90ms ease-in-out 0s;
+    border: 1px solid transparent;
+    cursor: pointer;
+    display: inline-block;
+    font-family: inherit;
+    font-weight: 400;
+    outline: 0;
+    overflow: hidden;
+    padding: 0 20px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    font-size: .813rem;
+    letter-spacing: .013rem;
+    line-height: 1.813rem;
+    border-radius: 2rem;
+}
+
+.model-chat .model-chat-content {
+    height: 100%;
+    position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.model-chat .model-chat-content .scroll-bar-container {
+    height: 100%;
+}
+
+.scroll-bar-container {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+}
+
+.ps {
+    overflow: hidden!important;
+    overflow-anchor: none;
+    -ms-overflow-style: none;
+    touch-action: auto;
+    -ms-touch-action: auto;
+}
+
+.model-chat-messages-wrapper {
+    border-bottom: 1px solid #2e2e2e;
+    height: 100%;
+    position: relative;
+}
+
+.model-chat-messages-wrapper .messages {
+    display: flex;
+    display: -webkit-flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.model-chat-messages-wrapper .messages .message {
+    -webkit-align-items: center;
+    align-items: center;
+    background: 0 0;
+    border-bottom: 1px solid #2e2e2e;
+    color: #e1e1e1;
+    display: -webkit-flex;
+    display: flex;
+    font-weight: 400;
+    min-height: 32px;
+    padding: 4px 15px 3px;
+    position: relative;
+    width: 100%;
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+.model-chat-messages-wrapper .messages .message::before {
+    bottom: 0;
+    content: '';
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 3px;
+}
+
+.model-chat-messages-wrapper .messages .message .body {
+    width: 100%;
+}
+
+.model-chat-messages-wrapper .messages .message .body {
+    display: inline;
+}
+
+.message-body-wrapper .username-wrapper {
+    display: inline-block !important;
+    font-weight: 700;
+    margin: 0 6px 0 0;
+    vertical-align: baseline;
+    font-size: .813rem;
+}
+
+.model-chat-messages-wrapper .view-cam-username {
+    display: inline-block;
+    font-weight: 700;
+    vertical-align: bottom;
+}
+
+.model-chat-messages-wrapper .messages .message .username-wrapper .username.regular {
+    color:#4caf50;
+}
+
+.model-chat-messages-wrapper .messages .message .username-wrapper .username {
+    cursor: pointer;
+}
+
+.model-chat-messages-wrapper .messages .message .username {
+    vertical-align: bottom;
+}
+
+.username.regular.colored {
+    color:#4caf50;
+}
+
+.username {
+    -webkit-align-items: center;
+    align-items: center;
+    color:#4caf50;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+}
+
+.username .username-level-wrapper {
+    display: inline-block;
+    max-width: 100%;
+}
+
+.model-chat-messages-wrapper .messages .username-level {
+    font-weight: 700;
+}
+
+.username .username-level-wrapper .username-level {
+    -webkit-align-items: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+.username .username-level-wrapper .username-content {
+    display: inline-block;
+}
+
+.username-content {
+    color:#4caf50;
+}
+
+.model-chat-messages-wrapper .regular-message-text {
+    display: inline;
+    line-height: 18px;
+    vertical-align: baseline;
+    color: #fff;   
+    font-size: .813rem;
+}
+
+.ps__rail-x {
+    display: none;
+    opacity: 0;
+    transition: background-color .2s linear,opacity .2s linear;
+    -webkit-transition: background-color .2s linear,opacity .2s linear;
+    height: 15px;
+    bottom: 0px;
+    position: absolute;
+}
+
+.ps__rail-y {
+    display: none;
+    opacity: 0;
+    transition: background-color .2s linear,opacity .2s linear;
+    -webkit-transition: background-color .2s linear,opacity .2s linear;
+    width: 15px;
+    right: 0;
+    position: absolute;
+}

@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="favicon.ico" />
+    <title>SOAS. - Management</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__close">+</div>
+
+        <ul class="offcanvas__widget">
+            <div>
+
+            </div>
+            <li class="offcanvas__logo"><a href="./index.html"><img src="img/logo.png" alt=""></a></li>
+            <li><a href="#"><span class="fa fa-gavel"></span>
+                    <div class="tip">2</div>
+                </a></li>
+            <li><a href="#"><span class="fa fa-shopping-cart"></span>
+                    <div class="tip">2</div>
+                </a></li>
+        </ul>
+        <div class="offcanvas__auth align-middle">
+            <!-- <a href="#">Login</a>
+            <a href="#">Register</a> -->
+            <img src="img/shop/shop-1.jpg" alt="" class="rounded-circle">
+        </div>
+        <div id="mobile-menu-wrap"></div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header position-relative">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-2">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-7">
+                    <div class="header__search input-group">
+                        <input type="text" class="search_bar form-control" placeholder="Search here">
+                        <div class="input-group-append">
+                            <button class="search-btn">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header__right">
+
+                        <ul class="header__right__widget">
+                            <li><a href="#"><span class="fa fa-gavel"></span>
+                                    <div class="tip">2</div>
+                                </a></li>
+                            <li><a href="#"><span class="fa fa-shopping-cart"></span>
+                                    <div class="tip">2</div>
+                                </a></li>
+                        </ul>
+                        <div class="header__right__auth">
+                            <div class="need-account d-none">
+                                <a href="../Login-Register/login.html">Login</a>
+                                <a href="../Login-Register/register.html">Register</a>
+                            </div>
+
+                            <div class="avatar d-block">
+                                <img src="img/shop/shop-1.jpg" id="avt-pic" alt="Avatar" class="d-inline rounded-circle"
+                                    style="width: 40px; height: 40px; margin-top:-15px; cursor: pointer;">
+                                <div class="position-absolute"
+                                    style="display: none; width: 300px; background-color: white; right: 0; z-index: 100;"
+                                    id="user-profile">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis repellat eveniet
+                                    quibusdam rem nihil officiis necessitatibus at neque nesciunt pariatur, facilis
+                                    exercitationem, mollitia optio excepturi, similique fugiat perspiciatis deserunt
+                                    dicta!
+                                </div>
+                                <script>
+                                    var toggle = false;
+                                    document.getElementById('avt-pic').onclick = function () {
+                                        if (toggle == false) {
+                                            document.getElementById('user-profile').style.display = 'block';
+                                            toggle = true;
+                                        } else {
+                                            document.getElementById('user-profile').style.display = 'none';
+                                            toggle = false;
+                                        }
+                                    };
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="canvas__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+        <div class="container-fluid" style="background-color: #1e8fb3;">
+            <div class="container row">
+                <nav class="header__menu col-xl-3 col-lg-2 text-center">
+                    <ul>
+                        <li><a href="#"><i class="fa fa-bars mr-2" style="font-size: larger;"
+                                    aria-hidden="true"></i>Category</a>
+                            <ul class="dropdown">
+                                <li><a href="#">Real Estate</a></li>
+                                <li><a href="#">Antique</a></li>
+                                <li><a href="#">Vehicles</a></li>
+                                <li><a href="#">Electronic</a></li>
+                                <li><a href="#">Furnitures</a></li>
+                                <li><a href="#">Kid & Toys</a></li>
+                                <li><a href="#">Fashion</a></li>
+                                <li><a href="#">Travel</a></li>
+                                <li><a href="#">Sport</a></li>
+                                <li><a href="#">Tools</a></li>
+                                <li><a href="#">Groceries</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <nav class="header__menu col-xl-9 col-lg-10 text-right">
+                    <ul>
+                        <li class="active"><a href="./index.html">Home</a></li>
+                        <li><a href="#">Auction</a></li>
+                        <li><a href="./blog.html">Blog</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="./"><i class="fa fa-home"></i> Home</a>
+                        <span>Product Details</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- Product Details Section Begin -->
+    <section class="product-details spad">
+        <div class="container bg-white p-5 rounded">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__left product__thumb nice-scroll">
+                            <a class="pt active" href="#product-1">
+                                <img src="img/product/details/thumb-1.jpg" alt="">
+                            </a>
+                            <a class="pt" href="#product-2">
+                                <img src="img/product/details/thumb-2.jpg" alt="">
+                            </a>
+                            <a class="pt" href="#product-3">
+                                <img src="img/product/details/thumb-3.jpg" alt="">
+                            </a>
+                            <a class="pt" href="#product-4">
+                                <img src="img/product/details/thumb-4.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="product__details__slider__content">
+                            <div class="product__details__pic__slider owl-carousel">
+                                <img data-hash="product-1" class="product__big__img"
+                                    src="img/product/details/product-1.jpg" alt="">
+                                <img data-hash="product-2" class="product__big__img"
+                                    src="img/product/details/product-3.jpg" alt="">
+                                <img data-hash="product-3" class="product__big__img"
+                                    src="img/product/details/product-2.jpg" alt="">
+                                <img data-hash="product-4" class="product__big__img"
+                                    src="img/product/details/product-4.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product__details__text">
+                        <h3>Essential structured blazer <span>Sold by: <b>ABC Store</b></span></h3>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <span>( 138 watches )</span>
+                        </div>
+                        <div class="product__details__widget">
+                            <ul>
+                                <li>
+                                    <span>Time:</span>
+                                    <p>00:00:30</p>
+                                </li>
+                                <li>
+                                    <span>Current winner:</span>
+                                    <p>MemberID24432</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product__details__price pt-5">$ 75.0</div>
+                        <div class="product__details__button">
+                            <div class="quantity">
+                                <span>Expected price:</span>
+                                <div class="pro-qty">
+                                    <input type="text" value="85">
+                                </div>
+                            </div>
+                            <a href="#" class="cart-btn"><span class="icon_bag_alt"></span> Bid</a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Delivery</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews
+                                    (<span>2</span>)</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <h6>Description</h6>
+                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
+                                    quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
+                                    Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
+                                    voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
+                                    consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
+                                    consequat massa quis enim.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                    quis, sem.</p>
+                            </div>
+                            <div class="tab-pane" id="tabs-2" role="tabpanel">
+                                <h6>Delivery</h6>
+                                <p>Chúng tôi sẽ vận chuyển đơn hàng này trong 15 ngày làm việc gần nhất.</p>
+                                <p>Vui lòng chuẩn bị sẵn số tiền trên.</p>
+                            </div>
+                            <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                <h6>Reviews (<span>2</span>)</h6>
+                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
+                                    quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
+                                    Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
+                                    voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
+                                    consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
+                                    consequat massa quis enim.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                                    dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                                    nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                                    quis, sem.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="related__title">
+                        <h5>RELATED PRODUCTS</h5>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-1.jpg">
+                            <div class="label new">New</div>
+                            <ul class="product__hover">
+                                <li><a href="img/product/related/rp-1.jpg" class="image-popup"><span
+                                            class="arrow_expand"></span></a></li>
+                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">Buttons tweed blazer</a></h6>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product__price">$ 59.0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-2.jpg">
+                            <ul class="product__hover">
+                                <li><a href="img/product/related/rp-2.jpg" class="image-popup"><span
+                                            class="arrow_expand"></span></a></li>
+                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">Flowy striped skirt</a></h6>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product__price">$ 49.0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-3.jpg">
+                            <div class="label stockout">out of stock</div>
+                            <ul class="product__hover">
+                                <li><a href="img/product/related/rp-3.jpg" class="image-popup"><span
+                                            class="arrow_expand"></span></a></li>
+                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">Cotton T-Shirt</a></h6>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product__price">$ 59.0</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-4.jpg">
+                            <ul class="product__hover">
+                                <li><a href="img/product/related/rp-4.jpg" class="image-popup"><span
+                                            class="arrow_expand"></span></a></li>
+                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">Slim striped pocket shirt</a></h6>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product__price">$ 59.0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Details Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-7">
+                    <div class="footer__about">
+                        <div class="footer__logo">
+                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        </div>
+                        <p>Project Capstone 1 - SOAS.</p>
+                        <p>We are alway the best team ever.</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-5">
+                    <div class="footer__widget">
+                        <h6>Quick links</h6>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blogs</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-4">
+                    <div class="footer__widget">
+                        <h6>Account</h6>
+                        <ul>
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">Orders Tracking</a></li>
+                            <li><a href="#">Checkout</a></li>
+                            <li><a href="#">Wishlist</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8 col-sm-8">
+                    <div class="footer__newslatter">
+                        <h6>CONTRIBUTION</h6>
+                        <form action="#">
+                            <input type="text" placeholder="Email">
+                            <button type="submit" class="site-btn">Subscribe</button>
+                        </form>
+                        <div class="footer__social">
+                            <a href="https://github.com/hoanvn1999/Secure-Online-Auction-System"><i
+                                    class="fa fa-github"></i></a>
+                            <a href="https://www.facebook.com/SOAS-Secure-Online-Auction-System-107061224478545"><i
+                                    class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    <div class="footer__copyright__text">
+                        <p>Copyright &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script> All rights reserved | This template is made with <i class="fa fa-heart"
+                                aria-hidden="true"></i> by <a href="https://phamlehoan-resume.web.app"
+                                target="_blank">C1SE.08</a></p>
+                    </div>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search End -->
+
+    <!-- Js Plugins -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/jquery.countdown.min.js"></script>
+    <script src="js/jquery.slicknav.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
