@@ -1,6 +1,7 @@
 import ProductService from "../services/product.service";
 import ProductUtils from "../utils/product.util";
 import Cloudinary from "../configs/cloudinary.config";
+
 import PRODUCT_CONSTANTS from "../constants/product.constant";
 
 
@@ -18,6 +19,7 @@ let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
  *  filtering all product has category name
  *  If has no req.query
  *  Getting all product in database and showing all on page /products
+ * 
  */
 ProductController.getProducts = async (req, res) => {
     let products = [];
@@ -28,6 +30,7 @@ ProductController.getProducts = async (req, res) => {
         return res.render('main/products/products', { 
             products,
             categories,
+            data: req.flash("data"),
             title: 'SOAS. - Category : '+ category
         });
     }
@@ -37,18 +40,20 @@ ProductController.getProducts = async (req, res) => {
     return res.render('main/products/products', { 
         products,
         categories,
+        data: req.flash("data"),
         title: 'SOAS. - List Products' 
     });
 }
 
 /**
- * @param { Product } categories
+ * 
  */
 ProductController.getAddProduct = (req, res) => {
     
 
     return res.render("main/products/addProduct", {
         categories,
+        data: req.flash("data"),
         title: 'SOAS. - Winning Products' 
     });
 }
@@ -99,6 +104,7 @@ ProductController.getDetail =async (req, res) => {
     // let product = await ProductService.findProductById(id);
     return res.render("main/products/details", {
         categories,
+        data: req.flash("data"),
         title: 'SOAS. - '
     })
 }
@@ -113,6 +119,7 @@ ProductController.getManage = async (req, res) => {
     return res.render("main/products/manage", {
         products,
         categories,
+        data: req.flash("data"),
         title: "manage products page"
     })
 }

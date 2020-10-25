@@ -1,0 +1,121 @@
+<!-- Header -->
+<%- include ('./../common/header/header.ejs') %> 
+
+<!-- Menu -->
+<%- include ('./../common/menu/menu.ejs') %> 
+
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container bg-white p-5 rounded">
+        <h2 class="row text-primary text-md-left font-weight-bold pb-4">Profile</h2>
+        <div class="row">
+            <div class="col-lg-5 col-md-5">
+                <div class="text-center">
+                    <img id="img-avatar" class="w-50 p-3 px-1" src="img/instagram/insta-1.jpg" class="rounded-circle" alt="SOAS User avatar">
+                    <form>
+                        <div class="form-group text-center">
+                            <label for="upload-avatar" class="btn btn-info">
+                                <span>New avatar</span>
+                                <input id="upload-avatar" type="file" class="form-control-file" onchange="readURL(this);" id="upload-avatar" hidden>                                    
+                            </label>
+                        </div>
+                    </form>
+                    <script>
+                        function readURL(input) {
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+                                reader.onload = function (e) {
+                                    $('#img-avatar').attr('src', e.target.result);
+                                };
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+                    </script>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7">
+                <div class="row">
+                    <div class="form-group col-lg-12 col-md-12">
+                        <label for="iursname" class="text-left font-weight-bold">User Name</label>
+                        <input type="text" class="form-control" id="input-ursname" name="user-name"
+                            placeholder="Your Username">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row container pb-2 font-weight-bold">Name</div>
+                        <div class="row">
+                            <div class="form-group col-lg-6 col-md-6">
+                                <input type="text" class="form-control" id="input-firstname" name="fname"
+                                    placeholder="First Name">
+    
+                            </div>
+                            <div class="form-group col-lg-6 col-md-6">
+                                <input type="text" class="form-control" id="input-lastname" name="lname"
+                                    placeholder="Last Name">
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-6 col-md-6">
+                        <label for="example-date-input" class="text-left col-form-label font-weight-bold">Birthdate</label>
+                        <input class="form-control" type="date" value="2020-08-19" id="example-date-input">
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6">
+                        <label for="i-gender" class="text-left col-form-label font-weight-bold">Gender</label>
+                        <select class="form-control" id="i-gender">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                </div>                    
+                <div class="row">
+                    <div class="form-group col-lg-6 col-md-6">
+                        <label for="iemai" class="text-left font-weight-bold">Email</label>
+                        <input type="text" class="form-control" id="input-email" name="email"
+                            placeholder="your_email@example.com">
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 ">
+                        <label for="phone-number" class="font-weight-bold">Phone Number</label>
+                        <input type="text" class="form-control" id="i-phonenumber" name="phone-number"
+                            placeholder="0912345678">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row container pb-2 font-weight-bold">Address</div>
+                    <div class="row">
+                        <div class="form-group col-lg-6 col-md-6">
+                            <input type="text" class="form-control" id="i-city" placeholder="Province/City">
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6">
+                            <input type="text" class="form-control" id="i-district" placeholder="District">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-12">
+                            <input type="text" class="form-control" id="i-address" placeholder="Detail Address">
+                        </div>
+                    </div>
+                    </div>
+                </div>                    
+            </div>
+            <div class="row mx-auto mt-5">
+                <div class="col-6">
+                    <button type="button" class="btn btn-info">Update</button>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </div>                    
+            </div>
+        </div>
+
+
+    </div>
+</section>
+<!-- Product Section End -->
+
+<!-- Footer -->
+<%- include ('./../common/footer/footer.ejs') %>

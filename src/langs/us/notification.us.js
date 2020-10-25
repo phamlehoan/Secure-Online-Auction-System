@@ -17,7 +17,7 @@ const notificationRegister = {
     },
     sendFail: "There was an error in sending email, please register your account again"
 }
-const translateMail ={
+export const transMail = {
     subject : '"SOAS" Verify account registration',
     content : (link)=>{
         return `<h2> Welcome to SOAS! </h2>
@@ -44,3 +44,4 @@ const loginSuccess = {
 
 export const regisErr = registerError;
 export const notiRes = notificationRegister;
+

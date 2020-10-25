@@ -1,17 +1,18 @@
-//config environment variables
-require("dotenv").config();
-var path = require('path');
-
+import path from "path";
 import express from "express";
 import morgan from "morgan";
 import bodyParser from "body-parser";
 import connectFlash from 'connect-flash';
+import dotenv from 'dotenv';
+import passport from "passport";
 
 import configViewEngine from "./configs/viewEngine"
 import Router from "./routers/web" 
 import dbConfig from "./configs/db.config";
 import sessionConfig from "./configs/session.config"
 
+//config environment variables
+dotenv.config();
 
 //initialize application instance
 let app = express();
@@ -37,6 +38,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(connectFlash());
 app.use(morgan("dev"));
+
+//Sử dụng passport để xác thực tài khoản
+app.use(passport.initialize());
+app.use(passport.session());
 
 //app routers
 Router(app);

@@ -2,11 +2,17 @@ import express from "express";
 import passport from "passport";
 
 import AuthController from "../controllers/auth.controller";
+import initPassportLocal from "../controllers/passport.controller/local";
 
+initPassportLocal();
 let router = express.Router();
 
 //Router view Login
-router.get("/login", AuthController.checkLoggedOut, AuthController.getLogin);
+router.get("/login", 
+    AuthController.checkLoggedOut,
+    AuthController.checkLoggedIn,
+    AuthController.getLogin
+);
 
 //Router post from login
 router.post("/login", passport.authenticate("local", {
