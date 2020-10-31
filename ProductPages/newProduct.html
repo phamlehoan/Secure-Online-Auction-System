@@ -135,8 +135,23 @@
     </header>
     <!-- Header Section End -->
 
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="./"><i class="fa fa-home"></i> Home</a>
+                        <span>New product</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
     <!-- Product Section Begin -->
-    <section class="product spad">
+    <section class="top__area spad">
         <div class="container rounded bg-white p-5">
             <div class="row">
                 <div class="col-12">
@@ -146,7 +161,7 @@
                 </div>
             </div>
             <div class="row container col">
-                <div class="pr-5 font-weight-bold">Post/Livestream</div>
+                <div class="pr-5 font-weight-bold">Post/Livestream<span class="text-danger">*</span></div>
                 <div class="form-check form-group pr-5">
                     <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
                         value="option1" checked>
@@ -160,12 +175,12 @@
             </div>
             <div class="row">
                 <div class="form-group col-lg-8 col-md-8">
-                    <label for="prd-name" class="text-left font-weight-bold">Product name</label>
+                    <label for="prd-name" class="text-left font-weight-bold">Product name<span class="text-danger">*</span></label>
                     <input type="text" name="prd-name" id="prd-name" class="form-control"
                         placeholder="Product name">
                 </div>
                 <div class="form-group col-lg-4 col-md-4">
-                    <label for="prd-type" class="text-left font-weight-bold">Product type</label>
+                    <label for="prd-type" class="text-left font-weight-bold">Product type<span class="text-danger">*</span></label>
                     <select class="form-control" id="prd-type">
                         <option>Real Estate</option>
                         <option>Antique</option>
@@ -183,7 +198,7 @@
             </div>
             <div class="row">
                 <div class="form-group col-8">
-                    <div class="font-weight-bold label">Images</div>
+                    <div class="font-weight-bold label">Images<span class="text-danger">*</span></div>
                     <div class="row">
                         <div id="preview"></div>
                         <label class="btn">
@@ -290,11 +305,11 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="row">
                         <div class="form-group col-6">
-                            <label for="start-price" class="text-left font-weight-bold">Reserve Price</label>
+                            <label for="start-price" class="text-left font-weight-bold">Reserve Price<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="start-price" name="start-price" class="text-left font-weight-bold" placeholder="10000.0&#8363">
                         </div>
                         <div class="form-group col-6">
-                            <label for="price-step" class="text-left font-weight-bold">Price step</label>
+                            <label for="price-step" class="text-left font-weight-bold">Price step<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="price-step" name="price-step" class="text-left font-weight-bold" placeholder="5000.0&#8363">
                         </div>
                     </div>
@@ -314,12 +329,12 @@
             </div>
             <div class="row">
                 <div class="form-group col-lg-6 col-md-6">
-                    <label for="start-datetime-local-input" class="text-left font-weight-bold">Start time</label>
+                    <label for="start-datetime-local-input" class="text-left font-weight-bold">Start time<span class="text-danger">*</span></label>
                     <input class="form-control" type="datetime-local" value="2020-08-19T13:45:00"
                         id="start-datetime-local-input">
                 </div>
                 <div class="form-group col-lg-6 col-md-6">
-                    <label for="end-datetime-local-input" class="text-left font-weight-bold">End time</label>
+                    <label for="end-datetime-local-input" class="text-left font-weight-bold">End time<span class="text-danger">*</span></label>
                     <input class="form-control" type="datetime-local" value="2020-08-19T13:45:00"
                         id="end-datetime-local-input">
                 </div>
