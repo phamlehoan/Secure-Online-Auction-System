@@ -11,9 +11,8 @@
 4.  Categories Section
 5.  Product Section
 6.  Countdown Section
-7.  Instagram
-8.  Contact
-9.  Footer Style
+7.  Contact
+8.  Footer Style
 -------------------------------------------------------------------*/
 
 /*----------------------------------------*/
@@ -534,70 +533,6 @@ ol {
 }
 
 /*---------------------
-  Trend
------------------------*/
-
-.trend {
-  padding-top: 80px;
-  padding-bottom: 50px;
-}
-
-.trend__content .section-title h4 {
-  font-size: 20px;
-}
-
-.trend__content .section-title h4:after {
-  bottom: -6px;
-}
-
-.trend__item {
-  overflow: hidden;
-  margin-bottom: 35px;
-}
-
-.trend__item__pic {
-  float: left;
-  margin-right: 25px;
-}
-
-.trend__item__text {
-  overflow: hidden;
-}
-
-.trend__item__text h6 {
-  font-size: 14px;
-  color: #111111;
-  margin-bottom: 5px;
-}
-
-.trend__item__text .rating {
-  line-height: 18px;
-  margin-bottom: 6px;
-}
-
-.trend__item__text .rating i {
-  font-size: 10px;
-  color: #e3c01c;
-  margin-right: -4px;
-}
-
-.trend__item__text .rating i:last-child {
-  margin-right: 0;
-}
-
-.trend__item__text .product__price {
-  color: #111111;
-  font-weight: 600;
-}
-
-.trend__item__text .product__price span {
-  font-size: 14px;
-  color: #b1b0b0;
-  text-decoration: line-through;
-  margin-left: 4px;
-}
-
-/*---------------------
   Discount
 -----------------------*/
 
@@ -739,71 +674,6 @@ ol {
 
 .services__item p {
   margin-bottom: 0;
-}
-
-/*---------------------
-  Instagram
------------------------*/
-
-.instagram__item {
-  height: 320px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-}
-
-.instagram__item:hover:after {
-  opacity: 1;
-}
-
-.instagram__item:hover .instagram__text {
-  opacity: 1;
-  visibility: visible;
-}
-
-.instagram__item:after {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.9);
-  content: "";
-  opacity: 0;
-  z-index: -1;
-  -webkit-transition: all, 0.3s;
-  -o-transition: all, 0.3s;
-  transition: all, 0.3s;
-}
-
-.instagram__text {
-  text-align: center;
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transition: all, 0.3s;
-  -o-transition: all, 0.3s;
-  transition: all, 0.3s;
-}
-
-.instagram__text i {
-  font-size: 30px;
-  color: #0d0d0d;
-}
-
-.instagram__text a {
-  font-size: 16px;
-  color: #0d0d0d;
-  font-weight: 500;
-  display: block;
-  margin-top: 10px;
 }
 
 /*---------------------
@@ -1065,7 +935,7 @@ ol {
 -----------------------*/
 
 .product {
-  padding-top: 60px;
+  padding-top: 30px;
   padding-bottom: 50px;
 }
 
@@ -2112,8 +1982,8 @@ ol {
 -----------------------*/
 
 .shop-cart {
-  padding-top: 70px;
-  padding-bottom: 90px;
+  padding-top: 30px;
+  padding-bottom: 40px;
 }
 
 .shop__cart__table {
@@ -3188,9 +3058,7 @@ ol {
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
 @media only screen and (min-width: 1600px) and (max-width: 1900px) {
-  .header {
-    padding: 0 85px;
-  }
+  
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
