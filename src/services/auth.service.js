@@ -28,7 +28,7 @@ AuthService.postRegister = (email, pass, protocol, host)=>{
         //Lưu tài khoản vào db
         let createUser = await userModel.createItem(userItem);
         //Tạo link trong email để xác nhận tài khoản
-        let linkVerify=`${protocol}://${host}/verify/${createUser.local.token}`
+        let linkVerify=`${protocol}://${host}/user/verify/${createUser.local.token}`
         //Gửi mail xác thực tài khoản cho người dùng (EmailUser,Subject,Content)
         sendEmail(email, transMail.subject, transMail.content(linkVerify))
         .then(success =>{

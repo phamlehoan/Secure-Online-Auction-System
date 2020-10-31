@@ -1,10 +1,10 @@
 <% if (data == "true") { %>
     <div class="avatar d-block">
-        <img src="img/shop/shop-1.jpg" id="avt-pic" alt="Avatar" class="d-inline rounded-circle" style="width: 30px; height: 30px; margin-top:-9px; cursor: pointer;"> 
+        <img src="<%-user.avatarUrl%>" id="avt-pic" alt="Avatar" class="d-inline rounded-circle" style="width: 30px; height: 30px; margin-top:-9px; cursor: pointer;"> 
         <div class="position-absolute user-menu" id="user-profile">
             <ul>
-                <li class="btn btn-bg-info d-block mb-2"><a href="/profile">Profile</a></li>
-                <li class="btn btn-bg-info d-block mb-2"><a href="/change-password">Change password</a></li>
+                <li class="btn btn-bg-info d-block mb-2"><a href="/user/profile">Profile</a></li>
+                <li class="btn btn-bg-info d-block mb-2"><a href="/user/change-password">Change password</a></li>
                 <li class="btn btn-bg-info d-block mb-2"><a href="/logout">Logout</a></li>
             </ul>
         </div>
@@ -14,7 +14,7 @@
 <% if (data == false) { %>
     <div class="need-account d-block">
         <a href="/login">Login</a>
-        <a href="/register">Register</a>
+        <a href="/user/register">Register</a>
     </div>
 <% } %>
 

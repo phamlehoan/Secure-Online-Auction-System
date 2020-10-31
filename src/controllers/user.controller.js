@@ -10,7 +10,8 @@ UserController.getProfile = (req,res)=>{
         data: req.flash("data"),
         user: req.user,
         errors: req.flash("errors"),
-        success:req.flash("success")
+        success:req.flash("success"),
+        title: "profile"
     })
 }
 UserController.updateProfile = async (req,res)=>{

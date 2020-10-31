@@ -30,11 +30,11 @@ AuthController.postRegister = async(req,res)=>{
        let registerSuccess = await authService.postRegister(req.body.email, req.body.pass, req.protocol,req.get('host'));
         arrSucc.push(registerSuccess);
         req.flash('success',arrSucc);
-        res.redirect("register")
+        res.redirect("/user/register")
     } catch (error) {
         arrErr.push(error);
         req.flash('errors',arrErr);
-        res.redirect("register")
+        res.redirect("/user/register")
     }
 
 }
@@ -78,7 +78,7 @@ AuthController.checkLoggedIn = (req,res,next)=>{
 //Kiểm tra xem đã logout hay chưa
 AuthController.checkLoggedOut = (req,res,next)=>{
     if(req.isAuthenticated())
-        return res.redirect("/");
+        return res.redirect("/products");
     next();
 }
 AuthController.checkUser = (req,res,next)=>{

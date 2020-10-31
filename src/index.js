@@ -31,7 +31,7 @@ sessionConfig(app);
 //-----------------------
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(connectFlash());
-// app.use(morgan("dev"));
+app.use(morgan("dev"));
 
 //Sử dụng passport để xác thực tài khoản
 app.use(passport.initialize());

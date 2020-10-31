@@ -1,0 +1,85 @@
+<!-- header -->
+<%- include("../common/header/header.ejs"); %>
+<!-- breadcrumb -->
+<%- include("../common/menu/menu.ejs"); %>
+    <!-- Shop Section Begin -->
+<!-- Product Section Begin -->
+<section class="product spad">
+    <div class="container bg-white p-5 rounded">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div class="section-title">
+                    <h4>Products</h4>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <ul class="filter__controls">
+                    <li class="active" data-filter="*">All</li>
+                    <li data-filter=".women">Women’s</li>
+                    <li data-filter=".men">Men’s</li>
+                    <li data-filter=".kid">Kid’s</li>
+                    <li data-filter=".accessories">Accessories</li>
+                    <li data-filter=".cosmetic">Cosmetics</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row property__gallery">
+                        <!-- list product start -->
+                        <% if(products.length > 0){%>
+                            <% products.forEach(product => {%>
+                                <div class="col-lg-3 col-md-4 col-sm-6 mix women pb-4">
+                                    <div class="product__item">
+                                        <div class="product__item__pic set-bg" data-setbg="<%-product.image%>">
+                                            <div class="label new">New</div>
+                                            <div class="auction__hover">
+                                                <div class="auction__winner"><i class="fa fa-trophy text-warning" aria-hidden="true"></i> ID: <span>435e6r7t8uiyyxc</span></div>
+                                                <div class="auction__price h1">$ <%-product.reservePrice%></div>
+                                            </div>  
+                                            <ul class="product__hover">
+                                                <li><a href="<%-product.image%>" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                                <li><a href="#"><span class="fa fa-gavel"></span></a></li>
+                                                <li><a href="/products/<%-product._id%>"><span class="icon_bag_alt"></span></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="product__item__text">
+                                            <h6><a href="/products/<%- product._id%>"><%-product.name%></a></h6>
+                                            <div class="rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div style="position: relative;">
+                                                <div class="product__price" style="position: absolute; left: 0;">$ <%-product.reservePrice%></div>
+                                                <div style="position: absolute; right: 0;">00:00:30</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <%})%>
+                        <%}else{%>
+                            <div class="col-lg-3 col-md-4 col-sm-6 mix women pb-4">
+                                <div class="product__item__text">No Product found</div>
+                            </div>
+                        <%}%>
+                        <!-- list product end -->
+                        <!-- pagination section start -->
+                        <div class="col-lg-12 text-center">
+                            <div class="pagination__option">
+                                <a href="#">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                                <a href="#"><i class="fa fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- pagination section end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Shop Section End -->
+<!-- footer -->
+<%- include("../common/footer/footer.ejs"); %>

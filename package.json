@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel-node src/index.js",
-    "dev": "nodemon --exec babel-node src/index"
+    "dev": "nodemon --exec babel-node src/index",
+    "debug": "nodemon --inspect --exec babel-node src/index"
   },
   "repository": {
     "type": "git",
@@ -34,7 +35,9 @@
     "nodemailer-smtp-transport": "^2.7.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.0",
+    "cloudinary": "^1.23.0",
+    "multer": "^1.4.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

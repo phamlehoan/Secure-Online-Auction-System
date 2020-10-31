@@ -20,7 +20,7 @@ const UserSchema = new Schema({
   },
   avatarUrl: {
     type: String,
-    default: "avatar.jpg",
+    default: "https://res.cloudinary.com/edtu/image/upload/v1604137396/images/51f6fb256629fc755b8870c801092942_cbgtdt.png",
   },
   role: {
     type: String,
