@@ -10,11 +10,18 @@
 3.  Header Section
 4.  Categories Section
 5.  Product Section
+<<<<<<< HEAD
 6.  Banner Section
 7.  Countdown Section
 8.  Instagram
 9.  Contact
 10.  Footer Style
+=======
+6.  Countdown Section
+7.  Contact
+8.  Footer Style
+9.  User control in the header
+>>>>>>> 8d1eac1... Fix giao dien + SEO
 -------------------------------------------------------------------*/
 
 /*----------------------------------------*/
@@ -417,18 +424,28 @@ ol {
   margin-right: 0;
 }
 
+<<<<<<< HEAD
 .header__menu ul li .dropdown li a {
   font-size: 14px;
   color: #ffffff;
   font-weight: 400;
   padding: 8px 20px;
   text-transform: capitalize;
+=======
+.header__menu ul li .dropdown li a h4 {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 400;
+    padding: 8px 20px;
+    text-transform: capitalize;
+>>>>>>> 8d1eac1... Fix giao dien + SEO
 }
 
 .header__menu ul li .dropdown li a:after {
   display: none;
 }
 
+<<<<<<< HEAD
 .header__menu ul li a {
   font-size: 15px;
   text-transform: uppercase;
@@ -437,6 +454,16 @@ ol {
   display: block;
   padding: 2px 0;
   position: relative;
+=======
+.header__menu ul li a h3 {
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-weight: 500;
+    display: block;
+    padding: 2px 0;
+    position: relative;
+>>>>>>> 8d1eac1... Fix giao dien + SEO
 }
 
 .header__menu ul li a:after {
@@ -683,6 +710,11 @@ ol {
   margin-left: 4px;
 }
 
+.top__area {
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
 /*---------------------
   Discount
 -----------------------*/
@@ -795,6 +827,7 @@ ol {
 }
 
 /*---------------------
+<<<<<<< HEAD
   Services
 -----------------------*/
 
@@ -893,6 +926,8 @@ ol {
 }
 
 /*---------------------
+=======
+>>>>>>> 8d1eac1... Fix giao dien + SEO
   Footer
 -----------------------*/
 
@@ -1150,11 +1185,14 @@ ol {
   Product
 -----------------------*/
 
+<<<<<<< HEAD
 .product {
   padding-top: 60px;
   padding-bottom: 50px;
 }
 
+=======
+>>>>>>> 8d1eac1... Fix giao dien + SEO
 .filter__controls {
   text-align: right;
   margin-bottom: 50px;
@@ -1413,11 +1451,14 @@ ol {
   Shop
 -----------------------*/
 
+<<<<<<< HEAD
 .shop {
   padding-top: 70px;
   padding-bottom: 80px;
 }
 
+=======
+>>>>>>> 8d1eac1... Fix giao dien + SEO
 .sidebar__categories {
   margin-bottom: 50px;
 }
@@ -1711,11 +1752,14 @@ ol {
   Product Details
 -----------------------*/
 
+<<<<<<< HEAD
 .product-details {
   padding-top: 70px;
   padding-bottom: 50px;
 }
 
+=======
+>>>>>>> 8d1eac1... Fix giao dien + SEO
 .product__details__pic {
   overflow: hidden;
 }
@@ -2435,11 +2479,14 @@ ol {
   Checkout
 -----------------------*/
 
+<<<<<<< HEAD
 .checkout {
   padding-top: 80px;
   padding-bottom: 70px;
 }
 
+=======
+>>>>>>> 8d1eac1... Fix giao dien + SEO
 .coupon__link {
   font-size: 14px;
   color: #444444;
@@ -2701,6 +2748,7 @@ ol {
   content: "";
 }
 
+<<<<<<< HEAD
 /*---------------------
     Blog
 -----------------------*/
@@ -3287,6 +3335,8 @@ ol {
   width: 100%;
 }
 
+=======
+>>>>>>> 8d1eac1... Fix giao dien + SEO
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
 @media only screen and (min-width: 1600px) and (max-width: 1900px) {
@@ -3776,6 +3826,7 @@ ol {
 /* Small Device = 320px */
 
 @media only screen and (max-width: 479px) {
+<<<<<<< HEAD
   .categories__item.categories__large__item {
     padding-left: 30px;
   }
@@ -3834,3 +3885,137 @@ ol {
     font-size: 24px;
   }
 }
+=======
+    .categories__item.categories__large__item {
+        padding-left: 30px;
+    }
+
+    .banner__text h1 {
+        font-size: 45px;
+    }
+
+    .filter__controls li {
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+
+    .discount__text {
+        padding: 75px 0px 50px;
+    }
+
+    .footer__newslatter form {
+        text-align: center;
+    }
+
+    .footer__newslatter form input {
+        margin-bottom: 10px;
+    }
+
+    .footer__newslatter form button {
+        position: relative;
+        right: 0;
+        top: 0;
+    }
+
+    .product__details__button .cart-btn {
+        float: none;
+        margin-right: 0;
+    }
+
+    .product__details__button ul {
+        float: none;
+    }
+
+    .nav-item {
+        margin-right: 20px;
+    }
+
+    .blog__details__item__title {
+        margin-right: 30px;
+    }
+
+    .blog__comment__item.blog__comment__item--reply {
+        padding-left: 0;
+    }
+
+    .blog__comment__item__text ul li {
+        margin-right: 5px;
+    }
+
+    .primary-btn.load-btn {
+        padding: 12px 50px 10px;
+    }
+
+    .blog__comment__item__pic {
+        float: none;
+        margin-bottom: 20px;
+    }
+
+    .discount__content form {
+        width: 100%;
+    }
+
+    .search-model-form input {
+        width: 100%;
+        font-size: 24px;
+    }
+}
+
+/*---------------------
+  User control in the 
+-----------------------*/
+
+
+.usr-control {
+    width: 180px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    right: 0;
+    z-index: 100;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.usr-control::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 9px solid #ddd;
+    position: absolute;
+    top: -9px;
+    right: 11%;
+}
+
+.usr-control>ul hr{
+    margin: 0;
+}
+
+.usr-control>ul>li{
+    margin: 8px 0;
+    display: block;
+    text-align: left;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.usr-control>ul>li:hover{
+    background-color: #f1f1f1;
+}
+
+.usr-control>ul>li i{
+    margin-right: 10px;
+    font-size: larger;
+}
+>>>>>>> 8d1eac1... Fix giao dien + SEO
