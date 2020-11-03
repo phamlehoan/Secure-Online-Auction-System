@@ -1,7 +1,7 @@
 const PRODUCT_CONSTANTS = {
     categories: [
         {name: "REAL ESTATE", code: "1", value:"Real Estate"},
-        {name: "ANTIQUE", code: "2", value:"Antique"},
+        {name: "CLOTHES", code: "2", value:"Clothes"},
         {name: "VEHICLES", code: "3", value:"Vehicles"},
         {name: "ELECTRONIC", code: "4", value:"Electronic"},
         {name: "FURNITURES", code: "5", value:"Furnitures"},
@@ -10,8 +10,8 @@ const PRODUCT_CONSTANTS = {
         {name: "TRAVEL", code: "8", value:"Travel"},
         {name: "SPORT", code: "9", value:"Sport"},
         {name: "TOOLS", code: "10", value:"Tools"},
-        {name: "GROCERIES", code: "11", value:"Groceries"},
-        {name: "CLOTHES", code: "12", value:"Clothes"}
+        {name: "GROCERIES", code: "11", value:"Groceries"}
+        
     ],
     priceMethod: [
         {name: "INCR", code: "1"},

@@ -15,15 +15,13 @@
             <div class="col-lg-8 col-md-8">
                 <ul class="filter__controls">
                     <li class="active" data-filter="*">All</li>
-                    <li data-filter=".women">Women’s</li>
-                    <li data-filter=".men">Men’s</li>
-                    <li data-filter=".kid">Kid’s</li>
-                    <li data-filter=".accessories">Accessories</li>
-                    <li data-filter=".cosmetic">Cosmetics</li>
+                    <% categories.slice(0 , 6).forEach(item => {%>
+                        <li data-filter="" onclick="findItemsByCat('<%-item.name%>')"><%-item.value%></li>
+                    <%})%>
                 </ul>
             </div>
         </div>
-        <div class="row property__gallery">
+        <div class="row property__gallery" id="products">
                         <!-- list product start -->
                         <% if(products.length > 0){%>
                             <% products.forEach(product => {%>
@@ -83,3 +81,4 @@
     <!-- Shop Section End -->
 <!-- footer -->
 <%- include("../common/footer/footer.ejs"); %>
+<script src="/js/product.js"></script>
