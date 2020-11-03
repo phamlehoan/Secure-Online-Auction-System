@@ -44,8 +44,8 @@ function productsRender(products) {
             </div>
             </div>
         </div>`
-    })
-    
+    });
+
     return document.getElementById('products').innerHTML = list;
 }
 
