@@ -122,13 +122,14 @@ ProductController.postProduct = async (req, res) => {
  * get detail of product
  */
 ProductController.getDetail =async (req, res) => {
-    // const { id } = req.params;
-    // let product = await ProductService.findProductById(id);
+    const { id } = req.params;
+    let product = await ProductService.findProductById(id);
     return res.render("main/products/details", {
         categories,
+        product,
         data: req.flash("data"),
         user: req.user,
-        title: 'SOAS. - '
+        title: 'SOAS. - '+product.name + ' 😍'
     })
 }
 
