@@ -37,7 +37,7 @@ let productsRender = (products) => {
                 <div class="auction__hover">
                     <div class="auction__winner"><i class="fa fa-trophy text-warning" aria-hidden="true"></i> ID: <span>435e6r7t8uiyyxc</span></div>
                     <div class="auction__price h1">$ ${product.reservePrice}</div>
-                </div>  
+                </div>
                 <ul class="product__hover">
                     <li><a href="${product.image}" class="image-popup"><span class="arrow_expand"></span></a></li>
                     <li><a href="#"><span class="fa fa-gavel"></span></a></li>

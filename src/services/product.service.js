@@ -7,8 +7,8 @@ const ProductService = {};
 
 /**
  * Save product into database
- * 
- * @param { Product } product 
+ *
+ * @param { Product } product
  */
 ProductService.save = async (product) => {
     return await ProductModel.create(product);
@@ -16,8 +16,8 @@ ProductService.save = async (product) => {
 
 /**
  * Find products by { id }
- * 
- * @param { String } id 
+ *
+ * @param { String } id
  */
 ProductService.findProductById = async (id) => {
     let product = await ProductModel.findById(id);
@@ -36,8 +36,8 @@ ProductService.findAll = async () => {
 
 /**
  * Find All products have { category }
- * 
- * @param { String } category 
+ *
+ * @param { String } category
  */
 ProductService.findProductByCategory = async (category) => {
     return await ProductModel.find({"categories.name" : category});
@@ -45,8 +45,8 @@ ProductService.findProductByCategory = async (category) => {
 
 /**
  * Find all products have { userId }
- * 
- * @param { String } userId 
+ *
+ * @param { String } userId
  */
 ProductService.findProductsByUserId = async (userId) => {
     return await ProductModel.find({"userId": userId});
@@ -54,7 +54,7 @@ ProductService.findProductsByUserId = async (userId) => {
 
 /**
  * Find product by criteria
- * 
+ *
  * @param {Object} criteria
  * @returns {ProductModel} Products
  */
@@ -63,9 +63,9 @@ ProductService.find = async (criteria) => {
 }
 
 /**
- * 
- * @param {String} productId 
- * @param {Number} newPrice 
+ *
+ * @param {String} productId
+ * @param {Number} newPrice
  */
 ProductService.updatePrice = async (productId, newPrice) => {
     let product = await ProductModel.findOne({_id: productId});
@@ -81,7 +81,7 @@ ProductService.updatePrice = async (productId, newPrice) => {
 }
 
 /**
- * 
+ *
  * @param {Array} list Ids
  * @returns {Array} list user
  */

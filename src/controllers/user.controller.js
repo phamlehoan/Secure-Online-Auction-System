@@ -2,10 +2,12 @@
  * user controller
  */
 import {validationResult} from 'express-validator/check';
-
+import ProductService from "./../services/product.service"
 import user from './../services/user.service';
 import AuctionLogModel from "../models/auctionlog.model";
-
+import UserModel from "./../models/user.model";
+import FeedbackModel from "./../models/feedback.model"
+import FeedbackService from "./../services/feedback.service"
 import PRODUCT_CONSTANTS from "../constants/product.constant";
 
 let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
@@ -23,6 +25,29 @@ UserController.getProfile = async (req, res) => {
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: "profile"
+    })
+}
+
+//infomation seller
+UserController.getInfoSeller = async (req, res) => {
+    let numberBiddingProd = await AuctionLogModel.auctionCounter(req.user._id);
+    let seller = await UserModel.findUserById(req.params.sellerId)
+    let dataFeedback = await FeedbackService.listFeedbackProduct(req.params.sellerId)
+    let countStar = await FeedbackService.statistical(req.params.sellerId)
+    console.log(countStar);
+    return res.render("main/profile/profile_seller",{
+        data: req.flash("data"),
+        idProduct: req.params.productId,
+        idSeller: req.params.sellerId,
+        user: req.user,
+        categories,
+        numberBiddingProd,
+        errors: req.flash("errors"),
+        success:req.flash("success"),
+        title: "profile",
+        seller: seller,
+        dataFeedback: dataFeedback,
+        star:countStar
     })
 }
 
@@ -97,6 +122,37 @@ UserController.putUpdatePass = async(req, res) => {
         }
         return res.status(200).send(result)
     } catch (error) {
+        return res.status(500).send(error);
+    }
+}
+
+UserController.postFeedback = async (req, res) => {
+    let content = req.body.content;
+    let star = req.body.star;
+    let itemFeedback = {
+        content: content,
+        sellerId: req.body.sellerId,
+        userId: req.user._id,
+        ratingStar: parseFloat(star),
+        productId: req.body.productId,
+    }
+    console.log(itemFeedback);
+    try {
+        //Gọi service để kiểm tra các điều kiện
+        await FeedbackModel.createItem(itemFeedback);
+        let user = await UserModel.findUserById(req.user._id);
+        let product = await ProductService.findProductById(req.body.productId);
+        //Thành công thì gửi về messenger thông báo
+        let result = {
+            data: itemFeedback,
+            username: user.username,
+            productname: product.name,
+            avatar: user.avatarUrl,
+            message:"Feedback success !",
+        }
+        return res.status(200).send(result)
+    } catch (error) {
+        console.log(error);
         return res.status(500).send(error);
     }
 }
