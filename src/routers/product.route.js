@@ -27,6 +27,11 @@ router.post('/add',
     ProductController.postProduct
 );
 
+router.get('/auction', 
+    AuthController.checkUser, 
+    ProductController.getManage
+);
+
 /* GET product details page. */
 router.get('/:id',
     AuthController.checkUser,

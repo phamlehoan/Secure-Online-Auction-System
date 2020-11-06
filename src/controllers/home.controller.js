@@ -5,7 +5,9 @@ const HomeController = {};
 
 HomeController.getHomepage = (req,res) =>{
     return res.render("main/home/home",{
-        data: req.flash("data")
+        data: req.flash("data"),
+        title: 'Auction',
+        user: req.user
     })
 }
 

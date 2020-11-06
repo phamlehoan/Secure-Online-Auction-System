@@ -2,6 +2,7 @@ import express from "express";
 import passport from "passport";
 
 import AuthController from "../controllers/auth.controller";
+import HomeController  from "../controllers/home.controller";
 
 let router = express.Router();
 
@@ -24,6 +25,11 @@ router.post("/login", passport.authenticate("local",{
 router.get("/logout",
     AuthController.checkLoggedIn,
     AuthController.getLogout
+);
+
+router.get("/",
+    AuthController.checkUser,
+    HomeController.getHomepage
 );
 
 module.exports = router;

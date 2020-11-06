@@ -29,7 +29,7 @@ function productsRender(products) {
                 </ul>
             </div>
             <div class="product__item__text">
-                <h6><a href="/products/${product._id}"></a></h6>
+                <h6><a href="/products/${product._id}">${product.name}</a></h6>
                 <div class="rating">
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
@@ -38,14 +38,14 @@ function productsRender(products) {
                     <i class="fa fa-star"></i>
                 </div>
                 <div style="position: relative;">
-                    <div class="product__price" style="position: absolute; left: 0;">${product.reservePrice}</div>
+                    <div class="product__price" style="position: absolute; left: 0;"$>$ ${product.reservePrice}</div>
                     <div style="position: absolute; right: 0;">00:00:30</div>
                 </div>
             </div>
             </div>
         </div>`
     })
-    console.log(list);
+    
     return document.getElementById('products').innerHTML = list;
 }
 
