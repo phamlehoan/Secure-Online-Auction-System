@@ -18,6 +18,9 @@ let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
  */
 ProductController.getProducts = async (req, res) => {
     let {category, price, userId} = req.query;
+    let phone = req.user.phone;
+    let city = req.user.personalInfo.address.city;
+    let district = req.user.personalInfo.address.district;
     let name = req.query.q;
     let categoryCode = ProductUtils.retrieveCatByCode(category);
     let criteria = ProductFactory.create(
@@ -27,9 +30,7 @@ ProductController.getProducts = async (req, res) => {
         userId
     );
     let products = [];
-    if(!req.user)
-    {
-        products = await ProductService.find(criteria);
+    if(!req.user){
         return res.render('main/products/products', {
             products,
             categories,
@@ -38,9 +39,9 @@ ProductController.getProducts = async (req, res) => {
             title: 'SOAS. - List Products'
         });
     }
-    if(!req.user.phone || !req.user.personalInfo.address.city || !req.user.personalInfo.address.district)
-    {
-        let arrErr = ["You must input important information"]
+
+    if(!phone || !city || !district){
+        let arrErr = ["You must input important information"];
         req.flash("must-enter", arrErr);
         return res.render("main/profile/profile",{
             data: req.flash("data"),
