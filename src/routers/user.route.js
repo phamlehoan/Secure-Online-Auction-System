@@ -8,7 +8,7 @@ import UserController from "../controllers/user.controller";
 let router = express.Router();
 
 //Router view register
-router.get("/register", 
+router.get("/register",
     AuthController.getRegister
 );
 //Router post from register
@@ -31,7 +31,7 @@ router.get("/profile",
     UserController.getProfile
 );
 
-router.put("/profile/user/update",
+router.put("/update-profile",
     AuthController.checkLoggedIn,
     AuthController.checkUser,
     UserValid.checkUserUpdate,
@@ -43,6 +43,12 @@ router.get("/change-password",
     AuthController.checkLoggedIn,
     AuthController.checkUser,
     UserController.getChangePass
+);
+router.put("/update-password",
+    AuthController.checkLoggedIn,
+    AuthController.checkUser,
+    UserValid.checkPassword,
+    UserController.putUpdatePass
 );
 
 module.exports = router;

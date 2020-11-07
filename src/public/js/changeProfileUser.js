@@ -144,7 +144,7 @@ function updateInfo(){
 function requestInfo(){
     $.ajax({
         type: "put",
-        url: "/profile/user/update",
+        url: "/user/update-profile",
         data: userInfo,
         success: function (response) {
             $(".user-modal-alert-success").find("span").text(response.message);
@@ -173,21 +173,12 @@ function clickResetUserInfo(){
 //Click update
 function clickSaveUserInfo(){
     $("#input-btn-update-user").bind("click",function(){
-        // if($.isEmptyObject(userInfo) && userAvatar === null)
-        // {
-        //      alertify.notify("Bạn phải thay đổi thông tin trước khi cập nhật dữ liệu","error",7);
-        //      return false;
-        // }
-        // if(userAvatar){
-        //     //Gửi request để update avatar vào db
-        //     requestAvatar()
-        // }
-        // if(!$.isEmptyObject(userInfo)){
-        //     //Gửi request để update info vào db
-        // alertify.notify("Bạn phải thay đổi thông tin trước khi cập nhật dữ liệu","error",7);
+        if($.isEmptyObject(userInfo))
+        {
+             alertify.notify("Bạn phải thay đổi thông tin trước khi cập nhật dữ liệu","error",7);
+             return false;
+        }
         requestInfo();
-
-        // }
     })
 }
 
@@ -261,42 +252,42 @@ function requestPassword(){
         url: "/user/update-password",
         data: userUpdatePassword,
         success: function (response) {
-            $(".user-modal-alert-password-success").find("span").text(response.message);
-            $(".user-modal-alert-password-success").css("display","block");
+            $(".user-modal-alert-success").find("span").text(response.message);
+            $(".user-modal-alert-success").removeClass("d-none")
 
             //Reset lại mọi thứ.
-            $("#input_btn_cancel_password").click();
+            $("#input-btn-reset-pass").click();
             //Logout
             logoutSystem();
         },
         error: function (error){
-            $(".user-modal-alert-password-error").find("span").text(error.responseText);
-            $(".user-modal-alert-password-error").css("display","block")
+            $(".user-modal-alert-error").find("span").text(error.responseText);
+            $(".user-modal-alert-error").removeClass("d-none")
 
             //Reset lại mọi thứ.
-            $("#input_btn_cancel_password").click();
+            $("#input-btn-reset-pass").click();
         }
     });
 }
 
 function clickSaveChangePassword(){
-    $("#input_btn_update_password").bind("click",function(){
+    $("#input-btn-update-pass").bind("click",function(){
         //Kiểm tra xem các ô có trống hay không
         if(!userUpdatePassword.currentPassword || !userUpdatePassword.newPassword || !userUpdatePassword.confirmPassword)
         {
-            alertify.notify("Bạn phải thay đổi thông tin trước khi cập nhật dữ liệu","error",7);
+            alertify.notify("You must change the information before you can update the data !","error",7);
              return false;
         }
         //Show dialog cần xác nhận thực hiện thay đổi
         Swal.fire({
-            title: 'Bạn có chắc chắn thay đổi mật khẩu?',
-            text: "Bạn sẽ không hoàn tác được chức năng này!",
+            title: 'Are you sure to change the password ?',
+            text: "You will not be able to undo this function!",
             type: 'info',
             showCancelButton: true,
             confirmButtonColor: '#2ECC71',
             cancelButtonColor: '#ff7675',
-            confirmButtonText: 'Đồng ý',
-            cancelButtonText: 'Hủy bỏ'
+            confirmButtonText: 'Agree',
+            cancelButtonText: 'Cancel'
           }).then((result) => {
             if(!result.value){
                 $("#input_btn_cancel_password").click();
@@ -310,21 +301,20 @@ function clickSaveChangePassword(){
 }
 
 function clickCancelChangePassword(){
-    $("#input_btn_cancel_password").bind("click",function(){
+    $("#input-btn-reset-pass").bind("click",function(){
         userUpdatePassword = {}
         //Đưa các textbox về lại giá trị ban đầu
         $("#input-change-current-password").val(null);
         $("#input-change-new-password").val(null);
         $("#input-change-confirm-password").val(null);
     })
-
 }
 function logoutSystem(){
     let timeInteval;
     Swal.fire({
         position: 'top-end',
-        title: 'Tự động đăng xuất sau 5 giây',
-        html: "Thời gian <strong></strong>",
+        title: 'Automatically log out after 5 seconds',
+        html: "Time <strong></strong>",
         showConfirmButton: false,
         timer: 5000,
         onBeforeOpen : () =>{
@@ -363,8 +353,8 @@ $(document).ready(function () {
     // clickResetUserInformation();
 
     // //Xử lý khi nhấn lưu thay đổi mật khẩu
-    // clickSaveChangePassword();
+    clickSaveChangePassword();
 
     // //Xử lý khi nhấn hủy bỏ thay đổi mật khẩu
-    // clickCancelChangePassword();
+    clickCancelChangePassword();
 });

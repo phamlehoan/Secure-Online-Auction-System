@@ -35,13 +35,13 @@ UserValid.checkUserUpdate = [
         .matches(/^(0)[0-9]{9,10}$/)
 ];
 
-// let checkPassword = [
-//     check('currentPassword',messErr.currenPassword)
-//         .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/),
-//     check('newPassword',messErr.newPassword)
-//         .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/),
-//     check('confirmPassword',messErr.confirmPassword)
-//         .custom((value,{req}) => value === req.body.newPassword)
-// ]
+UserValid.checkPassword = [
+    check('currentPassword',updateUserMess.pass.oldPass)
+        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&_-])[A-Za-z\d$@$!%*?&_-]{8,}$/),
+    check('newPassword',updateUserMess.pass.newPass)
+        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&_-])[A-Za-z\d$@$!%*?&_-]{8,}$/),
+    check('confirmPassword',updateUserMess.pass.confirmPass)
+        .custom((value,{req}) => value === req.body.newPassword)
+]
 
 export default UserValid;

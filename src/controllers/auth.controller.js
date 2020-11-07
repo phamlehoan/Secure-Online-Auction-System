@@ -17,7 +17,7 @@ AuthController.postRegister = async(req,res)=>{
     let arrSucc = [];
     let valid = validationResult(req);
     if(!valid.isEmpty())
-    {   
+    {
         //Đẩy tất cả các lỗi vào mảng Error
         valid.array().forEach(item =>{
             arrErr.push(item.msg);
@@ -86,7 +86,7 @@ AuthController.checkUser = (req,res,next)=>{
     {
         req.flash("data",true);
     }
-    else    
+    else
     {
         req.flash("data",false);
     }

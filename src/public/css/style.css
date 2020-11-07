@@ -534,9 +534,9 @@ ol {
 }
 .header__right__auth .user-menu{
   display: none;
-  width: 200px; 
-  background-color: #111111; 
-  right: 0; 
+  width: 200px;
+  background-color: #111111;
+  right: 0;
   z-index: 100;
   color: white;
   text-align: left;
@@ -546,7 +546,7 @@ ol {
 }
 .header__right__auth .user-menu li a{
   color: white;
-  font-weight: bold; 
+  font-weight: bold;
 }
 /*---------------------
   Banner
@@ -1116,7 +1116,7 @@ ol {
 }
 
 .product__item:hover .auction__hover
-.auction__price{  
+.auction__price{
   overflow: visible;
   opacity: 1;
 }
@@ -2590,9 +2590,9 @@ ol {
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
 @media only screen and (min-width: 1600px) and (max-width: 1900px) {
-  .header {
-    padding: 0 85px;
-  }
+  /* .header {
+    padding: 0 85p;
+  } */
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
@@ -3152,7 +3152,7 @@ ol {
 }
 
 /*---------------------
-  User control in the 
+  User control in the
 -----------------------*/
 
 
