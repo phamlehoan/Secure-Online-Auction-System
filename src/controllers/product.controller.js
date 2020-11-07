@@ -19,15 +19,37 @@ let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
  *  filtering all product has category name
  *  If has no req.query
  *  Getting all product in database and showing all on page /products
- * 
+ *
  */
 ProductController.getProducts = async (req, res) => {
     let products = [];
+    if(!req.user)
+    {
+        products = await ProductService.findAll();
+        return res.render('main/products/products', {
+            products,
+            categories,
+            data: req.flash("data"),
+            user: req.user,
+            title: 'SOAS. - List Products'
+        });
+    }
+    if(!req.user.phone || !req.user.personalInfo.address.city || !req.user.personalInfo.address.district)
+    {
+        let arrErr = ["You must input important information"]
+        req.flash("must-enter", arrErr);
+        return res.render("main/profile/profile",{
+            data: req.flash("data"),
+            user: req.user,
+            errors: req.flash("must-enter"),
+            title: "profile"
+        })
+    }
     if (req.query.category) {
         let category = ProductUtils.retrieveCatByCode(req.query.category);
         products =await ProductService.findProductByCategory(category);
 
-        return res.render('main/products/products', { 
+        return res.render('main/products/products', {
             products,
             categories,
             user: req.user,
@@ -36,37 +58,34 @@ ProductController.getProducts = async (req, res) => {
         });
     }
     products = await ProductService.findAll();
-    
-    
-    return res.render('main/products/products', { 
+
+
+    return res.render('main/products/products', {
         products,
         categories,
         data: req.flash("data"),
         user: req.user,
-        title: 'SOAS. - List Products' 
+        title: 'SOAS. - List Products'
     });
 }
 
-/**
- * 
- */
 ProductController.getAddProduct = (req, res) => {
-    
+
 
     return res.render("main/products/addProduct", {
         categories,
         data: req.flash("data"),
         user: req.user,
-        title: 'SOAS. - Winning Products' 
+        title: 'SOAS. - Winning Products'
     });
 }
 
 /**
  * Adding new product
- * 
+ *
  * @todo set default value for each attribute of req.body
  * @todo validate date time
- * @todo save categories and bidding methods into database 
+ * @todo save categories and bidding methods into database
  *       instead hard-code by constants
  */
 ProductController.postProduct = async (req, res) => {

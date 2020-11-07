@@ -116,7 +116,6 @@ UserSchema.statics ={
   },
   updateUserInfo(id,file)
   {
-    console.log("Vao dayy");
       return this.findByIdAndUpdate(id,file).exec();
   },
   //Tìm user có token và sửa lại active = true và xóa token
@@ -128,7 +127,11 @@ UserSchema.statics ={
         "local.token": null,
         "local.isActived": true,
     }).exec();
-},
+
+  },
+  updatePassword(id,hashedPassword){
+    return this.findByIdAndUpdate(id,{"local.password":hashedPassword}).exec();
+  },
 }
 UserSchema.methods = {
   //Hàm so sánh mật khẩu

@@ -44,7 +44,7 @@
     /*------------------
 		Navigation
 	--------------------*/
-    $(".header__menu").slicknav({
+    $(".header__menu").click({
         prependTo: '#mobile-menu-wrap',
         allowParentLinks: true
     });
@@ -181,7 +181,7 @@
 			$('.product__big__img').attr({src: imgurl});
 		}
     });
-    
+
     /*-------------------
 		Quantity change
 	--------------------- */
@@ -203,7 +203,7 @@
 		}
 		$button.parent().find('input').val(newVal);
     });
-    
+
     /*-------------------
 		Radio Btn
 	--------------------- */

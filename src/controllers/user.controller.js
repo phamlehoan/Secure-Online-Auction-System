@@ -52,7 +52,36 @@ UserController.getChangePass = (req,res)=>{
         data: req.flash("data"),
         user: req.user,
         errors: req.flash("errors"),
-        success:req.flash("success")
+        success:req.flash("success"),
+        title: 'SOAS. - Change Password'
     })
+}
+UserController.putUpdatePass = async(req,res)=>{
+    //Kiểm tra validation của form đăng ký
+    let valid = validationResult(req);
+    let arrErr= []; //Create arrray to contain err
+    //Kiểm tra xem có tồn tại lỗi sau khi kiểm tra validation hay không
+    if(!valid.isEmpty())
+    {
+        //Đẩy tất cả các lỗi vào mảng Error
+        valid.array().forEach(item =>{
+            arrErr.push(item.msg);
+        })
+        //Lưu mảng lỗi vào flash để đẩy lên phía client
+        return res.status(500).send(arrErr);
+    }
+    //Lấy thông tin của client gửi lên
+    let updateUserItem = req.body;
+    try {
+        //Gọi service để kiểm tra các điều kiện
+        await user.updatePassword(req.user._id,updateUserItem);
+        //Thành công thì gửi về messenger thông báo
+        let result = {
+            message:"Update password success !",
+        }
+        return res.status(200).send(result)
+    } catch (error) {
+        return res.status(500).send(error);
+    }
 }
 export default UserController;

@@ -51,6 +51,13 @@ const updateUser = {
         detailAddress: "Detail address limited from 1-100 characters",
         city: "City limited from 1-30 characters",
         phone: "Number phone is number and limited from 10-11 characters",
+    },
+    pass: {
+        oldPass: "Old password must contain at least 8 characters including uppercase, lowercase letters, numbers and special characters!",
+        newPass:"New password must contain at least 8 characters including uppercase, lowercase letters, numbers and special characters!",
+        confirmPass:"Does not match the new password!",
+        userInvalue: "User invalid",
+        wrongPassword:"Old password is incorrect"
     }
 }
 export const regisErr = registerError;
