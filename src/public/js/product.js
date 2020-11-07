@@ -1,6 +1,6 @@
 const baseUrl = 'http://localhost:8080/api/v1';
 
-async function findItemsByCat(category) {
+let findItemsByCat = async (category) => {
     let products = await getData(baseUrl + "/products");
     let filtered = products.products
     .filter(item => item.categories.name === category);
@@ -8,8 +8,7 @@ async function findItemsByCat(category) {
     return productsRender(filtered);
 }
 
-function productsRender(products) {
-    console.log(products);
+let productsRender = (products) => {
     let list = '';
     products.forEach(product => {
         list+=
@@ -49,7 +48,17 @@ function productsRender(products) {
     return document.getElementById('products').innerHTML = list;
 }
 
-async function getData(url, options) {
+let getData = async (url, options) => {
     return await fetch(url, options)
         .then(res => res.json());
 }
+<<<<<<< HEAD
+=======
+
+let bidding = () => {
+    socket.emit('bidding-products', {
+        //userId: req.user._id,
+        //productId: product._id
+    })
+}
+>>>>>>> d89b38a... Settup socketio and authen for socket, api

@@ -60,9 +60,16 @@ const updateUser = {
         wrongPassword:"Old password is incorrect"
     }
 }
+
+const AUTH_ERR_MESSAGE = {
+    NOT_VERIFY: "You must verify your account before do this operation !",
+    INVALID_USER: "Invalid login credentials"
+}
+
 export const regisErr = registerError;
 export const notiRes = notificationRegister;
 export const transMail = translateMail;
 export const loginErr = loginError;
 export const loginSucc = loginSuccess;
 export const updateUserMess = updateUser;
+export default AUTH_ERR_MESSAGE;

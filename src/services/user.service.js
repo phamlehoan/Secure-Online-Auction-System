@@ -1,7 +1,10 @@
 import bcrypt from 'bcrypt';
+import jwt from "jsonwebtoken";
 
 import userModel from "./../models/user.model";
 import updateUserMess from "./../langs/us/notification.us";
+import { UserNotVerifyException } from "../exceptions/user.exception";
+import userErrorMessage from "../langs/us/notification.us";
 
 const UserService = {}
 
@@ -44,6 +47,29 @@ UserService.updatePassword = (id, item) => {
 
       resolve(true);
   });
+}
+
+/**
+ * Generate jsonwebtoken
+ * 
+ * @returns {String} jwtToken
+ */
+UserService.generateAuthToken = async () => {
+  let user = new userModel();
+  const jwtToken = jwt.sign({
+    _id: user._id
+  },
+    process.env.JWT_KEY
+  );
+  if(user.local.token === null)
+    user.local.token = jwtToken;
+  else
+    throw new UserNotVerifyException(userErrorMessage.NOT_VERIFY);
+  await user.findOneAndUpdate(user._id, {
+    "local.token": jwtToken
+  });
+
+  return jwtToken;
 }
 
 export default UserService;

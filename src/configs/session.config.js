@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 //khởi tạo biến môi trườn
 dotenv.config();
+
 //Tạo mongoStrre để lưu session vào database
 let mongoDBStrore = MongoDBStore(session);
 
@@ -16,21 +17,23 @@ const {
     MONGO_PORT,
   } = process.env;
 
-  const MONGO_CONNECTION_STRING = `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB_NAME}?${MONGO_OPTIONS}`;
+  const MONGO_CONNECTION_STRING = 
+  `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}/${MONGO_DB_NAME}?${MONGO_OPTIONS}`
+  ||'';
 
 //Cấu hình sessionStore
 let sessionStore = new mongoDBStrore({
     uri: MONGO_CONNECTION_STRING,
-    collection: 'mySessions',
+    collection: process.env.SESSION_STORE_COLLECTION,
     autoReconnect: true,
-    autoRemove: "native"
+    autoRemove: process.env.SESSION_STORE_AUTO_REMOVE_MODE
 });
 
 //Cấu hình session
-let configSession = (app) =>{
+let config = (app) =>{
     app.use(session({
-        key: "express.sid",
-        secret: 'mySecret',
+        key: process.env.SESSION_KEY,
+        secret: process.env.SESSION_SECRET,
         store: sessionStore,
         resave: true,
         saveUninitialized: false,
@@ -38,4 +41,7 @@ let configSession = (app) =>{
     }));
 };
 
-module.exports = configSession;
+module.exports = {
+    config,
+    sessionStore
+};

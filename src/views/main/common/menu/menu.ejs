@@ -80,9 +80,9 @@
                     <li><a href="#"><h3><i class="fa fa-bars mr-2" style="font-size: larger;"
                         aria-hidden="true"></i>Category</h3></a>
                         <ul class="dropdown">
-                            <% categories.forEach(item => {%>
-                                <li><a href="/products/?category=<%-item.code%>"><h4><%-item.value%></h4></a></li>
-                            <%})%>
+                            <% categories.forEach(item =>{%>
+                                <li><a href="/products/?category=<%-item.code%>"><%-item.value%></a></li>
+                            <% })%>
                         </ul>
                     </li>
                 </ul>

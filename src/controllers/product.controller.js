@@ -129,7 +129,6 @@ ProductController.getDetail =async (req, res) => {
  * show All products
  */
 ProductController.getManage = async (req, res) => {
-    console.log(req.user._id);
     let products = await ProductService.findProductsByUserId(req.user._id);
     return res.render("main/products/manage", {
         products,
