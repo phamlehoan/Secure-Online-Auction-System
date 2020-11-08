@@ -1,6 +1,7 @@
 import ProductService from "../services/product.service";
 import ProductUtils from "../utils/product.util";
 import Cloudinary from "../configs/cloudinary.config";
+import ProductFactory from "../factory/product.factory";
 
 import PRODUCT_CONSTANTS from "../constants/product.constant";
 
@@ -13,19 +14,22 @@ const ProductController = {};
 let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
 
 /**
- * Checking if exist req.query
- *  Get category id by request query "products/?category=categoryId"
- *  retrieve category name by id in product constant
- *  filtering all product has category name
- *  If has no req.query
- *  Getting all product in database and showing all on page /products
- *
+ * 
  */
 ProductController.getProducts = async (req, res) => {
+    let {category, price, userId} = req.query;
+    let name = req.query.q;
+    let categoryCode = ProductUtils.retrieveCatByCode(category);
+    let criteria = ProductFactory.create(
+        name,
+        categoryCode,
+        price,
+        userId
+    );
     let products = [];
     if(!req.user)
     {
-        products = await ProductService.findAll();
+        products = await ProductService.find(criteria);
         return res.render('main/products/products', {
             products,
             categories,
@@ -45,20 +49,8 @@ ProductController.getProducts = async (req, res) => {
             title: "profile"
         })
     }
-    if (req.query.category) {
-        let category = ProductUtils.retrieveCatByCode(req.query.category);
-        products =await ProductService.findProductByCategory(category);
 
-        return res.render('main/products/products', {
-            products,
-            categories,
-            user: req.user,
-            data: req.flash("data"),
-            title: 'SOAS. - Category : '+ category
-        });
-    }
-    products = await ProductService.findAll();
-
+    products = await ProductService.find(criteria);
 
     return res.render('main/products/products', {
         products,
@@ -70,8 +62,6 @@ ProductController.getProducts = async (req, res) => {
 }
 
 ProductController.getAddProduct = (req, res) => {
-
-
     return res.render("main/products/addProduct", {
         categories,
         data: req.flash("data"),
@@ -122,13 +112,14 @@ ProductController.postProduct = async (req, res) => {
  * get detail of product
  */
 ProductController.getDetail =async (req, res) => {
-    // const { id } = req.params;
-    // let product = await ProductService.findProductById(id);
+    const { id } = req.params;
+    let product = await ProductService.findProductById(id);
     return res.render("main/products/details", {
         categories,
+        product,
         data: req.flash("data"),
         user: req.user,
-        title: 'SOAS. - '
+        title: 'SOAS. - '+product.name + ' 😍'
     })
 }
 

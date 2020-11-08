@@ -1,3 +1,5 @@
+import { query } from "express";
+import ProductModel from "../models/product.model";
 import Product from "../models/product.model";
 /**
  * Define all services for home route
@@ -10,7 +12,7 @@ const ProductService = {};
  * @param { Product } product 
  */
 ProductService.save = async (product) => {
-    return await Product.create(product);
+    return await Product.create(product).exec();
 }
 
 /**
@@ -19,14 +21,14 @@ ProductService.save = async (product) => {
  * @param { String } id 
  */
 ProductService.findProductById = async (id) => {
-    return await Product.findById(id);
+    return await Product.findById(id).exec();
 }
 
 /**
  * Find All products
  */
 ProductService.findAll = async () => {
-    return await Product.find({});
+    return await Product.find({}).exec();
 }
 
 /**
@@ -35,7 +37,7 @@ ProductService.findAll = async () => {
  * @param { String } category 
  */
 ProductService.findProductByCategory = async (category) => {
-    return await Product.find({"categories.name" : category});
+    return await Product.find({"categories.name" : category}).exec();
 }
 
 /**
@@ -44,7 +46,17 @@ ProductService.findProductByCategory = async (category) => {
  * @param { String } userId 
  */
 ProductService.findProductsByUserId = async (userId) => {
-    return await Product.find({"userId": userId});
+    return await Product.find({"userId": userId}).exec();
+}
+
+/**
+ * Find product by criteria
+ * 
+ * @param {Object} criteria
+ * @returns {ProductModel} Products
+ */
+ProductService.find = async (criteria) => {
+    return await ProductModel.find(criteria);
 }
 
 export default ProductService;

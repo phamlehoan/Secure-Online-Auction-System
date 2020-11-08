@@ -8,12 +8,33 @@ const ProductUtils = {};
  * @param {String} code 
  */
 ProductUtils.retrieveCatByCode = (code) => {
-    return PRODUCT_CONSTANT.categories.find(category => category.code == code).name;
+    if(typeof(code) == 'undefined')
+        return null;
+    
+    return PRODUCT_CONSTANT.categories
+    .find(category => category.code == code)
+    .name;
 }
 
 ProductUtils.retrievePriceMethod = (code) => {
-    return PRODUCT_CONSTANT.priceMethod.find(method => method.code == code).name;
+    if(typeof(code) == 'undefined')
+        return null;
+    return PRODUCT_CONSTANT.priceMethod
+    .find(method => method.code == code)
+    .name;
 }
-//Warning: duplicated code
+
+/**
+ * find category code by provided name
+ * 
+ * @param {String} name 
+ */
+ProductUtils.retrieveCatByName = (name) => {
+    if(typeof(name) == 'undefined')
+        return null;
+    return PRODUCT_CONSTANT.categories
+    .find(category => category.name == name)
+    .code;
+}
 
 export default ProductUtils;

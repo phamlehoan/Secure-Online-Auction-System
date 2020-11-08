@@ -6,8 +6,17 @@ import bcrypt from 'bcrypt';
 //Tạo muối
 const saltRounds = 7;
 
-UserService.updateUser = (id,file)=>{
-  return userModel.updateUserInfo(id,file);
+UserService.updateUser = (id, file) => {
+  return userModel.updateUserInfo(id, file);
+}
+
+/**
+ * Search user
+ * 
+ * @param {Object} queries 
+ */
+UserService.search = async (queries) => {
+  return await userModel.find(queries);
 }
 UserService.updatePassword = (id,item)=>{
   return new Promise(async(resolve,reject)=>{
