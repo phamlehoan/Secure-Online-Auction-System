@@ -1,5 +1,4 @@
 import ProductService from "../services/product.service";
-import ProductUtils from "../utils/product.util";
 
 const ProductApi = {};
 

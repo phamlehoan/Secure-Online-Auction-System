@@ -33,12 +33,6 @@ router.get('/auction',
 );
 
 /* GET product details page. */
-router.get('/:id', 
-    AuthController.checkUser, 
-    ProductController.getManage
-);
-
-/* GET product details page. */
 router.get('/:id',
     AuthController.checkUser,
     ProductController.getDetail

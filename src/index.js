@@ -21,6 +21,7 @@ import passport from 'passport';
 import socketIO from "socket.io";
 import http from "http";
 import cookieParser from "cookie-parser";
+import socketJwt from "socketio-jwt";
 
 import configViewEngine from "./configs/viewEngine"
 import dbConfig from "./configs/db.config";
@@ -76,6 +77,13 @@ server.listen(APP_PORT, APP_HOST, () => {
     console.log(`Server running at http://${APP_HOST}:${APP_PORT}/`);
 })
 
+// io.on("connection", socketJwt.authorize({
+//     secret: process.env.JWT_KEY,
+//     timeout: 15000
+// })).on("authenticated", (socket) => {
+//     console.log(`Socket connected with user ${socket.decoded_token._id}`);
+// })
+
 io.on("connection", (socket) => {
-    console.log("io server connected !");
+    console.log("Io connected !");
 })

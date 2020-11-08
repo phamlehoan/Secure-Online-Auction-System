@@ -53,14 +53,12 @@ AuthController.getLogin = (req,res)=>{
 }
 
 AuthController.activeAccount = async(req,res)=>{
-    let arrErr= []; //Create arrray to contain err
-    let arrSucc=[]; //Create array để chứa thông báo thành công
+    let arrErr= [];
+    let arrSucc=[];
     try {
-        //Lấy thông báo từ database, nếu không lỗi sẽ có thông báo success
         let activeSucc = await authService.activeAccount(req.params.token)
         arrSucc.push(activeSucc);
-        //Lưu mảng thành công vào flash để đẩy lên phía client
-        req.flash('success',arrSucc);
+        req.flash('success', arrSucc);
         res.redirect('/login');
     } catch (error) {
         arrErr.push(error);
@@ -70,34 +68,34 @@ AuthController.activeAccount = async(req,res)=>{
 }
 
 //Controller của router đăng xuất
-AuthController.getLogout = (req,res)=>{
+AuthController.getLogout = (req, res) => {
     req.logout();
-    req.flash("success",loginSucc.logoutSuccess)
-    res.redirect("/login")
+    req.flash("success", loginSucc.logoutSuccess);
+    res.redirect("/login");
 }
 
 //Kiểm tra xem đã Login hay chưa
-AuthController.checkLoggedIn = (req,res,next)=>{
+AuthController.checkLoggedIn = (req, res, next) => {
     if(!req.isAuthenticated())
         return res.redirect("/login");
     next();
 }
 
 //Kiểm tra xem đã logout hay chưa
-AuthController.checkLoggedOut = (req,res,next)=>{
+AuthController.checkLoggedOut = (req, res, next) => {
     if(req.isAuthenticated())
         return res.redirect("/products");
     next();
 }
 
-AuthController.checkUser = (req,res,next)=>{
+AuthController.checkUser = (req, res, next) => {
     if(req.user)
     {
-        req.flash("data",true);
+        req.flash("data", true);
     }
     else
     {
-        req.flash("data",false);
+        req.flash("data", false);
     }
     next();
 }

@@ -5,7 +5,6 @@ import {v4 as uuidv4} from 'uuid';
 import {notiRes,transMail} from './../langs/us/notification.us';
 import sendEmail from './../configs/mail.config';
 import userModel from './../models/user.model';
-import UserService from "../services/user.service";
 
 const AuthService = {};
 let saltRound = 7;

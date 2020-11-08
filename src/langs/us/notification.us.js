@@ -41,6 +41,7 @@ const loginSuccess = {
     loginSuccess: "The account is logged in successfully.",
     logoutSuccess: "The account is logged out successfully.",
 }
+
 const updateUser = {
     err : {
         username : "Username limited from 1-30 characters and does not contain special characters",

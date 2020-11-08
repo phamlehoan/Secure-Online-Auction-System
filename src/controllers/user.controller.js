@@ -15,6 +15,7 @@ UserController.getProfile = (req, res) => {
     return res.render("main/profile/profile",{
         data: req.flash("data"),
         user: req.user,
+        categories,
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: "profile"
@@ -57,6 +58,7 @@ UserController.updateProfile = async (req, res) => {
 UserController.getChangePass = (req, res) => {
     return res.render("main/changePassword/changePassword",{
         data: req.flash("data"),
+        categories,
         user: req.user,
         errors: req.flash("errors"),
         success:req.flash("success"),

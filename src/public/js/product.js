@@ -52,13 +52,4 @@ let getData = async (url, options) => {
     return await fetch(url, options)
         .then(res => res.json());
 }
-<<<<<<< HEAD
-=======
 
-let bidding = () => {
-    socket.emit('bidding-products', {
-        //userId: req.user._id,
-        //productId: product._id
-    })
-}
->>>>>>> d89b38a... Settup socketio and authen for socket, api

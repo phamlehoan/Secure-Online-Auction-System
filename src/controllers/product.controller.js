@@ -18,9 +18,6 @@ let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
  */
 ProductController.getProducts = async (req, res) => {
     let {category, price, userId} = req.query;
-    let phone = req.user.phone;
-    let city = req.user.personalInfo.address.city;
-    let district = req.user.personalInfo.address.district;
     let name = req.query.q;
     let categoryCode = ProductUtils.retrieveCatByCode(category);
     let criteria = ProductFactory.create(
@@ -30,6 +27,7 @@ ProductController.getProducts = async (req, res) => {
         userId
     );
     let products = [];
+    
     if(!req.user){
         return res.render('main/products/products', {
             products,
@@ -39,6 +37,10 @@ ProductController.getProducts = async (req, res) => {
             title: 'SOAS. - List Products'
         });
     }
+
+    let phone = req.user.phone;
+    let city = req.user.personalInfo.address.city;
+    let district = req.user.personalInfo.address.district;
 
     if(!phone || !city || !district){
         let arrErr = ["You must input important information"];

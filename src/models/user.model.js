@@ -107,7 +107,7 @@ UserSchema.statics ={
   },
   //Tìm user bằng email
   findUserbyEmail(email){
-    return this.findOne({"local.email":email}).exec();
+    return this.findOne({"local.email": email}).exec();
   },
   //Tìm user bằng id
   findUserById(id){
@@ -143,7 +143,11 @@ UserSchema.statics ={
 }
 
 UserSchema.methods = {
-  //Hàm so sánh mật khẩu
+  /**
+   * 
+   * @param {String} password
+   * @returns {Boolean} true if password match
+   */
   comparePass(password){
     return bcrypt.compare(password, this.local.password);
   }
