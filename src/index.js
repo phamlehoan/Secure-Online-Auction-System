@@ -21,7 +21,7 @@ import passport from 'passport';
 import socketIO from "socket.io";
 import http from "http";
 import cookieParser from "cookie-parser";
-import socketJwt from "socketio-jwt";
+// import socketJwt from "socketio-jwt";
 
 import configViewEngine from "./configs/viewEngine"
 import dbConfig from "./configs/db.config";
@@ -29,6 +29,7 @@ import session from "./configs/session.config";
 import Router from "./routers/web";
 import ApiRouter from "./routers/api/api";
 import AppSocket from "./sockets/socket";
+import configSocket from "./configs/socketAuth.config";
 
 dotenv.config();
 
@@ -70,20 +71,19 @@ const APP_PORT = process.env.APP_PORT || 3000;
 let server =  http.createServer(app);
 let io = socketIO(server);
 
+configSocket(io,cookieParser,session.sessionStore);
 //init all sockets app
 AppSocket(io);
 
+// io.on('connection', socketJwt.authorize({
+//   secret: process.env.JWT_KEY,
+//   timeout: 15000 // 15 seconds to send the authentication message
+// }))
+// .on('authenticated', (socket) => {
+//   //this socket is authenticated, we are good to handle more events from it.
+//   console.log(`hello! ${socket.decoded_token._id}`);
+// });
+
 server.listen(APP_PORT, APP_HOST, () => {
-    console.log(`Server running at http://${APP_HOST}:${APP_PORT}/`);
-})
-
-// io.on("connection", socketJwt.authorize({
-//     secret: process.env.JWT_KEY,
-//     timeout: 15000
-// })).on("authenticated", (socket) => {
-//     console.log(`Socket connected with user ${socket.decoded_token._id}`);
-// })
-
-io.on("connection", (socket) => {
-    console.log("Io connected !");
-})
+  console.log(`Server running at http://${APP_HOST}:${APP_PORT}/`);
+});

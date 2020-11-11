@@ -27,6 +27,7 @@
     "connect-mongodb-session": "^2.4.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
+    "eiows": "^3.4.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
@@ -39,9 +40,10 @@
     "nodemailer-smtp-transport": "^2.7.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "sweetalert2": "^10.9.0",
+    "passport.socketio": "^3.7.0",
     "socket.io": "^3.0.0",
     "socketio-jwt": "^4.6.2",
+    "sweetalert2": "^10.9.0",
     "uuid": "^8.3.0"
   },
   "devDependencies": {

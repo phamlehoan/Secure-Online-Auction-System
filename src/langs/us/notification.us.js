@@ -64,7 +64,9 @@ const updateUser = {
 
 const AUTH_ERR_MESSAGE = {
     NOT_VERIFY: "You must verify your account before do this operation !",
-    INVALID_USER: "Invalid login credentials"
+    INVALID_USER: "Invalid login credentials",
+    TOKEN_NOT_FOUND: "No token provided!",
+    UNAUTHORIZED: "Unauthorized!"
 }
 
 export const regisErr = registerError;

@@ -5,6 +5,7 @@ import {v4 as uuidv4} from 'uuid';
 import {notiRes,transMail} from './../langs/us/notification.us';
 import sendEmail from './../configs/mail.config';
 import userModel from './../models/user.model';
+import { token } from 'morgan';
 
 const AuthService = {};
 let saltRound = 7;
@@ -61,6 +62,15 @@ AuthService.activeAccount = (token) => {
         await userModel.activeAccount(token);
         resolve(transMail.activeSuccess);
     }) 
+}
+
+/**
+ * Verify valid token
+ * 
+ * @param {String} token 
+ */
+AuthService.verifyToken = (token) => {
+    
 }
 
 export default AuthService;
