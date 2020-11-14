@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const AuctionLogSchema = new Schema({
+const AuctionSchema = new Schema({
   userId:{
     type: String,
     required: true
@@ -16,11 +16,6 @@ const AuctionLogSchema = new Schema({
   },
   price: {
     type: Number,
-    required: true
-  },
-  productImage: String,
-  productName: {
-    type: String,
     required: true
   },
   createdAt: {
@@ -37,18 +32,6 @@ const AuctionLogSchema = new Schema({
   },
 });
 
-AuctionLogSchema.statics = {
-  saveProduct(product){
-    return this.create(product);
-  },
-  auctionCounter(userId){
-    return this.count({userId});
-  },
-  findAll(){
-    return this.find({});
-  }
-}
+const AuctionModel =  mongoose.model("Auctions", AuctionSchema);
 
-const AuctionLogModel =  mongoose.model("AuctionsLog", AuctionLogSchema);
-
-export default AuctionLogModel;
+export default AuctionModel;

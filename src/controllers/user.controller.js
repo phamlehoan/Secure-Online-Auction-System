@@ -16,6 +16,7 @@ UserController.getProfile = (req, res) => {
         data: req.flash("data"),
         user: req.user,
         categories,
+        numberBiddingProd,
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: "profile"
@@ -60,6 +61,7 @@ UserController.getChangePass = (req, res) => {
         data: req.flash("data"),
         categories,
         user: req.user,
+        numberBiddingProd,
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: 'SOAS. - Change Password'

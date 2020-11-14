@@ -100,10 +100,10 @@ const UserSchema = new Schema({
   },
 });
 
-UserSchema.statics ={
+UserSchema.statics = {
   //Tạo mới user
   createItem(item){
-    return this.create(item)
+    return this.create(item);
   },
   //Tìm user bằng email
   findUserbyEmail(email){

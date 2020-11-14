@@ -36,40 +36,48 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <span>
-                                            <i class="fa fa-check-circle text-success"></i>
-                                        </span>
-                                    </td>
-                                    <td class="cart__product__item">
-                                        <img src="/img/shop-cart/cp-1.jpg" alt="Product item">
-                                        <div class="cart__product__item__title">
-                                            <h6>Chain bucket bag</h6>
-                                            <div class="rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="cart__category">Fashion</td>
-                                    <td class="cart__price">$ 150.0</td>
-                                    <td class="cart__total">$ 300.0</td>
-                                    <td class="cart__close d-flex mt-4">
-                                        <button class="btn btn-success mr-1">
-                                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                                        </button>
-                                        <button class="btn btn-danger mr-1">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
-                                        <button class="btn btn-info">
-                                            <i class="fa fa-play" aria-hidden="true" title="Start Livestream"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                <%if(products){%>
+                                    <%products.forEach(product => {%>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <i class="fa fa-check-circle text-success"></i>
+                                                </span>
+                                            </td>
+                                            <td class="cart__product__item">
+                                                <img src="<%-product.productImage%>" alt="Product item">
+                                                <div class="cart__product__item__title">
+                                                    <h6><%-product.productName%></h6>
+                                                    <div class="rating">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="cart__category">Fashion</td>
+                                            <td class="cart__price">$ <%-product.price%></td>
+                                            <td class="cart__total">$ <%-product.reservePrice%></td>
+                                            <td class="cart__close d-flex mt-4">
+                                                <button class="btn btn-success mr-1">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </button>
+                                                <button class="btn btn-danger mr-1">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                                <button class="btn btn-info">
+                                                    <i class="fa fa-play" aria-hidden="true" title="Start Livestream"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <%})%>
+                                <%}else{%>
+                                    <tr>
+                                        <h3>No Product is Bidding.<a href="/products">let's Bidding</a></h3>
+                                    </tr>
+                                <%}%>
                             </tbody>
                         </table>
                     </div>

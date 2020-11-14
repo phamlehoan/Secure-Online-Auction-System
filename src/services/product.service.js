@@ -1,4 +1,3 @@
-import { query } from "express";
 import ProductModel from "../models/product.model";
 import Product from "../models/product.model";
 /**
@@ -57,6 +56,19 @@ ProductService.findProductsByUserId = async (userId) => {
  */
 ProductService.find = async (criteria) => {
     return await ProductModel.find(criteria);
+}
+
+/**
+ * 
+ * @param {String} productId 
+ * @param {Number} newPrice 
+ */
+ProductService.updatePrice = async (productId, newPrice) => {
+    return await ProductModel.findOneAndUpdate({
+        _id: productId
+    }, {
+        outbidPrice: newPrice
+    });
 }
 
 export default ProductService;

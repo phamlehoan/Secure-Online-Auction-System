@@ -48,7 +48,9 @@
                                             </div>  
                                             <ul class="product__hover">
                                                 <li><a href="<%-product.image%>" class="image-popup"><span class="arrow_expand"></span></a></li>
-                                                <li onclick="bidding('<%-product._id%>')"><a href="#"><span class="fa fa-gavel"></span></a></li>
+                                                <li onclick="biddingProduct('<%-product._id%>', 200)">
+                                                    <a href="#"><span class="fa fa-gavel"></span></a>
+                                                </li>
                                                 <li><a href="/products/<%-product._id%>"><span class="icon_bag_alt"></span></a></li>
                                             </ul>
                                         </div>
@@ -62,7 +64,7 @@
                                                 <i class="fa fa-star"></i>
                                             </div>
                                             <div style="position: relative;">
-                                                <div class="product__price" style="position: absolute; left: 0;">$ <%-product.reservePrice%></div>
+                                                <div class="product__price" style="position: absolute; left: 0;" id="<%-product._id%>">$ <%-product.reservePrice%></div>
                                                 <div style="position: absolute; right: 0;">00:00:30</div>
                                             </div>
                                         </div>
@@ -94,4 +96,4 @@
     <!-- Shop Section End -->
 <!-- footer -->
 <%- include("../common/footer/footer.ejs"); %>
-<script src="/js/product.js"></script>
+

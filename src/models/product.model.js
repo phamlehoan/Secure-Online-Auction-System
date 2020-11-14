@@ -23,9 +23,16 @@ const ProductSchema = new Schema({
     type: String,
     default: null,
   },
-  reservePrice: {
-    type: String,
+  reservePrice: {//giá mua đứt
+    type: Number,
   },
+  price: {//giá khởi điểm
+    type: Number,
+    required: true
+  },
+  outbidPrice: Number,//giá cao hơn || need to be updated
+  priceStep: String,//+5
+  priceMethod: String,//INCR
   categories: {
     name: {
       type: String,
@@ -34,9 +41,7 @@ const ProductSchema = new Schema({
   },
   image: String,
   tags: Array,
-  priceStep: String,
-  priceMethod: String,
-  outbidPrice: Number,
+
   status: String,
   userId: String,
   createdAt: {
@@ -53,6 +58,10 @@ const ProductSchema = new Schema({
   },
 });
 
+
+/**
+ * Product Schema bean method
+ */
 ProductSchema.methods = {
   setName(newName) {
     this.name = newName;

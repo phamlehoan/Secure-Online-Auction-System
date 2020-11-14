@@ -3,7 +3,7 @@ import ProductService from "../services/product.service";
 const ProductApi = {};
 
 ProductApi.getProducts = async (req, res) => {
-    res.json({
+    return res.json({
         products : await ProductService.findAll()
     })
 }

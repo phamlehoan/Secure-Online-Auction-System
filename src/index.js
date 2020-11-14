@@ -71,18 +71,14 @@ const APP_PORT = process.env.APP_PORT || 3000;
 let server =  http.createServer(app);
 let io = socketIO(server);
 
-configSocket(io,cookieParser,session.sessionStore);
+configSocket(
+  io,
+  cookieParser,
+  session.sessionStore
+);
+
 //init all sockets app
 AppSocket(io);
-
-// io.on('connection', socketJwt.authorize({
-//   secret: process.env.JWT_KEY,
-//   timeout: 15000 // 15 seconds to send the authentication message
-// }))
-// .on('authenticated', (socket) => {
-//   //this socket is authenticated, we are good to handle more events from it.
-//   console.log(`hello! ${socket.decoded_token._id}`);
-// });
 
 server.listen(APP_PORT, APP_HOST, () => {
   console.log(`Server running at http://${APP_HOST}:${APP_PORT}/`);
