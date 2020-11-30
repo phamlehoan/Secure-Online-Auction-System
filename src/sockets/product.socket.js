@@ -22,13 +22,13 @@ ProductSocket.bidding = (io) => {
                 product = {
                     userId: socket.request.user._id,
                     productId: data.productId,
-                    price: data.outbidPrice,
+                    price: data.newPrice,
                     productImage: productData.image,
                     productName: productData.name
                 }
             }
 
-            await ProductService.updatePrice(data.productId, data.outbidPrice);
+            await ProductService.updatePrice(data.productId, data.newPrice);
             await AuctionLogModel.saveProduct(product);
             let counter = await AuctionLogModel.auctionCounter(product.userId);
             return socket.emit("res-product-bidding-price", {

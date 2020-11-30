@@ -1,12 +1,19 @@
 /**
  * controller home page
  */
-const HomeController = {};
+import AuctionLogModel from "../models/auctionlog.model";
 
-HomeController.getHomepage = (req,res) =>{
+import PRODUCT_CONSTANTS from "../constants/product.constant";
+
+const HomeController = {};
+let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
+
+HomeController.getHomepage = async (req, res) => {
+    let numberBiddingProd = await AuctionLogModel.auctionCounter(req.user._id);
     return res.render("main/home/home",{
         data: req.flash("data"),
         title: 'Auction',
+        categories,
         numberBiddingProd,
         user: req.user
     })
@@ -21,7 +28,5 @@ HomeController.getProfile = (req,res)=>{
         success:req.flash("success")
     })
 }
-
-
 
 export default HomeController;

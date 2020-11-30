@@ -10,8 +10,15 @@ class UserNotFoundException extends Error {
     }
 }
 
+class NotHavePermissionException extends Error {
+  constructor(message) {
+    super(message)
+  }
+}
+
 module.exports = {
     UserNotVerifyException,
-    UserNotFoundException
+    UserNotFoundException,
+    NotHavePermissionException
 }
   

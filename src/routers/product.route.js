@@ -3,6 +3,7 @@ import express from "express";
 import ProductController from "../controllers/product.controller";
 import AuthController from "../controllers/auth.controller";
 import Uploader from "../configs/multer.config";
+import ProductService from "../services/product.service";
 
 
 let router = express.Router();
@@ -31,6 +32,21 @@ router.get('/auction',
     AuthController.checkUser, 
     ProductController.getManage
 );
+
+router.get('/manage', 
+    AuthController.checkUser,
+    ProductController.productManegements
+)
+
+router.get('/edit/:id',
+    AuthController.checkUser,
+    ProductController.updateProducts
+)
+
+router.post('/edit/:id',
+    AuthController.checkUser,
+    ProductController.postUpdateProducts
+)
 
 /* GET product details page. */
 router.get('/:id',

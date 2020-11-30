@@ -8,6 +8,22 @@ let findItemsByCat = async (category) => {
     return productsRender(filtered);
 }
 
+//post product
+let onSubmitPostProduct = () => {
+    let ckeditorData = CKEDITOR.instances['prd-description'].getData();
+    let formData = new FormData();
+    formData.append("description", ckeditorData.substring(3, ckeditorData.length - 5));
+    const options = {
+        mode: 'no-cors',
+        method: 'POST',
+        body: formData
+    }
+
+    getData("/", options)
+    .then(console.log('ok'))
+    .catch(err => console.log(err));
+}
+
 let productsRender = (products) => {
     let list = '';
     products.forEach(product => {
@@ -52,4 +68,3 @@ let getData = async (url, options) => {
     return await fetch(url, options)
         .then(res => res.json());
 }
-

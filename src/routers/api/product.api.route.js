@@ -10,4 +10,12 @@ router.get("/",
     productApi.getProducts
 )
 
+router.post("/add",
+    productApi.postProduct
+)
+
+router.get('/:id', 
+    productApi.getProduct
+)
+
 module.exports = router;

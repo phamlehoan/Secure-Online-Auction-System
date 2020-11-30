@@ -25,4 +25,5 @@ let sendEmail = (to,subject,htmlContent)=>{
     }
     return transporter.sendMail(option);
 }
+
 module.exports = sendEmail;

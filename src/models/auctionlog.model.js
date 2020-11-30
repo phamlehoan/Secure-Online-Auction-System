@@ -46,9 +46,12 @@ AuctionLogSchema.statics = {
   },
   findAll(){
     return this.find({});
+  },
+  findByUserId(id){
+    return this.find({userId: id});
   }
 }
 
-const AuctionLogModel =  mongoose.model("AuctionsLog", AuctionLogSchema);
+const AuctionLogModel =  mongoose.model("AuctionsLogs", AuctionLogSchema);
 
 export default AuctionLogModel;

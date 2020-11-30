@@ -8,4 +8,15 @@ ProductApi.getProducts = async (req, res) => {
     })
 }
 
+ProductApi.getProduct = async (req, res) => {
+    let productId = req.params.id;
+    return res.json({
+        product: await ProductService.findProductById(productId)
+    })
+}
+
+ProductApi.postProduct = async (req, res) => {
+
+}
+
 export default ProductApi;

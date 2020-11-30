@@ -26,12 +26,15 @@ const ProductSchema = new Schema({
   reservePrice: {//giá mua đứt
     type: Number,
   },
+  nextPrice: {
+    type: Number
+  },
   price: {//giá khởi điểm
     type: Number,
     required: true
   },
   outbidPrice: Number,//giá cao hơn || need to be updated
-  priceStep: String,//+5
+  priceStep: Number,//+5
   priceMethod: String,//INCR
   categories: {
     name: {
@@ -41,7 +44,7 @@ const ProductSchema = new Schema({
   },
   image: String,
   tags: Array,
-
+  
   status: String,
   userId: String,
   createdAt: {

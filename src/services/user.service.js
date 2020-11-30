@@ -92,4 +92,7 @@ UserService.findByCredentials = async (email, password) => {
   return user;
 }
 
+UserService.findUserById = async (userId) => {
+  return await UserModel.find({_id: userId});
+}
 export default UserService;
