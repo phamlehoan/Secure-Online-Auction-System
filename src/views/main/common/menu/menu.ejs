@@ -21,8 +21,8 @@
             </a></li>
     </ul>
     <div class="offcanvas__auth align-middle">
-        <a href="#">Login</a>
-        <a href="#">Register</a>
+        <a href="/login">Login</a>
+        <a href="/user/register">Register</a>
     </div>
     <div id="mobile-menu-wrap"></div>
 </div>
@@ -54,7 +54,7 @@
 
                     <ul class="header__right__widget">
                         <li><a href="/products/auction"><span class="fa fa-gavel"></span>
-                                <div class="tip">2</div>
+                                <div class="tip" id="number-product-bidding"><%-numberBiddingProd%></div>
                             </a></li>
                         <li><a href="#"><span class="fa fa-shopping-cart"></span>
                                 <div class="tip">2</div>
@@ -80,17 +80,9 @@
                     <li><a href="#"><h3><i class="fa fa-bars mr-2" style="font-size: larger;"
                         aria-hidden="true"></i>Category</h3></a>
                         <ul class="dropdown">
-                            <li><a href="#"><h4>Real Estate</h4></a></li>
-                            <li><a href="#"><h4>Antique</h4></a></li>
-                            <li><a href="#"><h4>Vehicles</h4></a></li>
-                            <li><a href="#"><h4>Electronic</h4></a></li>
-                            <li><a href="#"><h4>Furnitures</h4></a></li>
-                            <li><a href="#"><h4>Kid & Toys</h4></a></li>
-                            <li><a href="#"><h4>Fashion</h4></a></li>
-                            <li><a href="#"><h4>Travel</h4></a></li>
-                            <li><a href="#"><h4>Sport</h4></a></li>
-                            <li><a href="#"><h4>Tools</h4></a></li>
-                            <li><a href="#"><h4>Groceries</h4></a></li>
+                            <% categories.forEach(item =>{%>
+                                <li><a href="/products/?category=<%-item.code%>"><%-item.value%></a></li>
+                            <% })%>
                         </ul>
                     </li>
                 </ul>

@@ -1,6 +1,6 @@
 const baseUrl = 'http://localhost:8080/api/v1';
 
-async function findItemsByCat(category) {
+let findItemsByCat = async (category) => {
     let products = await getData(baseUrl + "/products");
     let filtered = products.products
     .filter(item => item.categories.name === category);
@@ -8,8 +8,23 @@ async function findItemsByCat(category) {
     return productsRender(filtered);
 }
 
-function productsRender(products) {
-    console.log(products);
+//post product
+let onSubmitPostProduct = () => {
+    let ckeditorData = CKEDITOR.instances['prd-description'].getData();
+    let formData = new FormData();
+    formData.append("description", ckeditorData.substring(3, ckeditorData.length - 5));
+    const options = {
+        mode: 'no-cors',
+        method: 'POST',
+        body: formData
+    }
+
+    getData("/", options)
+    .then(console.log('ok'))
+    .catch(err => console.log(err));
+}
+
+let productsRender = (products) => {
     let list = '';
     products.forEach(product => {
         list+=
@@ -44,12 +59,12 @@ function productsRender(products) {
             </div>
             </div>
         </div>`
-    })
-    
+    });
+
     return document.getElementById('products').innerHTML = list;
 }
 
-async function getData(url, options) {
+let getData = async (url, options) => {
     return await fetch(url, options)
         .then(res => res.json());
 }

@@ -1,6 +1,4 @@
-import { query } from "express";
 import ProductModel from "../models/product.model";
-import Product from "../models/product.model";
 /**
  * Define all services for home route
  */
@@ -12,7 +10,7 @@ const ProductService = {};
  * @param { Product } product 
  */
 ProductService.save = async (product) => {
-    return await Product.create(product).exec();
+    return await ProductModel.create(product);
 }
 
 /**
@@ -21,14 +19,14 @@ ProductService.save = async (product) => {
  * @param { String } id 
  */
 ProductService.findProductById = async (id) => {
-    return await Product.findById(id).exec();
+    return await ProductModel.findById(id);
 }
 
 /**
  * Find All products
  */
 ProductService.findAll = async () => {
-    return await Product.find({}).exec();
+    return await ProductModel.find({});
 }
 
 /**
@@ -37,7 +35,7 @@ ProductService.findAll = async () => {
  * @param { String } category 
  */
 ProductService.findProductByCategory = async (category) => {
-    return await Product.find({"categories.name" : category}).exec();
+    return await ProductModel.find({"categories.name" : category});
 }
 
 /**
@@ -46,7 +44,7 @@ ProductService.findProductByCategory = async (category) => {
  * @param { String } userId 
  */
 ProductService.findProductsByUserId = async (userId) => {
-    return await Product.find({"userId": userId}).exec();
+    return await ProductModel.find({"userId": userId});
 }
 
 /**
@@ -57,6 +55,22 @@ ProductService.findProductsByUserId = async (userId) => {
  */
 ProductService.find = async (criteria) => {
     return await ProductModel.find(criteria);
+}
+
+/**
+ * 
+ * @param {String} productId 
+ * @param {Number} newPrice 
+ */
+ProductService.updatePrice = async (productId, newPrice) => {
+    let product = await ProductModel.findOne({_id: productId});
+    if(product){
+        product.update({
+            price: newPrice,
+            nextPrice: parseInt(newPrice) + product.priceStep
+        })
+        .catch(err => console.log(err));
+    }
 }
 
 export default ProductService;

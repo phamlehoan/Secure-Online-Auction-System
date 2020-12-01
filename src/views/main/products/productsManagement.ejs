@@ -10,7 +10,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="./"><i class="fa fa-home"></i> Home</a>
-                        <span>All Bidding Products</span>
+                        <span>Seller management</span>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th><a href="/products">Products</a></th>
+                                    <th><a href="/products/add"><i class="fa fa-plus"></i>New</a></th>
                                     <th>Category</th>
                                     <th>Current price</th>
                                     <th>Control</th>
@@ -44,9 +44,9 @@
                                                 </span>
                                             </td>
                                             <td class="cart__product__item">
-                                                <img src="<%-product._id.productImage%>" alt="Product item">
+                                                <img src="<%-product.image%>" alt="Product item">
                                                 <div class="cart__product__item__title">
-                                                    <h6><%-product._id.productName%></h6>
+                                                    <h6><%-product.name%></h6>
                                                     <div class="rating">
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
@@ -59,9 +59,12 @@
                                             <td class="cart__category">Fashion</td>
                                             <td class="cart__price">$ <%-product.price%></td>
                                             <td class="cart__close d-flex mt-4">
-                                                <button class="btn btn-success mr-1">
-                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                </button>
+                                                <a href="/products/edit/<%-product._id%>">
+                                                    <button class="btn btn-success mr-1">
+                                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                    </button>
+                                                </a>
+
                                                 <button class="btn btn-danger mr-1">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </button>
@@ -73,7 +76,7 @@
                                     <%})%>
                                 <%}else{%>
                                     <tr>
-                                        <h3>No Product is Bidding.<a href="/products">let's Bidding</a></h3>
+                                        <h3>No Product.</h3>
                                     </tr>
                                 <%}%>
                             </tbody>

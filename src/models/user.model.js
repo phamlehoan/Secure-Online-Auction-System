@@ -4,6 +4,9 @@
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt';
 
+import userErrorMessage from "../langs/us/notification.us";
+import {UserNotFoundException, UserNotVerifyException} from "../exceptions/user.exception";
+
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -20,7 +23,7 @@ const UserSchema = new Schema({
   },
   avatarUrl: {
     type: String,
-    default: "https://res.cloudinary.com/edtu/image/upload/v1604137396/images/51f6fb256629fc755b8870c801092942_cbgtdt.png",
+    default: process.env.APP_DEFAULT_AVATAR,
   },
   role: {
     type: String,
@@ -97,14 +100,14 @@ const UserSchema = new Schema({
   },
 });
 
-UserSchema.statics ={
+UserSchema.statics = {
   //Tạo mới user
   createItem(item){
-    return this.create(item)
+    return this.create(item);
   },
   //Tìm user bằng email
   findUserbyEmail(email){
-    return this.findOne({"local.email":email}).exec();
+    return this.findOne({"local.email": email}).exec();
   },
   //Tìm user bằng id
   findUserById(id){
@@ -129,16 +132,27 @@ UserSchema.statics ={
     }).exec();
 
   },
-  updatePassword(id,hashedPassword){
-    return this.findByIdAndUpdate(id,{"local.password":hashedPassword}).exec();
+  updatePassword(id, hashedPassword){
+    return this.findByIdAndUpdate(
+      id, 
+      {
+        "local.password":hashedPassword
+      })
+      .exec();
   },
 }
+
 UserSchema.methods = {
-  //Hàm so sánh mật khẩu
+  /**
+   * 
+   * @param {String} password
+   * @returns {Boolean} true if password match
+   */
   comparePass(password){
-        return bcrypt.compare(password,this.local.password);
+    return bcrypt.compare(password, this.local.password);
   }
 }
+
 const UserModel =  mongoose.model("Users", UserSchema);
 
 

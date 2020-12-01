@@ -1,20 +1,32 @@
 /**
- * controller home page
+ * user controller
  */
 import {validationResult} from 'express-validator/check';
+
 import user from './../services/user.service';
+import AuctionLogModel from "../models/auctionlog.model";
+
+import PRODUCT_CONSTANTS from "../constants/product.constant";
+
+let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
+
 const UserController = {};
 
-UserController.getProfile = (req,res)=>{
+
+UserController.getProfile = async (req, res) => {
+    let numberBiddingProd = await AuctionLogModel.auctionCounter(req.user._id);
     return res.render("main/profile/profile",{
         data: req.flash("data"),
         user: req.user,
+        categories,
+        numberBiddingProd,
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: "profile"
     })
 }
-UserController.updateProfile = async (req,res)=>{
+
+UserController.updateProfile = async (req, res) => {
     //Kiểm tra validation của form đăng ký
     let valid = validationResult(req);
     let arrErr= []; //Create arrray to contain err
@@ -32,7 +44,6 @@ UserController.updateProfile = async (req,res)=>{
     try {
         //Lấy thông tin từ client gửi lên từ req
         let userUpdateItem = req.body ;
-        // console.log(req.body);
         //Tìm kiếm người dùng trong database
         let userUpdate = await user.updateUser(req.user._id,userUpdateItem);
         //Nếu thành công thì gửi message lên lại client
@@ -47,16 +58,21 @@ UserController.updateProfile = async (req,res)=>{
         return res.status(500).send(error);
     }
 }
-UserController.getChangePass = (req,res)=>{
+
+UserController.getChangePass = async (req, res) => {
+    let numberBiddingProd = await AuctionLogModel.auctionCounter(req.user._id);
     return res.render("main/changePassword/changePassword",{
         data: req.flash("data"),
+        categories,
         user: req.user,
+        numberBiddingProd,
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: 'SOAS. - Change Password'
     })
 }
-UserController.putUpdatePass = async(req,res)=>{
+
+UserController.putUpdatePass = async(req, res) => {
     //Kiểm tra validation của form đăng ký
     let valid = validationResult(req);
     let arrErr= []; //Create arrray to contain err
@@ -74,7 +90,7 @@ UserController.putUpdatePass = async(req,res)=>{
     let updateUserItem = req.body;
     try {
         //Gọi service để kiểm tra các điều kiện
-        await user.updatePassword(req.user._id,updateUserItem);
+        await user.updatePassword(req.user._id, updateUserItem);
         //Thành công thì gửi về messenger thông báo
         let result = {
             message:"Update password success !",
@@ -84,4 +100,5 @@ UserController.putUpdatePass = async(req,res)=>{
         return res.status(500).send(error);
     }
 }
+
 export default UserController;

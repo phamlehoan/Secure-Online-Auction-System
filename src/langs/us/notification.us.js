@@ -41,6 +41,7 @@ const loginSuccess = {
     loginSuccess: "The account is logged in successfully.",
     logoutSuccess: "The account is logged out successfully.",
 }
+
 const updateUser = {
     err : {
         username : "Username limited from 1-30 characters and does not contain special characters",
@@ -60,9 +61,18 @@ const updateUser = {
         wrongPassword:"Old password is incorrect"
     }
 }
+
+const AUTH_ERR_MESSAGE = {
+    NOT_VERIFY: "You must verify your account before do this operation !",
+    INVALID_USER: "Invalid login credentials",
+    TOKEN_NOT_FOUND: "No token provided!",
+    UNAUTHORIZED: "Unauthorized!"
+}
+
 export const regisErr = registerError;
 export const notiRes = notificationRegister;
 export const transMail = translateMail;
 export const loginErr = loginError;
 export const loginSucc = loginSuccess;
 export const updateUserMess = updateUser;
+export default AUTH_ERR_MESSAGE;

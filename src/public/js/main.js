@@ -1,7 +1,6 @@
 'use strict';
 
 (function ($) {
-
     /*------------------
         Preloader
     --------------------*/
@@ -125,30 +124,28 @@
     /*------------------
         CountDown
     --------------------*/
-    // For demo preview start
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
+    if($("#timerdate")[0]) {
+        var time = $("#timerdate")[0].value;
+        var date = Date.parse(time);
+            date = new Date(date);
+        var dd = String(date.getDate()).padStart(2, '0');
+        var mm = String(date.getMonth()).padStart(2, '0');
+        var yyyy = date.getFullYear();
 
-    if(mm == 12) {
-        mm = '01';
-        yyyy = yyyy + 1;
-    } else {
-        mm = parseInt(mm) + 1;
-        mm = String(mm).padStart(2, '0');
+        if(mm == 12) {
+            mm = '01';
+            yyyy = yyyy + 1;
+        } else {
+            mm = parseInt(mm) + 1;
+            mm = String(mm).padStart(2, '0');
+        }
+
+        var timerdate = mm + '/' + dd + '/' + yyyy;
+        console.log(timerdate);
+        $("#countdown-time").countdown(timerdate, function(event) {
+            $(this).html(event.strftime("%DDays : %HHours : %MMin : %Ss"));
+        });
     }
-    var timerdate = mm + '/' + dd + '/' + yyyy;
-    // For demo preview end
-
-
-    // Uncomment below and use your date //
-
-    /* var timerdate = "2020/12/30" */
-
-	$("#countdown-time").countdown(timerdate, function(event) {
-        $(this).html(event.strftime("<div class='countdown__item'><span>%D</span> <p>Day</p> </div>" + "<div class='countdown__item'><span>%H</span> <p>Hour</p> </div>" + "<div class='countdown__item'><span>%M</span> <p>Min</p> </div>" + "<div class='countdown__item'><span>%S</span> <p>Sec</p> </div>"));
-    });
 
     /*-------------------
 		Range Slider
@@ -189,16 +186,18 @@
 	proQty.prepend('<span class="dec qtybtn">-</span>');
 	proQty.append('<span class="inc qtybtn">+</span>');
 	proQty.on('click', '.qtybtn', function () {
-		var $button = $(this);
-		var oldValue = $button.parent().find('input').val();
+        var $button = $(this);
+        var oldValue = $button.parent().find('input').val();
+        var step = $button.parent().find('input')[0].step;
+        var minValue = $button.parent().find('input')[0].min;
 		if ($button.hasClass('inc')) {
-			var newVal = parseFloat(oldValue) + 1;
+			var newVal = parseFloat(oldValue) + parseInt(step);
 		} else {
 			// Don't allow decrementing below zero
-			if (oldValue > 0) {
-				var newVal = parseFloat(oldValue) - 1;
+			if (oldValue > parseInt(minValue)) {
+				var newVal = parseFloat(oldValue) - parseInt(step);
 			} else {
-				newVal = 0;
+				newVal = parseInt(minValue);
 			}
 		}
 		$button.parent().find('input').val(newVal);
@@ -211,5 +210,22 @@
         $(".size__btn label").removeClass('active');
         $(this).addClass('active');
     });
+
+    /*-------------------
+		Default input date time
+    --------------------- */
+    if ($('#start-datetime-local-input')[0]) {
+        var today = new Date();
+        var day = String(today.getDate()).padStart(2, '0');
+        var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var year = today.getFullYear();
+        var hour = today.getHours();
+        var min = today.getMinutes();
+
+        var current = year+'-'+month+'-'+day+'T'+hour+':'+min;
+        $('#start-datetime-local-input')[0].value = current;
+        $('#end-datetime-local-input')[0].value = current;
+        
+    }
 
 })(jQuery);
