@@ -1,5 +1,30 @@
 let socket = io();
 
+let onBiddingProduct = (productId) => {
+    let price = document.getElementById(productId).textContent;
+    let newPrice = document.getElementById('input-price' + productId);
+
+    if (window.location.pathname === '/products/'+productId) {
+        newPrice = parseInt(newPrice.value);
+        if (parseInt(price) >= parseInt(newPrice.value)) {
+            alert('You must provide a higher than current price');
+            return;
+        }
+        return biddingProduct(productId, newPrice);
+    }
+
+    if (window.location.pathname.startsWith('/products')) {
+        let priceStep = newPrice.step;
+        newPrice = parseInt(price) + parseInt(priceStep);
+        if (parseInt(price) >= parseInt(newPrice.value)) {
+            alert('You must provide a higher than current price');
+            return;
+        }
+    }
+
+    return biddingProduct(productId, newPrice);
+    
+}
 
 /**
  * Send params to the server
@@ -7,21 +32,27 @@ let socket = io();
  * @param {String} productId
  * @param {String} price
  */
-let biddingProduct = (productId, newPrice) => {
-    let product = fetch('http://localhost:8080/api/v1/products/'+productId)
-    .then(data => data.json());
-    document.getElementById(productId).innerHTML = product.price;
-
-
-    socket.emit("req-product-bidding", {
+let biddingProduct = async (productId, newPrice) => {
+    await socket.emit("req-product-bidding", {
         productId,
         newPrice
     });
-
-    return socket.on("res-product-bidding-price", (data) => {
-        document.getElementById(data.productId).innerHTML = "$ "+  data.price;
-        document.getElementById("number-product-bidding").innerHTML = data.biddingCount;
-        window.location.href = 'http://localhost:8080/products/'+data.productId
-    })
 }
 
+socket.on("res-product-bidding-price", (data) => {
+    let price = document.getElementById(data.productId);
+    price.classList.remove('text-danger');
+    price.classList.add('text-success');
+    //details page
+    let inputPrice = document.getElementById('input-price' + data.productId);
+    if (inputPrice) {
+        inputPrice.value = parseInt(data.price) + parseInt(data.priceStep);
+        inputPrice.min = data.price;
+    }
+    anime({
+        targets: price,
+        innerHTML: [0, data.price],
+        easing: 'linear',
+        round: 10
+    });
+})

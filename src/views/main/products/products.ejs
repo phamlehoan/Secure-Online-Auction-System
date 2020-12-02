@@ -49,9 +49,10 @@
                                             <ul class="product__hover">
                                                 <li><a href="<%-product.image%>" class="image-popup"><span class="arrow_expand"></span></a></li>
                                                 
-                                                <li onclick="biddingProduct('<%-product._id%>', '<%-product.nextPrice%>')">
+                                                <li onclick="onBiddingProduct('<%-product._id%>')">
                                                     <a href="#"><span class="fa fa-gavel"></span></a>
                                                 </li>
+                                                <input type="number" id="input-price<%-product._id%>" value="<%-product.price%>" min="<%-product.price%>" step="<%-product.priceStep%>" hidden>
                                                 <li><a href="/products/<%-product._id%>"><span class="icon_bag_alt"></span></a></li>
                                             </ul>
                                         </div>
@@ -65,7 +66,10 @@
                                                 <i class="fa fa-star"></i>
                                             </div>
                                             <div style="position: relative;">
-                                                <div class="product__price" style="position: absolute; left: 0;" id="<%-product._id%>">$ <%-product.price%></div>
+                                                <span style="color: black; position: absolute; left: 0;">$ </span>
+                                                <div class="product__price" style="position: absolute; left: 20px;" id="<%-product._id%>">
+                                                    <%-product.price%>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -96,4 +100,3 @@
     <!-- Shop Section End -->
 <!-- footer -->
 <%- include("../common/footer/footer.ejs"); %>
-

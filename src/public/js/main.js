@@ -141,7 +141,6 @@
         }
 
         var timerdate = mm + '/' + dd + '/' + yyyy;
-        console.log(timerdate);
         $("#countdown-time").countdown(timerdate, function(event) {
             $(this).html(event.strftime("%DDays : %HHours : %MMin : %Ss"));
         });
@@ -221,6 +220,12 @@
         var year = today.getFullYear();
         var hour = today.getHours();
         var min = today.getMinutes();
+
+        if (min < 10) 
+            min = '0' + min;
+
+        if (hour < 10)
+            hour = '0' + hour;
 
         var current = year+'-'+month+'-'+day+'T'+hour+':'+min;
         $('#start-datetime-local-input')[0].value = current;

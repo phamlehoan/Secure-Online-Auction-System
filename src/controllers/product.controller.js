@@ -2,12 +2,11 @@ import ProductService from "../services/product.service";
 import ProductUtils from "../utils/product.util";
 import Cloudinary from "../configs/cloudinary.config";
 import ProductFactory from "../factory/product.factory";
-import AuctionLogModel from "../models/auctionlog.model";
 import AuctionLogService from "../services/aution.service";
 import UserServices from "../services/user.service";
 
 import PRODUCT_CONSTANTS from "../constants/product.constant";
-import { UserNotFoundException, NotHavePermissionException } from "../exceptions/user.exception";
+import { NotHavePermissionException } from "../exceptions/user.exception";
 
 
 

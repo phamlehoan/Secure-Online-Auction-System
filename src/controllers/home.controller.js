@@ -9,17 +9,10 @@ const HomeController = {};
 let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
 
 HomeController.getHomepage = async (req, res) => {
-    let numberBiddingProd = await AuctionLogModel.auctionCounter(req.user._id);
-    return res.render("main/home/home",{
-        data: req.flash("data"),
-        title: 'Auction',
-        categories,
-        numberBiddingProd,
-        user: req.user
-    })
+    return res.redirect('/login');
 }
 
-HomeController.getProfile = (req,res)=>{
+HomeController.getProfile = (req, res) => {
     return res.render("main/profile/profile",{
         data: req.flash("data"),
         user: req.user,

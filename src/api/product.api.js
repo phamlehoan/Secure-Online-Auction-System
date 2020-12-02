@@ -10,8 +10,10 @@ ProductApi.getProducts = async (req, res) => {
 
 ProductApi.getProduct = async (req, res) => {
     let productId = req.params.id;
+    let price = await ProductService.findProductById(productId).nextPrice;
+    console.log(price);
     return res.json({
-        product: await ProductService.findProductById(productId)
+        price
     })
 }
 

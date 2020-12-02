@@ -31,12 +31,12 @@
             <form action="/products/add" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="form-group col-lg-8 col-md-8">
-                    <label for="prd-name" class="text-left font-weight-bold">Product name<span class="text-danger">*</span></label>
+                    <label for="prd-name" class="text-left font-weight-bold"><span class="text-danger">* Product name</span></label>
                     <input type="text" name="name" id="prd-name" class="form-control"
                         placeholder="Product name">
                 </div>
                 <div class="form-group col-lg-4 col-md-4">
-                    <label for="prd-type" class="text-left font-weight-bold">Product type<span class="text-danger">*</span></label>
+                    <label for="prd-type" class="text-left font-weight-bold"><span class="text-danger">* Product type</span></label>
                     <select class="form-control" id="prd-type" name="category">
                         <% categories.forEach(category => { %>
                             <option value="<%- category.code %>"><%- category.value%></option>
@@ -46,11 +46,11 @@
             </div>
             <div class="row">
                 <div class="form-group col-8">
-                    <div class="font-weight-bold label">Images<span class="text-danger">*</span></div>
+                    <div class="font-weight-bold label"><span class="text-danger">* Images</span></div>
                     <div class="row">
                         <div id="preview"></div>
                         <label class="btn">
-                            <img src="/img/product/related/newImage.png" style="width: 80px;"
+                            <img src="" style="width: 80px;"
                                 alt="Add new image">
                             <input id="file-input" name="file" type="file" hidden>
                         </label>
@@ -153,11 +153,11 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="row">
                         <div class="form-group col-6">
-                            <label for="start-price" class="text-left font-weight-bold">Price<span class="text-danger">*</span></label>
+                            <label for="start-price" class="text-left font-weight-bold"><span class="text-danger">* Price</span></label>
                             <input type="text" class="form-control" id="start-price" name="price" class="text-left font-weight-bold" placeholder="10000.0&#8363">
                         </div>
                         <div class="form-group col-6">
-                            <label for="price-step" class="text-left font-weight-bold">Price step<span class="text-danger">*</span></label>
+                            <label for="price-step" class="text-left font-weight-bold"><span class="text-danger">* Price step</span></label>
                             <input type="text" class="form-control" id="price-step" name="priceStep" class="text-left font-weight-bold" placeholder="5000.0&#8363">
                         </div>
                     </div>
@@ -177,12 +177,12 @@
             </div>
             <div class="row">
                 <div class="form-group col-lg-6 col-md-6">
-                    <label for="start-datetime-local-input" class="text-left font-weight-bold">Start time<span class="text-danger">*</span></label>
+                    <label for="start-datetime-local-input" class="text-left font-weight-bold"><span class="text-danger">* Start time</span></label>
                     <input class="form-control" name="startTime" type="datetime-local" value="2020-08-19T13:45:00"
                         id="start-datetime-local-input">
                 </div>
                 <div class="form-group col-lg-6 col-md-6">
-                    <label for="end-datetime-local-input" class="text-left font-weight-bold">End time<span class="text-danger">*</span></label>
+                    <label for="end-datetime-local-input" class="text-left font-weight-bold"><span class="text-danger">* End time</span></label>
                     <input class="form-control" name="endTime" type="datetime-local" value="2020-08-19T13:45:00"
                         id="end-datetime-local-input">
                 </div>

@@ -57,7 +57,11 @@
                                                 </div>
                                             </td>
                                             <td class="cart__category">Fashion</td>
-                                            <td class="cart__price">$ <%-product.price%></td>
+                                            <td class="cart__price">
+                                                <span class="text-danger">$</span>
+                                                <span id="<%-product._id.productId%>" class="text-danger"><%-product.price%></span>
+                                                
+                                            </td>
                                             <td class="cart__close d-flex mt-4">
                                                 <button class="btn btn-success mr-1">
                                                     <i class="fa fa-pencil" aria-hidden="true"></i>

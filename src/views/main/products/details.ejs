@@ -76,7 +76,10 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="product__details__price pt-5">$ <%-product.price%></div>
+                    <div class="product__details__price pt-5">
+                        <span class="text-danger">$</span>
+                        <span id="<%-product._id%>" style="text-decoration: none;" class="text-danger"><%-product.price%></span>
+                    </div>
                     <div class="product__details__button">
                         <div class="quantity">
                             <span>Expected price:</span>
@@ -86,10 +89,11 @@
                                     value="<%-product.nextPrice%>" 
                                     min="<%-product.nextPrice%>" 
                                     step="<%-product.priceStep%>"
+                                    id="input-price<%-product._id%>"
                                 >
                             </div>
                         </div>
-                        <button class="cart-btn" onclick="biddingProduct('<%-product._id%>', '<%-product.nextPrice%>')"><span class="icon_bag_alt"></span> Bid</button>
+                        <button class="cart-btn" onclick="onBiddingProduct('<%-product._id%>')"><span class="icon_bag_alt"></span> Bid</button>
                     </div>
 
                 </div>
