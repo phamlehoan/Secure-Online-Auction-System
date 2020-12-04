@@ -81,7 +81,7 @@
                         aria-hidden="true"></i>Category</h3></a>
                         <ul class="dropdown">
                             <% categories.forEach(item =>{%>
-                                <li><a href="/products/?category=<%-item.code%>"><%-item.value%></a></li>
+                                <li><a href="/products/?category=<%-item.code%>"><h4><%-item.value%></h4></a></li>
                             <% })%>
                         </ul>
                     </li>
@@ -89,9 +89,9 @@
             </nav>
             <nav class="header__menu col-xl-9 col-lg-10 text-right">
                 <ul>
-                    <li class="active"><a href="/">Home</a></li>
-                    <li><a href="/products/auction">Auction</a></li>
-                    <li><a href="/contact">Contact</a></li>
+                    <li class="active"><a href="/"><h3>Home</h3></a></li>
+                    <li><a href="/products/auction"><h3>Auction</h3></a></li>
+                    <li><a href="/contact"><h3>Contact</h3></a></li>
                 </ul>
             </nav>
         </div>

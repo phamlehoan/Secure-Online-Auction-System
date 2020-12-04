@@ -173,7 +173,6 @@ ProductController.getManage = async (req, res) => {
         productIds.push(product._id.productId);
     }
     let winners = await ProductService.findAllWinnerByProductIds(productIds);
-    console.log(winners);
     return res.render("main/products/auction", {
         products,
         categories,
