@@ -32,7 +32,6 @@ AuctionService.findNewestBiddingProducts = async (userId) => {
             }
         }
     ]);
-
     return productsWithHighestPrice;
 }
 
@@ -61,18 +60,23 @@ AuctionService.countNumberOfAuctions = async (userId) => {
                 createAt: -1
             }
         }
-    ]);
-    
-    return auction.length;
+    ]).count('price');
+    if (auction.length < 1)
+        return 0;
+    return auction[0].price;
 }
 
 /**
+ * find current highest price || user_id of bidded product
  * 
  * @param {String} productId
- * @returns {Product} Product with highest price
+ * @returns {Product} Product
  */
 AuctionService.findHighestPrice = async (productId) => {
-    return await AuctionLogModel.find({productId}).sort({price: 1}).limit(1);
+    return await AuctionLogModel.find({productId})
+    .sort({price: -1})
+    .select('userId price')
+    .limit(1);
 }
 
 export default AuctionService;

@@ -7,6 +7,8 @@ import UserServices from "../services/user.service";
 
 import PRODUCT_CONSTANTS from "../constants/product.constant";
 import { NotHavePermissionException } from "../exceptions/user.exception";
+import { ProductNotFoundException } from "../exceptions/product.exception";
+import ProductModel from "../models/product.model";
 
 
 
@@ -135,20 +137,25 @@ ProductController.postProduct = async (req, res) => {
  * get detail of product
  */
 ProductController.getDetail = async (req, res) => {
-    const { id } = req.params;
-    let product = await ProductService.findProductById(id);
-    let seller = await UserServices.findUserById(product.userId);
-    let currentHighestPriceProduct  = await AuctionLogService.findHighestPrice(product._id);
-    return res.render("main/products/details", {
-        categories,
-        product,
-        seller: seller[0].username,
-        data: req.flash("data"),
-        user: req.user,
-        userWithHighestPrice: currentHighestPriceProduct[0].userId,
-        numberBiddingProd: await AuctionLogService.countNumberOfAuctions(req.user._id),
-        title: 'SOAS. - '+product.name + ' 😍'
-    })
+    try {
+        const { id } = req.params;
+        let product = await ProductService.findProductById(id);
+        let seller = await UserServices.findUserById(product.userId);
+        let currentHighestPriceProduct  = await AuctionLogService.findHighestPrice(product._id);
+        return res.render("main/products/details", {
+            categories,
+            product,
+            seller: seller[0].username,
+            data: req.flash("data"),
+            user: req.user,
+            userWithHighestPrice: currentHighestPriceProduct[0].userId,
+            numberBiddingProd: await AuctionLogService.countNumberOfAuctions(req.user._id),
+            title: 'SOAS. - '+product.name + ' 😍'
+        })
+    } catch (error) {
+        console.log(error);
+    }
+
 }
 
 /**
@@ -157,16 +164,26 @@ ProductController.getDetail = async (req, res) => {
  * show All products
  */
 ProductController.getManage = async (req, res) => {
-    let currentUser = req.user._id;
-    let numberBiddingProd = await AuctionLogService.countNumberOfAuctions(req.user._id);
-    let products = await AuctionLogService.findNewestBiddingProducts(currentUser);
-    
-    return res.render("main/products/manage", {
+    let currentUser = req.user;
+    let products = await AuctionLogService.findNewestBiddingProducts(currentUser._id);
+    let numberBiddingProd = products.length;
+    let productIds = [];
+    for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        productIds.push(product._id.productId);
+    }
+    let winners = await ProductService.findAllWinnerByProductIds(productIds);
+    console.log(winners);
+    return res.render("main/products/auction", {
         products,
         categories,
         data: req.flash("data"),
         numberBiddingProd,
-        user: req.user,
+        user: {
+            avatarUrl: currentUser.avatarUrl,
+            _id: currentUser._id
+        },
+        winners,
         title: "auctions | 😎"
     })
 }

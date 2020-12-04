@@ -44,7 +44,7 @@ const ProductSchema = new Schema({
   },
   image: String,
   tags: Array,
-  
+  winnerId: String,
   status: String,
   userId: String,
   createdAt: {

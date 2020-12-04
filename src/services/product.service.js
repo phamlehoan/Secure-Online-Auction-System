@@ -1,4 +1,5 @@
 import ProductModel from "../models/product.model";
+import AuctionLogService from "../services/aution.service";
 /**
  * Define all services for home route
  */
@@ -14,12 +15,16 @@ ProductService.save = async (product) => {
 }
 
 /**
- * Find All products by { id }
+ * Find products by { id }
  * 
  * @param { String } id 
  */
 ProductService.findProductById = async (id) => {
-    return await ProductModel.findById(id);
+    let product = await ProductModel.findById(id);
+    if (!product)
+        throw new ProductNotFoundException('Product is not valid !');
+
+    return product;
 }
 
 /**
@@ -64,13 +69,28 @@ ProductService.find = async (criteria) => {
  */
 ProductService.updatePrice = async (productId, newPrice) => {
     let product = await ProductModel.findOne({_id: productId});
+    let bidProduct = await AuctionLogService.findHighestPrice(productId);
     if(product){
         product.update({
             price: newPrice,
-            nextPrice: parseInt(newPrice) + product.priceStep
+            nextPrice: parseInt(newPrice) + product.priceStep,
+            winnerId: bidProduct[0].userId
         })
         .catch(err => console.log(err));
     }
+}
+
+/**
+ * 
+ * @param {Array} list Ids
+ * @returns {Array} list user
+ */
+ProductService.findAllWinnerByProductIds = async (listIds) => {
+    return await ProductModel.find({
+        _id: {
+            $in: listIds
+        }
+    }).select('_id winnerId price');
 }
 
 export default ProductService;

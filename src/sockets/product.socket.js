@@ -3,6 +3,7 @@ import AuctionLogModel from "../models/auctionlog.model";
 import ProductModel from "../models/product.model";
 import ProductService from "../services/product.service";
 import { ProductNotFoundException } from "../exceptions/product.exception";
+import AuctionService from "../services/aution.service";
 
 /**
  * 
@@ -31,10 +32,11 @@ ProductSocket.bidding = (io) => {
                 productName: productData.name,
                 priceStep: productData.priceStep
             }
-
-            await ProductService.updatePrice(data.productId, data.newPrice);
+            
             await AuctionLogModel.saveProduct(product);
-            let counter = await AuctionLogModel.auctionCounter(product.userId);
+            await ProductService.updatePrice(data.productId, data.newPrice);
+            
+            let counter = await AuctionService.countNumberOfAuctions(product.userId);
             return io.emit("res-product-bidding-price", {
                 productId: data.productId, 
                 price: data.newPrice,

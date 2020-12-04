@@ -5,12 +5,18 @@ let onBiddingProduct = (productId) => {
     let newPrice = document.getElementById('input-price' + productId);
 
     if (window.location.pathname === '/products/'+productId) {
-        newPrice = parseInt(newPrice.value);
+
         if (parseInt(price) >= parseInt(newPrice.value)) {
-            alert('You must provide a higher than current price');
+            onBiddingFail("You must provide a higher than current price");
             return;
         }
-        return biddingProduct(productId, newPrice);
+
+        if (parseInt(newPrice.value) % parseInt(price) % parseInt(newPrice.step) !== 0) {
+            onBiddingFail("Your new price is not valid for this product please check!");
+            return;
+        }
+
+        return biddingProduct(productId, parseInt(newPrice.value));
     }
 
     if (window.location.pathname.startsWith('/products')) {
@@ -24,6 +30,18 @@ let onBiddingProduct = (productId) => {
 
     return biddingProduct(productId, newPrice);
     
+}
+
+let onBiddingFail = (message) => {
+    return alertify.alert(
+        "<div>"+
+        "<span style='color: #ca1515;font-family: 'Montserrat', sans-serif;'>"+ 
+            message 
+        +"</span>"+
+        "</div>",
+    () => {
+        alertify.message('OK');
+    });
 }
 
 /**
@@ -49,6 +67,7 @@ socket.on("res-product-bidding-price", (data) => {
         inputPrice.value = parseInt(data.price) + parseInt(data.priceStep);
         inputPrice.min = data.price;
     }
+    document.getElementById('number-product-bidding').innerHTML = data.biddingCount;
     anime({
         targets: price,
         innerHTML: [0, data.price],
