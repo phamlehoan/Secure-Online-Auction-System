@@ -29,6 +29,10 @@ body {
   background-color: #e9ebee;
 }
 
+* {
+  color: #212121;
+}
+
 h1,
 h2,
 h3,

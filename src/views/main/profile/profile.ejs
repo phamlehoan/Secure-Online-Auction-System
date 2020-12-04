@@ -4,10 +4,28 @@
 <!-- Menu -->
 <%- include ('./../common/menu/menu.ejs') %>
 
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__links">
+                    <a href="./"><i class="fa fa-home"></i> Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+
 <!-- Product Section Begin -->
 <section class="product spad">
     <div class="container bg-white p-5 rounded">
-        <h2 class="row text-primary text-md-left font-weight-bold pb-4">Profile</h2>
+        <div>
+            <div class="section-title">
+                <h4>Profile</h4>
+            </div>
+        </div>
         <form action="" method="post">
             <div class="row">
                 <div class="col-lg-5 col-md-5">
@@ -64,7 +82,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <div class="row container pb-2 font-weight-bold">Name</div>
+                            <label class="row container pb-2 font-weight-bold">Name<span class="text-danger">*</span></label>
                             <div class="row">
                                 <div class="form-group col-lg-6 col-md-6">
                                     <input type="text" class="form-control" id="input-firstname" name="fname" placeholder="First Name" value="<%= user.personalInfo.firstname %>">
@@ -79,11 +97,11 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-6 col-md-6">
-                            <label for="example-date-input" class="text-left col-form-label font-weight-bold">Birthdate</label>
+                            <label for="example-date-input" class="text-left col-form-label font-weight-bold">Birthdate<span class="text-danger">*</span></label>
                             <input class="form-control" type="date" value="<%= user.personalInfo.dob %>" id="input-dob">
                         </div>
                         <div class="form-group col-lg-6 col-md-6">
-                            <label for="i-gender" class="text-left col-form-label font-weight-bold">Gender</label>
+                            <label for="i-gender" class="text-left col-form-label font-weight-bold">Gender<span class="text-danger">*</span></label>
                             <select class="form-control" id="input-gender">
                                 <option <% if (user.gender === "male") { %>
                                     selected
@@ -96,7 +114,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-6 col-md-6">
-                            <label for="iemai" class="text-left font-weight-bold">Email</label>
+                            <label for="iemai" class="text-left font-weight-bold">Email<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="input-email" name="email"
                                 placeholder="your_email@example.com" value="<%= user.local.email%>" readonly>
                         </div>
@@ -108,7 +126,7 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <div class="row container pb-2 font-weight-bold">Address</div>
+                            <div class="row container pb-2 font-weight-bold">Address<span class="text-danger">*</span></div>
                         <div class="row">
                             <div class="form-group col-lg-6 col-md-6">
                                 <input type="text" class="form-control" id="input-city" placeholder="Province/City" value="<%=user.personalInfo.address.city%>">
