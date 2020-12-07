@@ -19,6 +19,9 @@ const ProductFactory = {};
 ProductFactory.create = (name, category, price, userId) => {
     let criteriaBuilder = {};
     if (name !== null && typeof(name) !== 'undefined') {
+        // criteriaBuilder["name"] = {
+        //     $regex: `/${name}/`
+        // };
         criteriaBuilder["name"] = name;
     }
 

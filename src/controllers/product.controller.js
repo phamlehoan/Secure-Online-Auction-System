@@ -33,6 +33,7 @@ ProductController.getProducts = async (req, res) => {
         price,
         userId
     );
+    console.log(criteria);
     let products = await ProductService.find(criteria);
     let numberBiddingProd = 0;
     
@@ -149,7 +150,6 @@ ProductController.getDetail = async (req, res) => {
         if (req.user) {
             biddingCouter = await AuctionLogService.countNumberOfAuctions(req.user._id);
         }
-        console.log(currentHighestPriceProduct);
         return res.render("main/products/details", {
             categories,
             product,

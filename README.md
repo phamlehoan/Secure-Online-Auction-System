@@ -1,13 +1,32 @@
-# Secure-Online-Auction-System
-This is the Capstone 1 project at Duy Tan University
 
-- Luồng chạy của code trong hệ thống:
-Models->Services->Controlers->Router->index.js(file gốc)
-+ Models: Tạo các Schema cho các collection và các lệnh truy vấn dữ liệu
-+ Services: Viết những hàm làm việc với Database ở trong hệ thống
-+ Controllers: Viết các chức năng của một router tương ứng nếu động đến Database thì sẽ gọi đến Services.
-+ Router: Viết những router điều hướng của trang web
-Ngoài ra:
-+ Validation: Dùng để kiểm tra các dữ liệu đầu vào trên hệ thống
-+ Lang: là nơi để viết các thông báo lỗi hoặc thành công 
-+ Config: là nơi cài đặt cấu hình của hệ thống
+# Secure Online Auction :moneybag:
+
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+
+# Features!
+-
+-
+-
+-
+### Tech
+
+Secure Online Auction uses a number of open source projects to work properly:
+
+* [Twitter Bootstrap] - great UI boilerplate for modern web apps
+* [node.js] - evented I/O for the backend
+* [Express] - fast node.js network app framework
+* [Socket.io] - the streaming build system
+
+### Installation
+
+Secure Online Auction requires [Node.js](https://nodejs.org/) v4+ to run.
+
+Install the dependencies and devDependencies and start the server.
+
+```sh
+$ cd Secure-Online-Auction-System
+$ npm install
+$ npm start
+```
+License
+Created by development team with :heart:
