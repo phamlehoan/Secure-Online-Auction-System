@@ -53,7 +53,7 @@ app.use(bodyParser.json());
 app.use(connectFlash());
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookieParser(process.env.COOKIE_KEY));
 
 //Sử dụng passport để xác thực tài khoản
 app.use(passport.initialize());

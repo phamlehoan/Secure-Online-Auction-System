@@ -23,6 +23,13 @@ ProductSocket.bidding = (io) => {
             if (!productData) {
                 throw new ProductNotFoundException('Product not found');
             }
+            
+            if (productData.userId == socket.request.user._id) {
+                io.emit('on-bidding-fail', {
+                    message: 'You can not bid your product'
+                })
+                return;
+            }
 
             product = {
                 userId: socket.request.user._id,
@@ -48,7 +55,5 @@ ProductSocket.bidding = (io) => {
     
     })
 }
-
-
 
 export default ProductSocket;

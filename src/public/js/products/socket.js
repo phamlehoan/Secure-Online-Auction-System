@@ -1,10 +1,18 @@
 let socket = io();
 
 let onBiddingProduct = (productId) => {
+
+    if (!socket.connected) {
+        //not connected
+        onBiddingFail('You must login before bidding. Are you have an account <a href="/login">Login<a/>? or '+
+        'Create new <a href="/user/register">Here<a/>!');
+        return;
+    }
+
     let price = document.getElementById(productId).textContent;
     let newPrice = document.getElementById('input-price' + productId);
 
-    if (window.location.pathname === '/products/'+productId) {
+    if (window.location.pathname === '/products/' + productId) {
 
         if (parseInt(price) >= parseInt(newPrice.value)) {
             onBiddingFail("You must provide a higher than current price");
@@ -28,8 +36,7 @@ let onBiddingProduct = (productId) => {
         }
     }
 
-    return biddingProduct(productId, newPrice);
-    
+    return onBiddingConfirm(productId ,newPrice);
 }
 
 let onBiddingFail = (message) => {
@@ -43,6 +50,26 @@ let onBiddingFail = (message) => {
         alertify.message('OK');
     });
 }
+
+let onBiddingConfirm = (productId, price) => {
+    alertify.confirm("Are you sure with price " + price +"?",
+    () => {
+        alertify.success('Successful!');
+        biddingProduct(productId, price);
+    },
+    () => {
+        alertify.error('Uh-oh! 😕');
+    });
+}
+
+socket.on('res-on-not-authentication', (error) => {
+    console.log('errrr');
+    return onBiddingFail(error.message);
+})
+
+socket.on('on-bidding-fail', (error) => {
+    return onBiddingFail(error.message);
+})
 
 /**
  * Send params to the server

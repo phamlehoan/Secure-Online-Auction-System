@@ -24,6 +24,7 @@ let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
  */
 ProductController.getProducts = async (req, res) => {
     let {category, price, userId} = req.query;
+    let { role } = req.signedCookies;
     let name = req.query.q;
     let categoryCode = ProductUtils.retrieveCatByCode(category);
     let criteria = ProductFactory.create(
@@ -32,7 +33,7 @@ ProductController.getProducts = async (req, res) => {
         price,
         userId
     );
-    let products = [];
+    let products = await ProductService.find(criteria);
     let numberBiddingProd = 0;
     
     if(!req.user){
@@ -57,6 +58,7 @@ ProductController.getProducts = async (req, res) => {
         req.flash("must-enter", arrErr);
         return res.render("main/profile/profile",{
             data: req.flash("data"),
+            role,
             user: req.user,
             categories,
             numberBiddingProd,
@@ -65,12 +67,10 @@ ProductController.getProducts = async (req, res) => {
         })
     }
 
-    products = await ProductService.find(criteria);
-   
-
     return res.render('main/products/products', {
         products,
         categories,
+        role,
         data: req.flash("data"),
         user: req.user,
         numberBiddingProd,
@@ -79,8 +79,10 @@ ProductController.getProducts = async (req, res) => {
 }
 
 ProductController.getAddProduct = async (req, res) => {
+    let { role } = req.signedCookies;
     return res.render("main/products/addProduct", {
         categories,
+        role,
         data: req.flash("data"),
         numberBiddingProd: await AuctionLogService.countNumberOfAuctions(req.user._id),
         user: req.user,
@@ -138,18 +140,25 @@ ProductController.postProduct = async (req, res) => {
  */
 ProductController.getDetail = async (req, res) => {
     try {
+        let { role } = req.signedCookies;
         const { id } = req.params;
         let product = await ProductService.findProductById(id);
         let seller = await UserServices.findUserById(product.userId);
         let currentHighestPriceProduct  = await AuctionLogService.findHighestPrice(product._id);
+        let biddingCouter = 0;
+        if (req.user) {
+            biddingCouter = await AuctionLogService.countNumberOfAuctions(req.user._id);
+        }
+        
         return res.render("main/products/details", {
             categories,
             product,
+            role,
             seller: seller[0].username,
             data: req.flash("data"),
             user: req.user,
-            userWithHighestPrice: currentHighestPriceProduct[0].userId,
-            numberBiddingProd: await AuctionLogService.countNumberOfAuctions(req.user._id),
+            userWithHighestPrice: !currentHighestPriceProduct ? currentHighestPriceProduct[0].userId : 'No User',
+            numberBiddingProd: biddingCouter,
             title: 'SOAS. - '+product.name + ' 😍'
         })
     } catch (error) {
@@ -164,6 +173,7 @@ ProductController.getDetail = async (req, res) => {
  * show All products
  */
 ProductController.getManage = async (req, res) => {
+    let { role } = req.signedCookies;
     let currentUser = req.user;
     let products = await AuctionLogService.findNewestBiddingProducts(currentUser._id);
     let numberBiddingProd = products.length;
@@ -176,6 +186,7 @@ ProductController.getManage = async (req, res) => {
     return res.render("main/products/auction", {
         products,
         categories,
+        role,
         data: req.flash("data"),
         numberBiddingProd,
         user: {
@@ -188,11 +199,13 @@ ProductController.getManage = async (req, res) => {
 }
 
 ProductController.productManegements = async (req, res) => {
+    let { role } = req.signedCookies;
     let sellerId = req.user._id;
     let products = await ProductService.findProductsByUserId(sellerId);
     return res.render("main/products/productsManagement", {
         products,
         categories,
+        role,
         data: req.flash("data"),
         numberBiddingProd: await AuctionLogService.countNumberOfAuctions(sellerId),
         user: req.user,
@@ -204,6 +217,7 @@ ProductController.productManegements = async (req, res) => {
  * Update product
  */
 ProductController.updateProducts = async (req, res) => {
+    let { role } = req.signedCookies;
     let prodductId = req.params.id;
     let product = await ProductService.findProductById(prodductId);
     if(product.userId != req.user._id)
@@ -212,6 +226,7 @@ ProductController.updateProducts = async (req, res) => {
     return res.render('main/products/update', {
         product,
         categories,
+        role,
         data: req.flash("data"),
         numberBiddingProd: await AuctionLogService.countNumberOfAuctions(req.user._id),
         user: req.user,

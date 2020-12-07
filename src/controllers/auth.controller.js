@@ -71,7 +71,8 @@ AuthController.activeAccount = async(req,res)=>{
 AuthController.getLogout = (req, res) => {
     req.logout();
     req.flash("success", loginSucc.logoutSuccess);
-    res.redirect("/login");
+    res.clearCookie();
+    return res.redirect("/login");
 }
 
 //Kiểm tra xem đã Login hay chưa

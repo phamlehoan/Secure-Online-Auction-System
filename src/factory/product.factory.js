@@ -3,6 +3,7 @@
  * 
  * @author github.com/dungphanxuan12
  */
+import DateTime from "date-and-time";
 
 const ProductFactory = {};
 
@@ -31,6 +32,10 @@ ProductFactory.create = (name, category, price, userId) => {
 
     if (userId !== null && typeof(userId) !== 'undefined') {
         criteriaBuilder["userId"] = userId;
+    }
+    
+    criteriaBuilder['aucEndTime'] = {
+        "$gt": DateTime.format(new Date(), 'YYYY-MM-DDTHH:mm:ss')
     }
 
     return criteriaBuilder;

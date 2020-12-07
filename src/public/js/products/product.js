@@ -2,6 +2,7 @@ const baseUrl = 'http://localhost:8080/api/v1';
 
 let findItemsByCat = async (category) => {
     let products = await getData(baseUrl + "/products");
+    console.log(products);
     let filtered = products.products
     .filter(item => item.categories.name === category);
 
