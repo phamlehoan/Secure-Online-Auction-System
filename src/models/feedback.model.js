@@ -10,7 +10,9 @@ const FeedbackSchema = new Schema({
     type: String,
     required: true
   },
+  sellerId: String,
   userId: String,
+  ratingStar: Number,
   productId: String,
   createdAt: {
     type: Number,
@@ -25,6 +27,28 @@ const FeedbackSchema = new Schema({
     default: null,
   },
 });
+
+FeedbackSchema.statics = {
+  //Tạo mới feedback
+  createItem(item){
+    return this.create(item);
+  },
+  findByProductId(id_seller){
+    return this.find({
+      sellerId: id_seller
+    }).sort({createdAt: -1})
+  },
+  countByStar(id_seller,star){
+    return this.find({
+      sellerId: id_seller
+    }).count({ratingStar: star}).exec();
+  },
+  countAllStar(id_seller){
+    return this.find({
+      sellerId: id_seller
+    }).count().exec();
+  }
+}
 
 const FeedbackModel =  mongoose.model("feedbacks", FeedbackSchema);
 

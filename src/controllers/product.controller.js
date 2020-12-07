@@ -20,7 +20,7 @@ const ProductController = {};
 let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
 
 /**
- * 
+ *
  */
 ProductController.getProducts = async (req, res) => {
     let {category, price, userId} = req.query;
@@ -35,7 +35,7 @@ ProductController.getProducts = async (req, res) => {
     );
     let products = await ProductService.find(criteria);
     let numberBiddingProd = 0;
-    
+
     if(!req.user){
         return res.render('main/products/products', {
             products,
@@ -126,13 +126,15 @@ ProductController.postProduct = async (req, res) => {
             nextPrice: parseInt(req.body.price) + parseInt(req.body.priceStep),
             userId: req.user._id
         }
-
         await ProductService.save(product);
     } catch (error) {
         console.log(error);
     }
 
-    return res.redirect("/products");
+    return res.redirect("/products",
+    {
+        data: req.flash("data")
+    });
 }
 
 /**
@@ -222,7 +224,7 @@ ProductController.updateProducts = async (req, res) => {
     let product = await ProductService.findProductById(prodductId);
     if(product.userId != req.user._id)
         throw new NotHavePermissionException('You have no permission for this operation');
-    
+
     return res.render('main/products/update', {
         product,
         categories,
@@ -235,7 +237,7 @@ ProductController.updateProducts = async (req, res) => {
 }
 
 /**
- * 
+ *
  */
 ProductController.postUpdateProducts = async (req, res) => {
     try {
@@ -271,7 +273,9 @@ ProductController.postUpdateProducts = async (req, res) => {
         console.log(error);
     }
 
-    return res.redirect("/products");
+    return res.redirect("/products"),{
+        data: req.flash("data")
+    };
 }
 
 export default ProductController;

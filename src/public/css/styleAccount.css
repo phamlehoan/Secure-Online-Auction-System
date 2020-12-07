@@ -257,7 +257,7 @@ body {
   overflow: hidden; }
 
 .signup-image {
-  margin: 0 55px; 
+  margin: 0 55px;
   margin-top: 45px; }
 
 .form-title {
@@ -587,5 +587,3 @@ label.valid {
   .social-label {
     margin-right: 0px;
     margin-bottom: 10px; } }
-
-/*# sourceMappingURL=style.css.map */

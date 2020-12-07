@@ -51,4 +51,16 @@ router.put("/update-password",
     UserController.putUpdatePass
 );
 
+router.get("/profile-seller/:sellerId/:productId",
+    AuthController.checkLoggedIn,
+    AuthController.checkUser,
+    UserController.getInfoSeller
+);
+
+router.post("/feedback",
+    AuthController.checkLoggedIn,
+    AuthController.checkUser,
+    UserController.postFeedback
+);
+
 module.exports = router;
