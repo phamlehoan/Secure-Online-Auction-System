@@ -149,7 +149,7 @@ ProductController.getDetail = async (req, res) => {
         if (req.user) {
             biddingCouter = await AuctionLogService.countNumberOfAuctions(req.user._id);
         }
-        
+        console.log(currentHighestPriceProduct);
         return res.render("main/products/details", {
             categories,
             product,
@@ -157,7 +157,7 @@ ProductController.getDetail = async (req, res) => {
             seller: seller[0].username,
             data: req.flash("data"),
             user: req.user,
-            userWithHighestPrice: !currentHighestPriceProduct ? currentHighestPriceProduct[0].userId : 'No User',
+            userWithHighestPrice: currentHighestPriceProduct.length > 0 ? currentHighestPriceProduct[0].userId : 'No User',
             numberBiddingProd: biddingCouter,
             title: 'SOAS. - '+product.name + ' 😍'
         })

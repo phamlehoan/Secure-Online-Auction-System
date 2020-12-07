@@ -24,7 +24,7 @@ let onBiddingProduct = (productId) => {
             return;
         }
 
-        return biddingProduct(productId, parseInt(newPrice.value));
+        return onBiddingConfirm(productId, parseInt(newPrice.value));
     }
 
     if (window.location.pathname.startsWith('/products')) {
