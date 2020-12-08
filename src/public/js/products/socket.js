@@ -42,8 +42,8 @@ let onBiddingProduct = (productId) => {
 let onBiddingFail = (message) => {
     return alertify.alert(
         "<div>"+
-        "<span style='color: #ca1515;font-family: 'Montserrat', sans-serif;'>"+ 
-            message 
+        "<span style='color: #ca1515;font-family: 'Montserrat', sans-serif;'>"+
+            message
         +"</span>"+
         "</div>",
     () => {
@@ -73,7 +73,7 @@ socket.on('on-bidding-fail', (error) => {
 
 /**
  * Send params to the server
- * 
+ *
  * @param {String} productId
  * @param {String} price
  */

@@ -6,13 +6,13 @@ import { ProductNotFoundException } from "../exceptions/product.exception";
 import AuctionService from "../services/aution.service";
 
 /**
- * 
+ *
  */
 const ProductSocket = {};
 
 /**
  * Save bidding log
- * 
+ *
  * @param {SocketIo} io
  */
 ProductSocket.bidding = (io) => {
@@ -39,20 +39,20 @@ ProductSocket.bidding = (io) => {
                 productName: productData.name,
                 priceStep: productData.priceStep
             }
-            
+
             await AuctionLogModel.saveProduct(product);
             await ProductService.updatePrice(data.productId, data.newPrice);
-            
+
             let counter = await AuctionService.countNumberOfAuctions(product.userId);
             return io.emit("res-product-bidding-price", {
-                productId: data.productId, 
+                productId: data.productId,
                 price: data.newPrice,
                 biddingCount: counter,
                 priceStep: product.priceStep,
                 nextPrice: parseInt(data.newPrice) + parseInt(product.priceStep)
             });
         });
-    
+
     })
 }
 

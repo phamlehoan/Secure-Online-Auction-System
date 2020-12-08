@@ -4,7 +4,7 @@ const AuctionService = {};
 
 /**
  * find all bidding products with newest price
- * @param {String} userId 
+ * @param {String} userId
  */
 AuctionService.findNewestBiddingProducts = async (userId) => {
     let productsWithHighestPrice = await AuctionLogModel.aggregate([
@@ -68,7 +68,7 @@ AuctionService.countNumberOfAuctions = async (userId) => {
 
 /**
  * find current highest price || user_id of bidded product
- * 
+ *
  * @param {String} productId
  * @returns {Product} Product
  */

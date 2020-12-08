@@ -1,0 +1,102 @@
+<!-- header -->
+<%- include("../common/header/header.ejs"); %>
+<!-- breadcrumb -->
+<%- include("../common/menu/menu.ejs"); %>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="./"><i class="fa fa-home"></i> Home</a>
+                        <span>Seller management</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Product Section Begin -->
+    <section class="shop-cart spad">
+        <div class="container bg-white p-5 rounded">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shop__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th><a href="/products">Products</a></th>
+                                    <th>Category</th>
+                                    <th>Current price</th>
+                                    <th>Expected price</th>
+                                    <th>Control</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%if(products){%>
+                                    <%products.forEach(product => {%>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <i class="fa fa-check-circle text-success"></i>
+                                                </span>
+                                            </td>
+                                            <td class="cart__product__item">
+                                                <img src="<%-product.productImage%>" alt="Product item">
+                                                <div class="cart__product__item__title">
+                                                    <h6><%-product.productName%></h6>
+                                                    <div class="rating">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="cart__category">Fashion</td>
+                                            <td class="cart__price">$ <%-product.price%></td>
+                                            <td class="cart__total">$ <%-product.reservePrice%></td>
+                                            <td class="cart__close d-flex mt-4">
+                                                <button class="btn btn-success mr-1">
+                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                </button>
+                                                <button class="btn btn-danger mr-1">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                                <button class="btn btn-info">
+                                                    <i class="fa fa-play" aria-hidden="true" title="Start Livestream"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <%})%>
+                                <%}else{%>
+                                    <tr>
+                                        <h3>No Product is Bidding.<a href="/products">let's Bidding</a></h3>
+                                    </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="cart__btn">
+                        <a href="#">Bidding</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="cart__btn update__btn">
+                        <a href="#"><span class="icon_loading"></span> Update list</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Section End -->
+<!-- footer -->
+<%- include("../common/footer/footer.ejs"); %>

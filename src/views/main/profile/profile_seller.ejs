@@ -1,0 +1,197 @@
+<!-- Header -->
+<%- include ('./../common/header/header.ejs') %>
+
+<!-- Menu -->
+<%- include ('./../common/menu/menu.ejs') %>
+
+<!-- Breadcrumb Begin -->
+<div class="breadcrumb-option">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="breadcrumb__links">
+                  <a href="./"><i class="fa fa-home"></i> Home</a>
+                  <span>Feedback</span>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- Product Section Begin -->
+<section class="product spad">
+  <div class="container bg-white rounded">
+      <div class="row">
+          <div class="col-12 bg-info">
+            <div class="row p-2">
+              <div class="col-2">
+                <img src="<%-user.avatarUrl%>" id="avt-pic" alt="Avatar" class="d-inline rounded-circle" style="width:100%;">
+              </div>
+              <div class="col-8 d-flex align-items-center justify-content-center">
+                <div class="text-center">
+                  <h1 class="font-weight-bold text-white"><%-seller.username%></h1>
+                  <div class="rating-star">
+                    <%for(var i=0 ; i < Math.floor(star.totalStar.percentage); i++){%>
+                      <span class="fa fa-star checked"></span>
+                    <%}%>
+                    <%if(Math.round((star.totalStar.percentage - Math.floor(star.totalStar.percentage))*10) < 7 && Math.round((star.totalStar.percentage - Math.floor(star.totalStar.percentage))*10) >1){%>
+                      <span class="fa fa-star-half-empty checked"></span>
+                    <%}%>
+                    <%if(Math.round((star.totalStar.percentage - Math.floor(star.totalStar.percentage))*10) >= 7){%>
+                      <span class="fa fa-star-half-empty"></span>
+                    <%}%>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div class="container bg-white p-3 pl-5 rounded mt-3">
+    <div class="row mb-10">
+      <!-- Thống kê -->
+      <div class="col-4 bg-secondary p-3">
+        <div class="row">
+          <!-- Thống kê rating -->
+          <div class="col-6">
+            <div class="row d-flex align-items-center">
+              <div class="col-4">
+                <span class="fa fa-star"></span> 5
+              </div>
+              <div class="col-8 p-0 m-0">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%- star.star5.percentage %>%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"><%- star.star5.percentage %>%</div>
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center">
+              <div class="col-4">
+                <span class="fa fa-star"></span> 4
+              </div>
+              <div class="col-8 p-0 m-0">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: <%-star.star4.percentage %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><%- star.star4.percentage %>%</div>
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center">
+              <div class="col-4">
+                <span class="fa fa-star"></span> 3
+              </div>
+              <div class="col-8 p-0 m-0">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: <%- star.star3.percentage %>%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><%- star.star3.percentage %>%</div>
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center">
+              <div class="col-4">
+                <span class="fa fa-star"></span> 2
+              </div>
+              <div class="col-8 p-0 m-0">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: <%- star.star2.percentage %>%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"><%- star.star2.percentage %>%</div>
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center">
+              <div class="col-4">
+                <span class="fa fa-star"></span> 1
+              </div>
+              <div class="col-8 p-0 m-0">
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: <%- star.star1.percentage %>%"" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"><%- star.star1.percentage %>%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tổng rating -->
+          <div class="col-6 m-0 d-flex align-items-center justify-content-center">
+            <div class="text-center">
+              <h2 class="font-weight-bold text-white"><%-star.totalStar.percentage%></h2>
+              <div class="rating-star">
+                <%for(var i=0 ; i < Math.floor(star.totalStar.percentage); i++){%>
+                  <span class="fa fa-star checked"></span>
+                <%}%>
+                <%if(Math.round((star.totalStar.percentage - Math.floor(star.totalStar.percentage))*10) < 7 && Math.round((star.totalStar.percentage - Math.floor(star.totalStar.percentage))*10) >1){%>
+                  <span class="fa fa-star-half-empty checked"></span>
+                <%}%>
+                <%if(Math.round((star.totalStar.percentage - Math.floor(star.totalStar.percentage))*10) >= 7){%>
+                  <span class="fa fa-star-half-empty"></span>
+                <%}%>
+              </div>
+              <div>
+                <span class="fa fa-user"></span> <%-star.totalStar.star%> votes
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedback and rating -->
+      <div class="col-8">
+        <div class="col-md-12">
+          <form method="post">
+              <input id="ratings-hidden" name="rating" type="hidden">
+              <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="4"></textarea>
+              <input type="hidden" id="idProduct" name="rating" value="<%-idProduct%>">
+              <input type="hidden" id="idSeller" name="rating" value="<%-idSeller%>">
+              <div class="text-right">
+                <div id="rating">
+                  <input type="radio" id="star5" name="rating" value="5" checked/>
+                  <label class = "full" for="star5" title="5 stars"></label>
+
+                  <input type="radio" id="star4" name="rating" value="4" />
+                  <label class = "full" for="star4" title="4 stars"></label>
+
+                  <input type="radio" id="star3" name="rating" value="3" />
+                  <label class = "full" for="star3" title="3 stars"></label>
+
+                  <input type="radio" id="star2" name="rating" value="2" />
+                  <label class = "full" for="star2" title="2 stars"></label>
+
+                  <input type="radio" id="star1" name="rating" value="1" />
+                  <label class = "full" for="star1" title="1 star"></label>
+                </div>
+                <button class="btn btn-success mt-2 btn-review" type="button">Review</button>
+              </div>
+          </form>
+      </div>
+      </div>
+    </div>
+
+    <!-- Comment -->
+    <div class="comment-rating mt-5">
+
+    </div>
+    <% dataFeedback.forEach(item => {%>
+      <div class="mt-2">
+        <div class="row ">
+          <div class="col-2 text-center" >
+              <div class="avatar-user mb-1">
+                <img src="<%-user.avatarUrl%>" id="avt-pic" alt="Avatar" class="d-inline rounded-circle" style="width:40%;">
+              </div>
+              <h5><%-item.username%></h5>
+              <p>2020-11-30 17:35</p>
+              <p><%-item.productname%></p>
+          </div>
+          <div class="col-8">
+            <div class="rating-star">
+              <%for(var i=0 ; i< item.data.ratingStar; i++) {%>
+                <span class="fa fa-star checked"></span>
+              <%}%>
+            </div>
+            <p><%-item.data.content%></p>
+          </div>
+        </div>
+      </div>
+      <hr>
+    <% }); %>
+
+  </div>
+</section>
+<!-- Product Section End -->
+
+<!-- Footer -->
+<%- include ('./../common/footer/footer.ejs') %>
+<!-- http://localhost:8080/user/profile-seller/5fa61848a2fbed0d3c9b0ce9/5fc49fded9fa4a3cf89e3582 -->
