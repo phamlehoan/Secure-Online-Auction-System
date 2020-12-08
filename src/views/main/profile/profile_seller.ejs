@@ -169,19 +169,19 @@
         <div class="row ">
           <div class="col-2 text-center" >
               <div class="avatar-user mb-1">
-                <img src="<%-user.avatarUrl%>" id="avt-pic" alt="Avatar" class="d-inline rounded-circle" style="width:40%;">
+                <img src="<%-item.user[0].avatar%>" id="avt-pic" alt="Avatar" class="d-inline rounded-circle" style="width:40%;">
               </div>
-              <h5><%-item.username%></h5>
+              <h5><%-item.user[0].username%></h5>
               <p>2020-11-30 17:35</p>
-              <p><%-item.productname%></p>
+              <p><a class="text-success" href="/products/<%-item.product[0]._id%>"><%-item.product[0].productName%></a></p>
           </div>
           <div class="col-8">
             <div class="rating-star">
-              <%for(var i=0 ; i< item.data.ratingStar; i++) {%>
+              <%for(var i=0 ; i< item.ratingStar; i++) {%>
                 <span class="fa fa-star checked"></span>
               <%}%>
             </div>
-            <p><%-item.data.content%></p>
+            <p><%-item.content%></p>
           </div>
         </div>
       </div>

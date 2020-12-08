@@ -155,7 +155,7 @@ ProductController.getDetail = async (req, res) => {
             categories,
             product,
             role,
-            seller: seller[0].username,
+            seller: seller[0],
             data: req.flash("data"),
             user: req.user,
             userWithHighestPrice: currentHighestPriceProduct.length > 0 ? currentHighestPriceProduct[0].userId : 'No User',

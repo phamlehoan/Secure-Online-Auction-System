@@ -35,8 +35,7 @@ UserController.getInfoSeller = async (req, res) => {
     let seller = await UserModel.findUserById(req.params.sellerId)
     let dataFeedback = await FeedbackService.listFeedbackProduct(req.params.sellerId)
     let countStar = await FeedbackService.statistical(req.params.sellerId)
-    console.log(countStar);
-    return res.render("main/profile/profile_seller",{
+    return res.render("main/profile/profile_seller", {
         data: req.flash("data"),
         idProduct: req.params.productId,
         idSeller: req.params.sellerId,
