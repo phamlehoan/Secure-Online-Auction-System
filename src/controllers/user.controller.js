@@ -9,6 +9,7 @@ import UserModel from "./../models/user.model";
 import FeedbackModel from "./../models/feedback.model"
 import FeedbackService from "./../services/feedback.service"
 import PRODUCT_CONSTANTS from "../constants/product.constant";
+import AuctionLogService from "../services/aution.service";
 
 let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
 
@@ -16,7 +17,7 @@ const UserController = {};
 
 
 UserController.getProfile = async (req, res) => {
-    let numberBiddingProd = await AuctionLogModel.auctionCounter(req.user._id);
+    let numberBiddingProd = await AuctionLogService.countNumberOfAuctions(req.user._id);
     return res.render("main/profile/profile",{
         data: req.flash("data"),
         user: req.user,
@@ -30,7 +31,7 @@ UserController.getProfile = async (req, res) => {
 
 //infomation seller
 UserController.getInfoSeller = async (req, res) => {
-    let numberBiddingProd = await AuctionLogModel.auctionCounter(req.user._id);
+    let numberBiddingProd = await AuctionLogService.countNumberOfAuctions(req.user._id);
     let seller = await UserModel.findUserById(req.params.sellerId)
     let dataFeedback = await FeedbackService.listFeedbackProduct(req.params.sellerId)
     let countStar = await FeedbackService.statistical(req.params.sellerId)
@@ -85,7 +86,7 @@ UserController.updateProfile = async (req, res) => {
 }
 
 UserController.getChangePass = async (req, res) => {
-    let numberBiddingProd = await AuctionLogModel.auctionCounter(req.user._id);
+    let numberBiddingProd = await AuctionLogService.countNumberOfAuctions(req.user._id);
     return res.render("main/changePassword/changePassword",{
         data: req.flash("data"),
         categories,
@@ -126,18 +127,22 @@ UserController.putUpdatePass = async(req, res) => {
     }
 }
 
+/**
+ * POST feedback API
+ * @todo move API package
+ */
 UserController.postFeedback = async (req, res) => {
-    let content = req.body.content;
-    let star = req.body.star;
-    let itemFeedback = {
-        content: content,
-        sellerId: req.body.sellerId,
-        userId: req.user._id,
-        ratingStar: parseFloat(star),
-        productId: req.body.productId,
-    }
-    console.log(itemFeedback);
     try {
+        let content = req.body.content;
+        let star = req.body.star;
+        let itemFeedback = {
+            content: content,
+            sellerId: req.body.sellerId,
+            userId: req.user._id,
+            ratingStar: parseFloat(star),
+            productId: req.body.productId,
+        }
+    
         //Gọi service để kiểm tra các điều kiện
         await FeedbackModel.createItem(itemFeedback);
         let user = await UserModel.findUserById(req.user._id);

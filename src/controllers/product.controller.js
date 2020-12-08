@@ -33,7 +33,6 @@ ProductController.getProducts = async (req, res) => {
         price,
         userId
     );
-    console.log(criteria);
     let products = await ProductService.find(criteria);
     let numberBiddingProd = 0;
 
