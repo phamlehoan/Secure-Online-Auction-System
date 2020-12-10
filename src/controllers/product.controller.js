@@ -218,7 +218,6 @@ ProductController.productManegements = async (req, res) => {
  * Update product
  */
 ProductController.updateProducts = async (req, res) => {
-    let { role } = req.signedCookies;
     let prodductId = req.params.id;
     let product = await ProductService.findProductById(prodductId);
     if(product.userId != req.user._id)
@@ -227,7 +226,6 @@ ProductController.updateProducts = async (req, res) => {
     return res.render('main/products/update', {
         product,
         categories,
-        role,
         data: req.flash("data"),
         numberBiddingProd: await AuctionLogService.countNumberOfAuctions(req.user._id),
         user: req.user,
@@ -240,41 +238,54 @@ ProductController.updateProducts = async (req, res) => {
  */
 ProductController.postUpdateProducts = async (req, res) => {
     try {
-        let image = "" || process.env.PRODUCT_DEFAULT_IMG;
-        if (req.file) {
-            await Cloudinary.uploadSingle(req.file.path)
-            .then(data => {
-                image = data.url;
-            });
-        }
+        let productId = req.params.id;
+        let product = await ProductService.findProductById(productId);
+        console.log(product);
+        if (product) {
+            let image = "" || product.image;
+            if (req.file) {
+                await Cloudinary.uploadSingle(req.file.path)
+                .then(data => {
+                    image = data.url;
+                });
+            }
 
-        let product = {
-            name: req.body.name,
-            code: req.body.code,
-            description: req.body.description,
-            aucStartTime: req.body.startTime || Date.now,
-            aucEndTime: req.body.endTime,
-            price: req.body.price,
-            image: image,
-            categories: {
-                name: ProductUtils.retrieveCatByCode(req.body.category)
-            },
-            tags: null,
-            priceStep: req.body.priceStep,
-            priceMethod: ProductUtils.retrievePriceMethod(req.body.priceMethod) || "INCR",
-            status: 1,
-            nextPrice: parseInt(req.body.price) + parseInt(req.body.priceStep),
-            userId: req.user._id
+            let newProduct = {
+                name: req.body.name || product.name,
+                code: req.body.code || product.code,
+                description: req.body.description || product.description,
+                aucStartTime: req.body.startTime || product.startTime,
+                aucEndTime: req.body.endTime || product.endTime,
+                price: req.body.price || product.price,
+                image: image,
+                categories: {
+                    name: ProductUtils.retrieveCatByCode(req.body.category)
+                },
+                tags: null,
+                priceStep: req.body.priceStep || product.priceStep,
+                priceMethod: ProductUtils.retrievePriceMethod(req.body.priceMethod) || "INCR",
+                status: 1,
+                nextPrice: parseInt(product.price) + parseInt(product.priceStep),
+                userId: req.user._id,
+                updatedAt: Date.now()
+            }
+            return await ProductService.update(productId, newProduct);
         }
+    } catch (error) {
+        console.log(error);
+        return res.redirect('/products');
+    }
+}
 
-        await ProductService.save(product);
+ProductController.deleteProduct = async (req, res) => {
+    try {
+        let { id } = req.params;
+        await ProductService.delete(id);
+        return res.redirect('/products/manage');
     } catch (error) {
         console.log(error);
     }
 
-    return res.redirect("/products"),{
-        data: req.flash("data")
-    };
 }
 
 export default ProductController;

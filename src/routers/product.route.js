@@ -51,6 +51,12 @@ router.post('/edit/:id',
     ProductController.postUpdateProducts
 )
 
+router.get('/del/:id', 
+    AuthController.checkUser,
+    Authorization.hasAddPermission,
+    ProductController.deleteProduct
+)
+
 /* GET product details page. */
 router.get('/:id',
     AuthController.checkUser,

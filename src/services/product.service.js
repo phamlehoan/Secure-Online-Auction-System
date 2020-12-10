@@ -93,4 +93,28 @@ ProductService.findAllWinnerByProductIds = async (listIds) => {
     }).select('_id winnerId price');
 }
 
+/**
+ * find product by ID and update
+ * 
+ * @param {String} id 
+ * @param {Product} product 
+ */
+ProductService.update = async (id, product) => {
+    return await ProductModel.findOneAndUpdate(
+        {_id: id},
+        product
+    );
+}
+
+
+/**
+ * 
+ * @param {String} id 
+ */
+ProductService.delete = async (id) => {
+    return await ProductModel.findByIdAndDelete({
+        _id: id
+    });
+}
+
 export default ProductService;
