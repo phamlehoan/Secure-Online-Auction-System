@@ -1,5 +1,5 @@
-import {check} from "express-validator/check";
-import {updateUserMess} from "../langs/us/notification.us";
+import { check } from "express-validator";
+import { updateUserMess } from "../langs/us/notification.us";
 
 const UserValid = {}
 

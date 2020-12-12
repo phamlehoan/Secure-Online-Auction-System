@@ -123,12 +123,33 @@
                         </div>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <h6>Reviews (<span>2</span>)</h6>
-                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                consequat massa quis enim.</p>
+                            <div class="col-md-12">
+                                <form action="/user/profile-seller/" method="post">
+                                    <input id="ratings-hidden" name="rating" type="hidden">
+                                    <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="4"></textarea>
+                                    <input type="hidden" id="idProduct" name="rating">
+                                    <input type="hidden" id="idSeller" name="rating">
+                                    <div class="text-right">
+                                      <div id="rating">
+                                        <input type="radio" id="star5" name="rating" value="5" checked/>
+                                        <label class = "full" for="star5" title="5 stars"></label>
+                      
+                                        <input type="radio" id="star4" name="rating" value="4" />
+                                        <label class = "full" for="star4" title="4 stars"></label>
+                      
+                                        <input type="radio" id="star3" name="rating" value="3" />
+                                        <label class = "full" for="star3" title="3 stars"></label>
+                      
+                                        <input type="radio" id="star2" name="rating" value="2" />
+                                        <label class = "full" for="star2" title="2 stars"></label>
+                      
+                                        <input type="radio" id="star1" name="rating" value="1" />
+                                        <label class = "full" for="star1" title="1 star"></label>
+                                      </div>
+                                      <button class="btn btn-success mt-2 btn-review" type="button">Review</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

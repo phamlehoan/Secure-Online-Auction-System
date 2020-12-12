@@ -21,7 +21,6 @@ import passport from 'passport';
 import socketIO from "socket.io";
 import http from "http";
 import cookieParser from "cookie-parser";
-// import socketJwt from "socketio-jwt";
 
 import configViewEngine from "./configs/viewEngine"
 import dbConfig from "./configs/db.config";
@@ -30,6 +29,7 @@ import Router from "./routers/web";
 import ApiRouter from "./routers/api/api";
 import AppSocket from "./sockets/socket";
 import configSocket from "./configs/socketAuth.config";
+import redis from "./configs/redis.config";
 
 dotenv.config();
 
@@ -67,6 +67,8 @@ ApiRouter(app);
 
 const APP_HOST = process.env.APP_HOST || "localhost";
 const APP_PORT = process.env.APP_PORT || 3000;
+const REDIS_PORT = process.env.REDIS_PORT || 6379;
+
 
 let server =  http.createServer(app);
 let io = socketIO(server);
@@ -74,7 +76,7 @@ let io = socketIO(server);
 configSocket(
   io,
   cookieParser,
-  session.sessionStore
+  session.sessionRedisStore
 );
 
 //init all sockets app

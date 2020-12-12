@@ -39,8 +39,9 @@
                         </thead>
                         <tbody>
                             <%if(products){%>
-                                <%for(let i = 0; i < products.length; i++){%>
+                                <%for(let i = 0; i < winners.length; i++){%>
                                     <%const product = products[i];%>
+                                    <%const winner = winners[i];%>
                                     <tr>
                                         <td class="cart__product__item">
                                             <img src="<%-product._id.productImage%>" alt="<%-product._id.productName%>" height='auto' width='100'>
@@ -55,17 +56,18 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="cart__price">$ <p id="<%-product._id.productId%>"><%-winners[i].price%></p></td>
+                                        <td class="cart__price">$ <p id="<%-product._id.productId%>"><%-winner.price%></p></td>
                                         <td class="cart__price">
                                             $ <p><%-product.price%></p>
                                         </td>
-                                        <%if(user._id == winners[i].winnerId){%>
+                                        <%if(user._id == winner.winnerId){%>
                                             <td class="cart__total" class="text-success">You</td>
                                         <%}else{%>
-                                            <td class="cart__total"><%-winners[i].winnerId%></td>
+                                            <td class="cart__total"><%-winner.winnerId%></td>
                                         <%}%>
                                     </tr>
-                            <%}}else{%>
+                                <%}%>
+                            <%}else{%>
                                 <tr>
                                     <h3>No Product is Bidding.<a href="/products">let's Bidding</a></h3>
                                 </tr>
