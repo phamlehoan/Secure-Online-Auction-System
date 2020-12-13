@@ -51,4 +51,15 @@ router.put("/update-password",
     UserController.putUpdatePass
 );
 
+//Router apply to seller
+router.get("/apply-seller",
+    AuthController.checkLoggedIn,
+    AuthController.checkUser,
+    UserController.getApplySeller
+);
+router.put("/update-seller",
+    AuthController.checkLoggedIn,
+    AuthController.checkUser,
+    UserController.putApplySeller
+);
 module.exports = router;

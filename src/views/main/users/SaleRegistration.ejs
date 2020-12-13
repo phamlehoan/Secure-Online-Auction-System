@@ -1,0 +1,212 @@
+<!-- header -->
+<%- include("../common/header/header.ejs"); %>
+<!-- menu -->
+<%- include("../common/menu/menu.ejs"); %>
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="./"><i class="fa fa-home"></i> Home</a>
+                        <span>Sale registration</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Sale registration section begin -->
+    <section class="top__area spad">
+        <div class="container bg-white p-5 rounded">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h4>Sale registration</span></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row container  col-lg-12 col-md-12">
+                <div class="pr-5">Account type<span class="text-danger">*</span></div>
+                <div class="form-check form-group pr-5">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                        value="option1" checked>
+                    <label class="form-check-label" for="exampleRadios1">Personal</label>
+                </div>
+                <div class="form-check form-group">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                        value="option2">
+                    <label class="form-check-label" for="exampleRadios2">Organization</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-12">
+                            <label for="iursname" class="text-left">User Name<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="input-ursname" name="user-name"
+                                placeholder="your username" value="<%= user.username%>" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row container pb-2">Name<span class="text-danger">*</span></div>
+                            <div class="row">
+                                <div class="form-group col-lg-6 col-md-6">
+                                    <input type="text" class="form-control" id="input-firstname" name="fname"
+                                        placeholder="First Name" value="<%= user.personalInfo.firstname %>" readonly>
+
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6">
+                                    <input type="text" class="form-control" id="input-lastname" name="lname"
+                                        placeholder="Last Name" value="<%= user.personalInfo.lastname %>" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6 col-md-6">
+                            <label for="iemai" class="text-left">Email<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="input-email" name="email"
+                                placeholder="your_email@example.com" value="<%= user.local.email%>" readonly>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6">
+                            <label for="phone-number">Phone Number<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="i-phonenumber" name="phone-number"
+                                placeholder="0912345678" value="<%= user.phone %>" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6 col-md-6">
+                            <label for="example-date-input" class="text-left col-form-label">Birthdate</label>
+                            <input class="form-control" type="date" value="<%= user.personalInfo.dob %>" id="example-date-input">
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6">
+                            <label for="i-gender" class="text-left col-form-label">Gender</label>
+                            <select class="form-control" id="i-gender">
+                                <option <% if (user.gender === "male") { %>
+                                    selected
+                                <% } %>value="male">Male</option>
+                                <option <% if (user.gender === "female") { %>
+                                    selected
+                                <% }%>value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row container pb-2">Address<span class="text-danger">*</span></div>
+                            <div class="row">
+                                <div class="form-group col-lg-6 col-md-6">
+                                    <input type="text" class="form-control" id="i-city" placeholder="Province/City" value="<%=user.personalInfo.address.city%>" readonly>
+                                </div>
+                                <div class="form-group col-lg-6 col-md-6">
+                                    <input type="text" class="form-control" id="i-district" placeholder="District" value="<%=user.personalInfo.address.district%>" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-12 col-md-12">
+                                    <input type="text" class="form-control" id="i-address" placeholder="Detail Address" value="<%=user.personalInfo.address.district%>" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section class="Content-2 mt-2 mb-4">
+                <div class="container bg-light border border-primary p-7 rounded ">
+                    <h3 class="row text-left p-3 text-primary">Please enter your indentity card or passport for legal
+                        account</h3>
+                    <div class="row">
+                        <div class="form-group col-lg-6 col-md-6">
+                            <label for="id" class="text-left col-form-label ">Identity Number<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="i-id" name="id" placeholder="Your Identity Number">
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6">
+                            <label for="example-date-input" class="text-left col-form-label ">Date Range<span class="text-danger">*</span></label>
+                            <input class="form-control " type="date" value="2020-08-19" id="i-cdate">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-12">
+                            <label for="issuedby">Issued by<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="i-issued" name="issuedby">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <script type='text/javascript'>
+                            function preview_image(event, i) {
+                                var reader = new FileReader();
+                                reader.onload = function () {
+                                    var output = document.getElementById("output_image" + i);
+                                    output.src = reader.result;
+                                }
+                                reader.readAsDataURL(event.target.files[0]);
+                            }
+                        </script>
+                        <div class="row form-group mx-auto text-center">
+                            <div class="col-5 text-center mx-auto align-items-center">
+                                <div class="text-center font-weight-bold pb-2">Front side</div>
+                                <div id="wrapper" class="pb-2">
+                                    <label for="idcard-front" class="btn">
+                                        <input type="file" id="idcard-front" name="idcard-front" class="pb-2"
+                                            accept="image/*" onchange="preview_image(event,0)" hidden>
+                                        <img id="output_image0" src="img/account/id-card-front.png" class="img-fluid rounded" />
+                                    </label>
+
+                                </div>
+                            </div>
+                            <div class="col-5 text-center mx-auto align-items-center">
+                                <div class="text-center font-weight-bold pb-2">Back side</div>
+                                <label for="idcard-back" class="btn">
+                                    <input type="file" id="idcard-back" name="idcard-back" class="pb-2" accept="image/*"
+                                        onchange="preview_image(event,1)" hidden>
+                                    <img id="output_image1" src="img/account/id-card-back.png" class="img-fluid rounded" />
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="Content-3">
+                <div class="container bg-light border border-primary p-7 rounded">
+                    <h3 class="row text-left p-3 text-primary">Bank Account</h3>
+                    <div class="row">
+                        <div class="form-group col-lg-6 col-md-6">
+                            <label for="account-number">Account Number</label>
+                            <input type="text" class="form-control" id="i-accnum" name="account-number" placeholder="Your Bank Account's Number">
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6">
+                            <label for="account-name">Account Name</label>
+                            <input type="text" class="form-control" id="i-accnum" name="account-name" placeholder="Your Bank Account's Name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-12">
+                            <label for="bank-name">Bank Name</label>
+                            <select class="form-control" id="i-banknamer">
+                                <option>VietComBank</option>
+                                <option>TechComBank</option>
+                                <option>DongABank</option>
+                                <option>OceanBank</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="pt-5 row">
+                <div class="col-6 text-right">
+                    <button type="button" class="btn btn-info" id="input-btn-submit">Submit</button>
+                </div>
+                <div class="col-6 text-left">
+                    <button type="button" class="btn btn-danger" id="input-btn-reset">Cancel</button>
+                </div>
+            </div>
+    </section>
+    <!-- Sale registration section end -->
+
+<!-- footer -->
+<%- include("../common/footer/footer.ejs"); %>

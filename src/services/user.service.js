@@ -25,7 +25,7 @@ UserService.updatePassword = (id,item)=>{
       if(!currentUser)
           return reject(updateUserMess.pass.userInvalue);
       //So sánh mật khẩu cũ trong db
-      let checkCurrentPassword = await currentUser.comparePass(item. currentPassword);
+      let checkCurrentPassword = await currentUser.comparePass(item.currentPassword);
       //Kiểm tra có đúng hay không
       if(!checkCurrentPassword)
           return reject(updateUserMess.pass.wrongPassword);
@@ -35,6 +35,9 @@ UserService.updatePassword = (id,item)=>{
       await userModel.updatePassword(id,bcrypt.hashSync(item.newPassword,salt));
       resolve(true);
   })
+}
+UserService.applySeller =(id,file)=>{
+  return userModel.findByIdAndUpdate(id, file);
 }
 
 
