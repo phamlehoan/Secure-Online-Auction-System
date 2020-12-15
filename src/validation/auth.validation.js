@@ -24,7 +24,7 @@ AuthValid.isExistsSession = async (req, res, next) => {
     try {
         let { email } = req.body;
         let user = await UserService.findUserByEmail(email);
-        if (user.local.token) {
+        if (user.local.token !== null) {
             if (user.local.loginTimes >= 2) {
                 let opt = uuidv4().split('-')[0];
                 let message = 'Check your security email';

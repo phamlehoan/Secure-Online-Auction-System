@@ -113,9 +113,11 @@ AuthController.verifyToken = async (req, res) => {
     let isTrue = await authService.verifyToken(id, otp);
     if (isTrue) {
         res.clearCookie('id');
-        await UserService.updateLoginTimes(-1, id);
         await UserService.updateToken(id, null);
+        await UserService.updateLoginTimes(-1, id);
         req.flash('success', 'please login again');
+    }else{
+        req.flash('errors', 'Wrong OTP');
     }
     return res.redirect('/login');
 }

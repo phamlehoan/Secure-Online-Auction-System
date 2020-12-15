@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node src/index.js",
-    "dev": "nodemon --exec babel-node src/index",
-    "debug": "nodemon --inspect --exec babel-node src/index.js"
+    "start": "babel-node src/cluster.js",
+    "dev": "babel-node src/cluster",
+    "debug": "nodemon --inspect --exec babel-node src/cluster.js"
   },
   "repository": {
     "type": "git",

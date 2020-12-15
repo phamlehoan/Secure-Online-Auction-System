@@ -1,17 +1,3 @@
-/**
- * Entry point application
- * @version 1.0.0
- * @since Aug 10, 2020
- * 
- * Mentor: Jan samuelsson
- * Members: Pham Hoan
- *          Phan Xuan Dung
- *          Nguyen Thanh Long
- *          Huynh Dac Vinh
- *          Nguyen Thuy Ngan
- * 
- * @copyright Created by Auction Capstone 1 team with ♥️
- */
 import express from "express";
 import morgan from "morgan";
 import bodyParser from "body-parser";
@@ -37,54 +23,60 @@ dotenv.config();
 let app = express();
 //-----------------------
 
-//------Middleware-------
-//app view engine configuration
-configViewEngine(app);
+let ServerApplication = (app) => {
+  //------Middleware-------
+  //app view engine configuration
+  configViewEngine(app);
 
-//connect database
-dbConfig();
+  //connect database
+  dbConfig();
 
-//connect session
-session.config(app);
+  //connect session
+  session.config(app);
 
-//-----------------------
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(connectFlash());
-app.use(morgan("dev"));
-app.use(express.json());
-app.use(cookieParser(process.env.COOKIE_KEY));
+  //-----------------------
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.json());
+  app.use(connectFlash());
+  app.use(morgan("dev"));
+  app.use(express.json());
+  app.use(cookieParser(process.env.COOKIE_KEY));
 
-//Sử dụng passport để xác thực tài khoản
-app.use(passport.initialize());
-app.use(passport.session());
+  //Sử dụng passport để xác thực tài khoản
+  app.use(passport.initialize());
+  app.use(passport.session());
 
-//app routers
-Router(app);
+  //app routers
+  Router(app);
 
-//api routers
-ApiRouter(app);
+  //api routers
+  ApiRouter(app);
 
-const APP_HOST = process.env.APP_HOST || "localhost";
-const APP_PORT = process.env.APP_PORT || 3000;
-const REDIS_PORT = process.env.REDIS_PORT || 6379;
-const REDIS_HOST =  process.env.REDIS_HOST || "localhost";
+  const APP_HOST = process.env.APP_HOST || "localhost";
+  const APP_PORT = process.env.APP_PORT || 3000;
+  const REDIS_PORT = process.env.REDIS_PORT || 6379;
+  const REDIS_HOST =  process.env.REDIS_HOST || "localhost";
 
 
-let server =  http.createServer(app);
-let io = socketIO(server);
+  let server =  http.createServer(app);
+  let io = socketIO(server);
 
-configSocket(
-  io,
-  cookieParser,
-  session.sessionRedisStore
-);
+  configSocket(
+    io,
+    cookieParser,
+    session.sessionRedisStore
+  );
 
-redisSocket(io, REDIS_HOST, REDIS_PORT);
+  redisSocket(io, REDIS_HOST, REDIS_PORT);
 
-//init all sockets app
-AppSocket(io);
+  //init all sockets app
+  AppSocket(io);
 
-server.listen(APP_PORT, APP_HOST, () => {
-  console.log(`Server running at http://${APP_HOST}:${APP_PORT}/`);
-});
+  server.listen(APP_PORT, APP_HOST, () => {
+    console.log(`Server running at http://${APP_HOST}:${APP_PORT}/`);
+    console.log('Server: '+process.pid);
+  });
+
+}
+
+module.exports = ServerApplication;
