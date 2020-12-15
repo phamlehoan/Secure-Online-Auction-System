@@ -68,7 +68,7 @@
                             <li>
                                 <span>Time:</span>
                                 <input type="hidden" id="timerdate" value="<%-product.aucEndTime%>">
-                                <p id="countdown-time"></p>
+                                <p class="bg-light text-secondary text-monospace font-weight-bold" id="countdown-time"></p>
                             </li>
                             <li>
                                 <span>Current winner:</span>
@@ -96,62 +96,6 @@
                         <button class="cart-btn" onclick="onBiddingProduct('<%-product._id%>')"><span class="icon_bag_alt"></span> Bid</button>
                     </div>
 
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="product__details__tab">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Delivery</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews (<span>2</span>)</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                            <h6>Description</h6>
-                            <p><%-product.description%></p>
-                        </div>
-                        <div class="tab-pane" id="tabs-2" role="tabpanel">
-                            <h6>Delivery</h6>
-                            <p>Chúng tôi sẽ vận chuyển đơn hàng này trong 15 ngày làm việc gần nhất.</p>
-                            <p>Vui lòng chuẩn bị sẵn số tiền trên.</p>
-                        </div>
-                        <div class="tab-pane" id="tabs-3" role="tabpanel">
-                            <h6>Reviews (<span>2</span>)</h6>
-                            <div class="col-md-12">
-                                <form action="/user/profile-seller/" method="post">
-                                    <input id="ratings-hidden" name="rating" type="hidden">
-                                    <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="4"></textarea>
-                                    <input type="hidden" id="idProduct" name="rating">
-                                    <input type="hidden" id="idSeller" name="rating">
-                                    <div class="text-right">
-                                      <div id="rating">
-                                        <input type="radio" id="star5" name="rating" value="5" checked/>
-                                        <label class = "full" for="star5" title="5 stars"></label>
-                      
-                                        <input type="radio" id="star4" name="rating" value="4" />
-                                        <label class = "full" for="star4" title="4 stars"></label>
-                      
-                                        <input type="radio" id="star3" name="rating" value="3" />
-                                        <label class = "full" for="star3" title="3 stars"></label>
-                      
-                                        <input type="radio" id="star2" name="rating" value="2" />
-                                        <label class = "full" for="star2" title="2 stars"></label>
-                      
-                                        <input type="radio" id="star1" name="rating" value="1" />
-                                        <label class = "full" for="star1" title="1 star"></label>
-                                      </div>
-                                      <button class="btn btn-success mt-2 btn-review" type="button">Review</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

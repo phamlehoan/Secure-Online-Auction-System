@@ -29,7 +29,7 @@ import Router from "./routers/web";
 import ApiRouter from "./routers/api/api";
 import AppSocket from "./sockets/socket";
 import configSocket from "./configs/socketAuth.config";
-import redis from "./configs/redis.config";
+import redisSocket from "./configs/redis.config";
 
 dotenv.config();
 
@@ -68,6 +68,7 @@ ApiRouter(app);
 const APP_HOST = process.env.APP_HOST || "localhost";
 const APP_PORT = process.env.APP_PORT || 3000;
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
+const REDIS_HOST =  process.env.REDIS_HOST || "localhost";
 
 
 let server =  http.createServer(app);
@@ -78,6 +79,8 @@ configSocket(
   cookieParser,
   session.sessionRedisStore
 );
+
+redisSocket(io, REDIS_HOST, REDIS_PORT);
 
 //init all sockets app
 AppSocket(io);

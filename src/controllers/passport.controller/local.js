@@ -36,11 +36,11 @@ let initPassportLocal = () => {
          }
     }))
 
-    passport.serializeUser((user,done)=>{
+    passport.serializeUser((user, done) => {
         done(null, user._id);
     })
 
-    passport.deserializeUser((userId,done)=>{
+    passport.deserializeUser((userId, done) => {
         userModel.findUserById(userId)
         .then(user => {
             return done(null, user);

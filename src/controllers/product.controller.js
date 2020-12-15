@@ -101,13 +101,10 @@ ProductController.postProduct = async (req, res) => {
             userId: req.user._id
         }
         await ProductService.save(product);
-        return res.redirect("/products",
-        {
-            data: req.flash("data")
-        });
+        return res.redirect("/products");
     } catch (error) {
         console.log(error);
-        return res.redirect('/products?errors'+ error);
+        return res.redirect('/products?errors=true');
     }
 
 
@@ -135,7 +132,7 @@ ProductController.getDetail = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        return res.redirect('/products?errors=' + error);
+        return res.redirect('/products?errors=true');
     }
 
 }
@@ -233,7 +230,7 @@ ProductController.postUpdateProducts = async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        return res.redirect('/products?errors=' + error);
+        return res.redirect('/products?errors=true');
     }
 }
 
@@ -244,7 +241,7 @@ ProductController.deleteProduct = async (req, res) => {
         return res.redirect('/products/manage');
     } catch (error) {
         console.log(error);
-        return res.redirect('/products/manage?errors=' + error);
+        return res.redirect('/products/manage?errors=true');
     }
 
 }

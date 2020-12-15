@@ -67,10 +67,13 @@ AuthService.activeAccount = (token) => {
 /**
  * Verify valid token
  * 
- * @param {String} token 
  */
-AuthService.verifyToken = (token) => {
-    
+AuthService.verifyToken = async (userId, otp) => {
+    let user = await userModel.findById({_id: userId});
+    if (user.local.token === otp) {
+        return true;
+    }
+    return false;
 }
 
 export default AuthService;

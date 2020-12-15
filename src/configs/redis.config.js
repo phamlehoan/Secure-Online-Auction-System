@@ -1,19 +1,18 @@
-import Redis from "redis";
+import redisAdapter from "socket.io-redis";
 
 /**
- * Redis configuration
+ * Redis socketIo configurations
  * 
+ * @param {Socket} io 
  * @param {String} host 
  * @param {Number} port 
  * @param {Number} tls 
- * @returns {Redis} client
  */
-let redis = (host, port, tls) => {
-    return Redis.createClient({
-        host,
-        port,
-        tls
-    });
+let redis = (io, host, port, tls) => {
+    return io.adapter(redisAdapter({
+         host, 
+         port
+    }));
 }
 
 export default redis;

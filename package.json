@@ -20,9 +20,11 @@
   },
   "homepage": "https://github.com/hoanvn1999/Secure-Online-Auction-System#readme",
   "dependencies": {
+    "Base64": "^1.1.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.23.0",
+    "cluster": "^0.7.7",
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^2.4.1",
     "connect-redis": "^5.0.0",
@@ -46,6 +48,7 @@
     "passport.socketio": "^3.7.0",
     "redis": "^3.0.2",
     "socket.io": "^3.0.0",
+    "socket.io-redis": "^6.0.1",
     "socketio-jwt": "^4.6.2",
     "sweetalert2": "^10.9.0",
     "uuid": "^8.3.0"
