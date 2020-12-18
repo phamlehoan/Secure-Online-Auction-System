@@ -75,7 +75,7 @@ AuthController.getLogout = async (req, res) => {
         await UserService.updateToken(_id, null);
         await UserService.updateLoginTimes(-1, _id);
         req.logOut();
-        req.flash("success", loginSucc.logoutSuccess);
+        req.session.destroy(req.session.sid);
         res.clearCookie();
         return res.redirect("/login");
     } catch (error) {

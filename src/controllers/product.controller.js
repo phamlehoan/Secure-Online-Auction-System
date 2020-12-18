@@ -4,7 +4,9 @@ import Cloudinary from "../configs/cloudinary.config";
 import ProductFactory from "../factory/product.factory";
 import AuctionLogService from "../services/aution.service";
 import UserServices from "../services/user.service";
-
+import CommonServices from "../services/common.service";
+import RedisService from "../redis/redis";
+import { stringify } from "uuid";
 /**
  * controller home page
  */
@@ -25,14 +27,13 @@ ProductController.getProducts = async (req, res) => {
     );
     let products = await ProductService.find(criteria);
     let numberBiddingProd = 0;
-
     if(!req.user){
         return res.render('main/products/products', {
             products,
             numberBiddingProd,
             title: 'SOAS. - List Products'
         });
-    }
+    } 
 
     numberBiddingProd = await AuctionLogService.countNumberOfAuctions(req.user._id);
 

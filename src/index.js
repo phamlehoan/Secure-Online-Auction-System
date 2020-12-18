@@ -15,7 +15,8 @@ import Router from "./routers/web";
 import ApiRouter from "./routers/api/api";
 import AppSocket from "./sockets/socket";
 import configSocket from "./configs/socketAuth.config";
-import redisSocket from "./configs/redis.config";
+import redisConfig from "./configs/redis.config";
+import RedisService from "./redis/redis";
 
 dotenv.config();
 
@@ -23,7 +24,7 @@ dotenv.config();
 let app = express();
 //-----------------------
 
-let ServerApplication = (app) => {
+let ServerApplication = async (app) => {
   //------Middleware-------
   //app view engine configuration
   configViewEngine(app);
@@ -67,10 +68,20 @@ let ServerApplication = (app) => {
     session.sessionRedisStore
   );
 
-  redisSocket(io, REDIS_HOST, REDIS_PORT);
-
   //init all sockets app
   AppSocket(io);
+
+  let redis = redisConfig(REDIS_HOST, REDIS_PORT);
+
+  RedisService.initial(redis);
+
+  redis.on("error", function (err) {
+    console.log("redis error " + err);
+  });
+
+  redis.on('connect', () => {
+    console.log('redis connected');
+  })
 
   server.listen(APP_PORT, APP_HOST, () => {
     console.log(`Server running at http://${APP_HOST}:${APP_PORT}/`);

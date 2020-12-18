@@ -1,3 +1,4 @@
+import Base64 from "Base64";
 import ProductModel from "../models/product.model";
 import AuctionLogService from "../services/aution.service";
 /**
@@ -115,6 +116,15 @@ ProductService.delete = async (id) => {
     return await ProductModel.findByIdAndDelete({
         _id: id
     });
+}
+
+/**
+ * 
+ * @param {Object} object
+ * @returns encrypted object
+ */
+ProductService.encrypt = async (object) => {
+    
 }
 
 export default ProductService;
