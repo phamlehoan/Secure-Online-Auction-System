@@ -1,6 +1,6 @@
-import Base64 from "Base64";
 import ProductModel from "../models/product.model";
 import AuctionLogService from "../services/aution.service";
+import { ProductNotFoundException } from "../exceptions/product.exception";
 /**
  * Define all services for home route
  */
@@ -125,6 +125,38 @@ ProductService.delete = async (id) => {
  */
 ProductService.encrypt = async (object) => {
     
+}
+
+/**
+ * 
+ */
+ProductService.findProductsExpiration = async () => {
+    return await ProductModel.aggregate([
+        {
+            $project: {
+                time: {
+                    $subtract: ['$aucEndTime', '$$NOW']
+                },
+                status: 1
+            }
+        },
+        {
+            $match: {
+                status: '1',
+                time: {
+                  $lte: 900000,
+                  $gt: 0
+                }
+            }
+        }
+    ]);
+}
+
+ProductService.changeStatus = async (productId) => {
+    return await ProductModel.findOneAndUpdate(
+        {_id: productId},
+        {status: '2'}
+    )
 }
 
 export default ProductService;

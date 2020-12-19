@@ -4,9 +4,7 @@ import Cloudinary from "../configs/cloudinary.config";
 import ProductFactory from "../factory/product.factory";
 import AuctionLogService from "../services/aution.service";
 import UserServices from "../services/user.service";
-import CommonServices from "../services/common.service";
-import RedisService from "../redis/redis";
-import { stringify } from "uuid";
+
 /**
  * controller home page
  */

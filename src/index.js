@@ -9,7 +9,7 @@ import http from "http";
 import cookieParser from "cookie-parser";
 
 import configViewEngine from "./configs/viewEngine"
-import dbConfig from "./configs/db.config";
+import db from "./configs/db.config";
 import session from "./configs/session.config";
 import Router from "./routers/web";
 import ApiRouter from "./routers/api/api";
@@ -17,6 +17,7 @@ import AppSocket from "./sockets/socket";
 import configSocket from "./configs/socketAuth.config";
 import redisConfig from "./configs/redis.config";
 import RedisService from "./redis/redis";
+import initializeJobs from "./jobs/job";
 
 dotenv.config();
 
@@ -30,7 +31,7 @@ let ServerApplication = async (app) => {
   configViewEngine(app);
 
   //connect database
-  dbConfig();
+  db.mongoConnect();
 
   //connect session
   session.config(app);
@@ -70,6 +71,8 @@ let ServerApplication = async (app) => {
 
   //init all sockets app
   AppSocket(io);
+
+  initializeJobs();
 
   let redis = redisConfig(REDIS_HOST, REDIS_PORT);
 

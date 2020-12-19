@@ -16,11 +16,11 @@ const ProductSchema = new Schema({
     default: null,
   },
   aucStartTime: {
-    type: String,
+    type: Date,
     default: null,
   },
   aucEndTime: {
-    type: String,
+    type: Date,
     default: null,
   },
   reservePrice: {//giá mua đứt
@@ -48,15 +48,15 @@ const ProductSchema = new Schema({
   status: String,
   userId: String,
   createdAt: {
-    type: Number,
-    default: Date.now,
+    type: Date,
+    default: Date.now
   },
   updatedAt: {
-    type: Number,
+    type: Date,
     default: null,
   },
   deletedAt: {
-    type: Number,
+    type: Date,
     default: null,
   },
 });
