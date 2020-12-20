@@ -95,4 +95,12 @@ UserService.findByCredentials = async (email, password) => {
 UserService.findUserById = async (userId) => {
   return await UserModel.find({_id: userId});
 }
+
+UserService.findAll = async () => {
+  return await UserModel.find({ role: {$ne: 'admin'}});
+}
+
+UserService.banUser =(id,file)=>{
+  return UserModel.findByIdAndUpdate(id, file);
+}
 export default UserService;

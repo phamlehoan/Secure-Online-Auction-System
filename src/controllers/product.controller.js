@@ -33,9 +33,10 @@ ProductController.getProducts = async (req, res) => {
         price,
         userId
     );
+    //console.log(criteria);
     let products = await ProductService.find(criteria);
     let numberBiddingProd = 0;
-
+    //console.log(products);
     if(!req.user){
         return res.render('main/products/products', {
             products,
@@ -203,6 +204,7 @@ ProductController.productManegements = async (req, res) => {
     let { role } = req.signedCookies;
     let sellerId = req.user._id;
     let products = await ProductService.findProductsByUserId(sellerId);
+    console.log(products);
     return res.render("main/products/productsManagement", {
         products,
         categories,
