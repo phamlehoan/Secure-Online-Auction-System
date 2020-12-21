@@ -3,6 +3,7 @@ import passportLocal from "passport-local"
 
 import userModel from "./../../models/user.model";
 import {loginErr, loginSucc} from "./../..//langs/us/notification.us";
+import RedisService from "../../redis/redis";
 
 
 let LocalStretagy = passportLocal.Strategy;
@@ -28,6 +29,10 @@ let initPassportLocal = () => {
             if(!comparePass)
                 return done(null, false, req.flash("errors", loginErr.loginFail));
 
+            let cache = {
+                [user._id]: user.username
+            };
+            await RedisService.setHashCache('users', cache);
             return done(null, user, loginSucc.loginSuccess);
 
          } catch (error) {

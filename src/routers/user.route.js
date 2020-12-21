@@ -63,4 +63,8 @@ router.post("/feedback",
     UserController.postFeedback
 );
 
+router.get('/verify', 
+    UserController.verify
+)
+
 module.exports = router;

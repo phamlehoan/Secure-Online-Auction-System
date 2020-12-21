@@ -2,6 +2,7 @@ import authService from './../services/auth.service';
 import {validationResult} from 'express-validator';
 import {loginSucc} from './../langs/us/notification.us'
 import UserService from "../services/user.service";
+import RedisService from "../redis/redis";
 
 const AuthController = {};
 
@@ -74,6 +75,8 @@ AuthController.getLogout = async (req, res) => {
         let { _id } = req.user;
         await UserService.updateToken(_id, null);
         await UserService.updateLoginTimes(-1, _id);
+        await RedisService.delHashCache('users', _id+'')
+        .catch(err => console.log(err))
         req.logOut();
         req.session.destroy(req.session.sid);
         res.clearCookie();
@@ -115,6 +118,7 @@ AuthController.verifyToken = async (req, res) => {
         res.clearCookie('id');
         await UserService.updateToken(id, null);
         await UserService.updateLoginTimes(-1, id);
+        await RedisService.delHashCache('users', _id+'')
         req.flash('success', 'please login again');
     }else{
         req.flash('errors', 'Wrong OTP');
