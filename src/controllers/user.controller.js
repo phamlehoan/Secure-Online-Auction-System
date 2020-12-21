@@ -203,4 +203,7 @@ UserController.putApplySeller = async(req,res)=>{
     }
 }
 
+UserController.verify = (req, res) => {
+    return res.render('auth/verify/verify');
+}
 export default UserController;

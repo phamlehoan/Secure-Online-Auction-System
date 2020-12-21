@@ -5,26 +5,16 @@ import ProductFactory from "../factory/product.factory";
 import AuctionLogService from "../services/aution.service";
 import UserServices from "../services/user.service";
 
-import PRODUCT_CONSTANTS from "../constants/product.constant";
-import { NotHavePermissionException } from "../exceptions/user.exception";
-import { ProductNotFoundException } from "../exceptions/product.exception";
-import ProductModel from "../models/product.model";
-
-
-
 /**
  * controller home page
  */
 const ProductController = {};
-
-let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
 
 /**
  *
  */
 ProductController.getProducts = async (req, res) => {
     let {category, price, userId} = req.query;
-    let { role } = req.signedCookies;
     let name = req.query.q;
     let categoryCode = ProductUtils.retrieveCatByCode(category);
     let criteria = ProductFactory.create(
@@ -36,17 +26,17 @@ ProductController.getProducts = async (req, res) => {
     //console.log(criteria);
     let products = await ProductService.find(criteria);
     let numberBiddingProd = 0;
+<<<<<<< HEAD
     //console.log(products);
+=======
+>>>>>>> origin/master
     if(!req.user){
         return res.render('main/products/products', {
             products,
-            categories,
             numberBiddingProd,
-            data: req.flash("data"),
-            user: req.user,
             title: 'SOAS. - List Products'
         });
-    }
+    } 
 
     numberBiddingProd = await AuctionLogService.countNumberOfAuctions(req.user._id);
 
@@ -58,10 +48,6 @@ ProductController.getProducts = async (req, res) => {
         let arrErr = ["You must input important information"];
         req.flash("must-enter", arrErr);
         return res.render("main/profile/profile",{
-            data: req.flash("data"),
-            role,
-            user: req.user,
-            categories,
             numberBiddingProd,
             errors: req.flash("must-enter"),
             title: "profile"
@@ -70,23 +56,14 @@ ProductController.getProducts = async (req, res) => {
 
     return res.render('main/products/products', {
         products,
-        categories,
-        role,
-        data: req.flash("data"),
-        user: req.user,
         numberBiddingProd,
         title: 'SOAS. - List Products'
     });
 }
 
 ProductController.getAddProduct = async (req, res) => {
-    let { role } = req.signedCookies;
     return res.render("main/products/addProduct", {
-        categories,
-        role,
-        data: req.flash("data"),
         numberBiddingProd: await AuctionLogService.countNumberOfAuctions(req.user._id),
-        user: req.user,
         title: 'SOAS. - Winning Products'
     });
 }
@@ -128,14 +105,13 @@ ProductController.postProduct = async (req, res) => {
             userId: req.user._id
         }
         await ProductService.save(product);
+        return res.redirect("/products");
     } catch (error) {
         console.log(error);
+        return res.redirect('/products?errors=true');
     }
 
-    return res.redirect("/products",
-    {
-        data: req.flash("data")
-    });
+
 }
 
 /**
@@ -143,7 +119,6 @@ ProductController.postProduct = async (req, res) => {
  */
 ProductController.getDetail = async (req, res) => {
     try {
-        let { role } = req.signedCookies;
         const { id } = req.params;
         let product = await ProductService.findProductById(id);
         let seller = await UserServices.findUserById(product.userId);
@@ -153,18 +128,15 @@ ProductController.getDetail = async (req, res) => {
             biddingCouter = await AuctionLogService.countNumberOfAuctions(req.user._id);
         }
         return res.render("main/products/details", {
-            categories,
             product,
-            role,
             seller: seller[0],
-            data: req.flash("data"),
-            user: req.user,
             userWithHighestPrice: currentHighestPriceProduct.length > 0 ? currentHighestPriceProduct[0].userId : 'No User',
             numberBiddingProd: biddingCouter,
             title: 'SOAS. - '+product.name + ' 😍'
         })
     } catch (error) {
         console.log(error);
+        return res.redirect('/products?errors=true');
     }
 
 }
@@ -175,7 +147,6 @@ ProductController.getDetail = async (req, res) => {
  * show All products
  */
 ProductController.getManage = async (req, res) => {
-    let { role } = req.signedCookies;
     let currentUser = req.user;
     let products = await AuctionLogService.findNewestBiddingProducts(currentUser._id);
     let numberBiddingProd = products.length;
@@ -185,33 +156,26 @@ ProductController.getManage = async (req, res) => {
         productIds.push(product._id.productId);
     }
     let winners = await ProductService.findAllWinnerByProductIds(productIds);
+    //console.log(winners.length, products.length);
     return res.render("main/products/auction", {
         products,
-        categories,
-        role,
-        data: req.flash("data"),
+        winners,
         numberBiddingProd,
         user: {
             avatarUrl: currentUser.avatarUrl,
             _id: currentUser._id
         },
-        winners,
         title: "auctions | 😎"
     })
 }
 
 ProductController.productManegements = async (req, res) => {
-    let { role } = req.signedCookies;
     let sellerId = req.user._id;
     let products = await ProductService.findProductsByUserId(sellerId);
     console.log(products);
     return res.render("main/products/productsManagement", {
         products,
-        categories,
-        role,
-        data: req.flash("data"),
         numberBiddingProd: await AuctionLogService.countNumberOfAuctions(sellerId),
-        user: req.user,
         title: "manage products| 🤑"
     })
 }
@@ -220,20 +184,15 @@ ProductController.productManegements = async (req, res) => {
  * Update product
  */
 ProductController.updateProducts = async (req, res) => {
-    let { role } = req.signedCookies;
     let prodductId = req.params.id;
     let product = await ProductService.findProductById(prodductId);
     if(product.userId != req.user._id)
-        throw new NotHavePermissionException('You have no permission for this operation');
+        return res.redirect('/products?errors=403')
 
     return res.render('main/products/update', {
         product,
-        categories,
-        role,
-        data: req.flash("data"),
         numberBiddingProd: await AuctionLogService.countNumberOfAuctions(req.user._id),
-        user: req.user,
-        title: 'Edit |'+product.name
+        title: 'Edit |'+ product.name
     })
 }
 
@@ -242,41 +201,54 @@ ProductController.updateProducts = async (req, res) => {
  */
 ProductController.postUpdateProducts = async (req, res) => {
     try {
-        let image = "" || process.env.PRODUCT_DEFAULT_IMG;
-        if (req.file) {
-            await Cloudinary.uploadSingle(req.file.path)
-            .then(data => {
-                image = data.url;
-            });
-        }
+        let productId = req.params.id;
+        let product = await ProductService.findProductById(productId);
+        if (product) {
+            let image = "" || product.image;
+            if (req.file) {
+                await Cloudinary.uploadSingle(req.file.path)
+                .then(data => {
+                    image = data.url;
+                });
+            }
 
-        let product = {
-            name: req.body.name,
-            code: req.body.code,
-            description: req.body.description,
-            aucStartTime: req.body.startTime || Date.now,
-            aucEndTime: req.body.endTime,
-            price: req.body.price,
-            image: image,
-            categories: {
-                name: ProductUtils.retrieveCatByCode(req.body.category)
-            },
-            tags: null,
-            priceStep: req.body.priceStep,
-            priceMethod: ProductUtils.retrievePriceMethod(req.body.priceMethod) || "INCR",
-            status: 1,
-            nextPrice: parseInt(req.body.price) + parseInt(req.body.priceStep),
-            userId: req.user._id
+            let newProduct = {
+                name: req.body.name || product.name,
+                code: req.body.code || product.code,
+                description: req.body.description || product.description,
+                aucStartTime: req.body.startTime || product.startTime,
+                aucEndTime: req.body.endTime || product.endTime,
+                price: req.body.price || product.price,
+                image: image,
+                categories: {
+                    name: ProductUtils.retrieveCatByCode(req.body.category)
+                },
+                tags: null,
+                priceStep: req.body.priceStep || product.priceStep,
+                priceMethod: ProductUtils.retrievePriceMethod(req.body.priceMethod) || "INCR",
+                status: 1,
+                nextPrice: parseInt(product.price) + parseInt(product.priceStep),
+                userId: req.user._id,
+                updatedAt: Date.now()
+            }
+            return await ProductService.update(productId, newProduct);
         }
-
-        await ProductService.save(product);
     } catch (error) {
         console.log(error);
+        return res.redirect('/products?errors=true');
+    }
+}
+
+ProductController.deleteProduct = async (req, res) => {
+    try {
+        let { id } = req.params;
+        await ProductService.delete(id);
+        return res.redirect('/products/manage');
+    } catch (error) {
+        console.log(error);
+        return res.redirect('/products/manage?errors=true');
     }
 
-    return res.redirect("/products"),{
-        data: req.flash("data")
-    };
 }
 
 export default ProductController;

@@ -68,7 +68,7 @@
                             <li>
                                 <span>Time:</span>
                                 <input type="hidden" id="timerdate" value="<%-product.aucEndTime%>">
-                                <p id="countdown-time"></p>
+                                <p class="bg-light text-secondary text-monospace font-weight-bold" id="countdown-time"></p>
                             </li>
                             <li>
                                 <span>Current winner:</span>
@@ -96,41 +96,6 @@
                         <button class="cart-btn" onclick="onBiddingProduct('<%-product._id%>')"><span class="icon_bag_alt"></span> Bid</button>
                     </div>
 
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="product__details__tab">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Delivery</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews (<span>2</span>)</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                            <h6>Description</h6>
-                            <p><%-product.description%></p>
-                        </div>
-                        <div class="tab-pane" id="tabs-2" role="tabpanel">
-                            <h6>Delivery</h6>
-                            <p>Chúng tôi sẽ vận chuyển đơn hàng này trong 15 ngày làm việc gần nhất.</p>
-                            <p>Vui lòng chuẩn bị sẵn số tiền trên.</p>
-                        </div>
-                        <div class="tab-pane" id="tabs-3" role="tabpanel">
-                            <h6>Reviews (<span>2</span>)</h6>
-                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                consequat massa quis enim.</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

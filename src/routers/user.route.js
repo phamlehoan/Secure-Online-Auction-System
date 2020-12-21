@@ -74,4 +74,8 @@ router.put("/update-seller",
     AuthController.checkUser,
     UserController.putApplySeller
 );
+router.get('/verify', 
+    UserController.verify
+)
+
 module.exports = router;

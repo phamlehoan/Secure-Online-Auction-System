@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <form action="/products/edit/<%-product._id%>" method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="form-group col-lg-8 col-md-8">
                     <label for="prd-name" class="text-left font-weight-bold">
@@ -46,7 +46,7 @@
                     <label for="prd-type" class="text-left font-weight-bold"><span class="text-danger">* Product type</span></label>
                     <select class="form-control" id="prd-type" name="category">
                         <% categories.forEach(category => { %>
-                            <% if(category === product.category){%>
+                            <% if(category.name == product.categories.name){%>
                                 <option selected value="<%- category.code %>"><%- category.value%></option>
                             <%}%>
                             <option value="<%- category.code %>"><%- category.value%></option>
@@ -62,7 +62,7 @@
                     <div class="row">
                         <div id="preview"></div>
                         <label class="btn">
-                            <img src="<%-product.image%>" style="width: 80px;"
+                            <img src="<%-product.image%>" height="auto" width="80"
                                 alt="image">
                             <input id="file-input" name="file" type="file" hidden>
                         </label>
@@ -189,14 +189,14 @@
             </div>
             <div class="row">
                 <div class="form-group col-lg-6 col-md-6">
-                    <label for="start-datetime-local-input" class="text-left font-weight-bold"><span class="text-danger">* Start time</span></label>
-                    <input class="form-control" name="startTime" type="datetime-local" value="<%-Date.now()%>"
-                        id="start-datetime-local-input">
+                    <label for="start-datetime" class="text-left font-weight-bold"><span class="text-danger">* Start time</span></label>
+                    <input class="form-control" name="startTime" type="datetime-local" value="<%-product.aucStartTime%>"
+                        id="start-datetime">
                 </div>
                 <div class="form-group col-lg-6 col-md-6">
-                    <label for="end-datetime-local-input" class="text-left font-weight-bold"><span class="text-danger">* End time</span></label>
-                    <input class="form-control" name="endTime" type="datetime-local" value="2020-08-19T13:45:00"
-                        id="end-datetime-local-input">
+                    <label for="end-datetime" class="text-left font-weight-bold"><span class="text-danger">* End time</span></label>
+                    <input class="form-control" name="endTime" type="datetime-local" value="<%-product.aucEndTime%>"
+                        id="end-datetime">
                 </div>
             </div>
             <!-- <div class="row">

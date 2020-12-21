@@ -1,12 +1,16 @@
 import session from 'express-session';
 import MongoDBStore from 'connect-mongodb-session';
+import ConnectRedis from "connect-redis";
+import Redis from "redis";
 import dotenv from 'dotenv';
 
-//khởi tạo biến môi trườn
 dotenv.config();
 
-//Tạo mongoStrre để lưu session vào database
-let mongoDBStrore = MongoDBStore(session);
+//store session into database
+const mongoDBStrore = MongoDBStore(session);
+const redisStore = ConnectRedis(session);
+
+const redisClient = Redis.createClient();
 
 const {
     MONGO_USERNAME,
@@ -29,19 +33,27 @@ let sessionStore = new mongoDBStrore({
     autoRemove: process.env.SESSION_STORE_AUTO_REMOVE_MODE
 });
 
+let sessionRedisStore = new redisStore({
+    host: process.env.REDIS_HOST || 'localhost',
+    port: process.env.REDIS_PORT || 6379,
+    client: redisClient,
+    ttl: process.env.REDIS_TTL || 260
+});
+
 //Cấu hình session
 let config = (app) =>{
     app.use(session({
         key: process.env.SESSION_KEY,
         secret: process.env.SESSION_SECRET,
-        store: sessionStore,
+        store: sessionRedisStore,
         resave: true,
         saveUninitialized: false,
-        cookie: { maxAge: 1000 * 60 * 60 * 24 } // Set thời gian sống cho cookie là 1 ngày
+        cookie: { maxAge: 1000 * 60 * 60 * 24 } //1 day
     }));
 };
 
 module.exports = {
     config,
-    sessionStore
+    sessionStore,
+    sessionRedisStore
 };
