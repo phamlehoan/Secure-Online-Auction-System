@@ -228,156 +228,66 @@
                             </div>
                             <div class="comment-widgets scrollable">
                                 <!-- Comment Row -->
-                                <div class="d-flex flex-row comment-row m-t-0">
-                                    <div class="p-2"><img src="/img/users/1.jpg" alt="user" width="50"
-                                            class="rounded-circle"></div>
-                                    <div class="comment-text w-100">
-                                        <h6 class="font-medium">Essential structured blazer</h6>
-                                        <div class="m-b-15 d-block">
-                                            <span>
-                                                <b>ABC Store</b>
-                                                <div class="text-warning d-inline">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                <%if(products){%>
+                                    <%products.forEach(product => {%>
+                                        <div class="d-flex flex-row comment-row m-t-0">
+                                            <div class="p-2"><img src="<%-product.image%>" alt="user" width="50"
+                                                    class="rounded-circle"></div>
+                                            <div class="comment-text w-100">
+                                                <h6 class="font-medium"><%-product.name%></h6>
+                                                <div class="m-b-15 d-block">
+                                                    <span>
+                                                        <b>???</b>
+                                                        <div class="text-warning d-inline">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                        </div>
+                                                    </span>
+                                                    <div>
+                                                        <b>Start time:</b>
+                                                        <span><%-product.aucStartTime%></span></div>
+                                                    <div>
+                                                        <b>End time:</b>
+                                                        <span><%-product.aucEndTime%></span>
+                                                    </div>
+                                                    <div>
+                                                        <b>Current Price:</b>
+                                                        <span><%-product.price%></span>
+                                                    </div>
+                                                    <div>
+                                                        <b>Step:</b>
+                                                        <span><%-product.priceStep%></span>
+                                                    </div>
+                                                    <div>
+                                                        <b>Reserve Price:</b>
+                                                        <span><%-product.reservePrice%></span>
+                                                    </div>      
                                                 </div>
-                                            </span>
-                                            <div>
-                                                <b>Livestream:</b>
-                                                <span>Yes</span>
+                                                <div class="comment-footer">
+                                                    <span class="text-muted float-right">April 14, 2016</span>
+                                                    <%if(product.status == 1){%>  
+                                                        <span class="label label-rounded label-primary">Approved</span>
+                                                    <%}else{%>
+                                                        <span class="label label-rounded label-danger">Rejected</span>
+                                                    <%}%>
+                                                    <span class="action-icons">
+                                                        <a href="javascript:void(0)"><i class="ti-na"></i></a>
+                                                        <a href="javascript:void(0)"><i class="ti-check"></i></a>
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <b>Start time:</b>
-                                                <span>December 14, 2020 16:30:00</span></div>
-                                            <div>
-                                                <b>End time:</b>
-                                                <span>December 14, 2020 18:30:00</span>
-                                            </div>
-                                            <div>
-                                                <b>Current Price:</b>
-                                                <span>$30</span>
-                                            </div>
-                                            <div>
-                                                <b>Step:</b>
-                                                <span>$10</span>
-                                            </div>
-                                            <div>
-                                                <b>Expected Price:</b>
-                                                <span>$300</span>
-                                            </div>      
                                         </div>
-                                        <div class="comment-footer">
-                                            <span class="text-muted float-right">April 14, 2016</span> 
-                                            <span class="label label-rounded label-primary">Pending</span> 
-                                            <span class="action-icons">
-                                                <a href="javascript:void(0)"><i class="ti-na"></i></a>
-                                                <a href="javascript:void(0)"><i class="ti-check"></i></a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <%})%>
+                                <%}else{%>
+                                    <tr>
+                                        <h3>No products in the system.</h3>
+                                    </tr>
+                                <%}%>
                                 <!-- Comment Row -->
-                                <div class="d-flex flex-row comment-row">
-                                    <div class="p-2"><img src="/img/users/4.jpg" alt="user" width="50"
-                                            class="rounded-circle"></div>
-                                    <div class="comment-text w-100">
-                                        <h6 class="font-medium">Essential structured blazer</h6>
-                                        <div class="m-b-15 d-block">
-                                            <span>
-                                                <b>ABC Store</b>
-                                                <div class="text-warning d-inline">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </span>
-                                            <div>
-                                                <b>Livestream:</b>
-                                                <span>No</span>
-                                            </div>
-                                            <div>
-                                                <b>Start time:</b>
-                                                <span>December 14, 2020 16:30:00</span></div>
-                                            <div>
-                                                <b>End time:</b>
-                                                <span>December 14, 2020 18:30:00</span>
-                                            </div>
-                                            <div>
-                                                <b>Current Price:</b>
-                                                <span>$30</span>
-                                            </div>
-                                            <div>
-                                                <b>Step:</b>
-                                                <span>$10</span>
-                                            </div>
-                                            <div>
-                                                <b>Expected Price:</b>
-                                                <span>$300</span>
-                                            </div>
-                                        </div>
-                                        <div class="comment-footer ">
-                                            <span class="text-muted float-right">April 14, 2016</span>
-                                            <span class="label label-success label-rounded">Approved</span>
-                                            <span class="action-icons">
-                                                <a href="javascript:void(0)"><i class="ti-na"></i></a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Comment Row -->
-                                <div class="d-flex flex-row comment-row">
-                                    <div class="p-2"><img src="/img/users/5.jpg" alt="user" width="50"
-                                            class="rounded-circle"></div>
-                                    <div class="comment-text w-100">
-                                        <h6 class="font-medium">Essential structured blazer</h6>
-                                        <div class="m-b-15 d-block">
-                                            <span>
-                                                <b>ABC Store</b>
-                                                <div class="text-warning d-inline">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </div>
-                                            </span>
-                                            <div>
-                                                <b>Livestream:</b>
-                                                <span>Yes</span>
-                                            </div>
-                                            <div>
-                                                <b>Start time:</b>
-                                                <span>December 14, 2020 16:30:00</span></div>
-                                            <div>
-                                                <b>End time:</b>
-                                                <span>December 14, 2020 18:30:00</span>
-                                            </div>
-                                            <div>
-                                                <b>Current Price:</b>
-                                                <span>$30</span>
-                                            </div>
-                                            <div>
-                                                <b>Step:</b>
-                                                <span>$10</span>
-                                            </div>
-                                            <div>
-                                                <b>Expected Price:</b>
-                                                <span>$300</span>
-                                            </div>
-                                        </div>
-                                        <div class="comment-footer">
-                                            <span class="text-muted float-right">April 14, 2016</span>
-                                            <span class="label label-rounded label-danger">Rejected</span>
-                                            <span class="action-icons">
-                                                <a href="javascript:void(0)"><i class="ti-check"></i></a>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

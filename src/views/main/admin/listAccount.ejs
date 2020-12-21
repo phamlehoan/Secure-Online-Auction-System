@@ -14,7 +14,7 @@
     <title>SOAS Admin</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/xtreme-admin-lite/" />
     <!-- Favicon icon -->
-    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
     <!-- Custom CSS -->
     <link href="/vendors/chartist/dist/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -304,40 +304,42 @@
                                         <%if(users){%>
                                             <%users.forEach(user => {%>
                                                 <tr>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="m-r-10">
-                                                                    <img src= <%-user.avatarUrl%> class="btn btn-circle d-flex btn-secondary text-white" alt="Product item" style="padding: 0px;">
+                                                    <div>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="m-r-10">
+                                                                        <img src= <%-user.avatarUrl%> class="btn btn-circle d-flex btn-secondary text-white" alt="Product item" style="padding: 0px;">
+                                                                </div>
+                                                                <div class="">
+                                                                    <h4 class="m-b-0 font-16"><%-user.personalInfo.firstname + ' ' + user.personalInfo.lastname%></h4>
+                                                                </div>
                                                             </div>
-                                                            <div class="">
-                                                                <h4 class="m-b-0 font-16"><%-user.personalInfo.firstname + ' ' + user.personalInfo.lastname%></h4>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td><%-user.local.email%></td>
-                                                    <td><%-user.role%></td>
-                                                    <%if(user.role == 'seller'){%>
-                                                        <td><label class="label label-success">Accepted</label></td>
-                                                    <%}else if(user.role == 'buyer'){%>
-                                                        <%if(user.identifyCard){%>
-                                                            <td><label class="label label-warning">Pending</label></td>
-                                                        <%}else{%>   
-                                                            <td><label class="label label-primary">Actived</label></td>
+                                                        </td>
+                                                        <td><%-user.local.email%></td>
+                                                        <td><%-user.role%></td>
+                                                        <%if(user.role == 'seller'){%>
+                                                            <td><label class="label label-success">Accepted</label></td>
+                                                        <%}else if(user.role == 'buyer'){%>
+                                                            <%if(user.identifyCard){%>
+                                                                <td><label class="label label-warning">Pending</label></td>
+                                                            <%}else{%>   
+                                                                <td><label class="label label-primary">Actived</label></td>
+                                                            <%}%>
+                                                        <%}else{%>
+                                                            <td><label class="label label-danger">Banned</label></td>
                                                         <%}%>
-                                                    <%}else{%>
-                                                        <td><label class="label label-danger">Banned</label></td>
-                                                    <%}%>
+                                                        </div>    
                                                     <td>
                                                         <%if(user.role == 'banned'){%>
-                                                            <a href="javascript:void(0)"><i class="p-1 fa fa-eye text-white bg-primary rounded"></i>???</a>
+                                                            <i class="p-1 fa fa-eye text-white bg-primary rounded" onclick="return show('<%-user._id%>')" style="cursor: pointer;">test</i>
                                                         <%}else{%>
-                                                            <i class="p-1 fa fa-ban text-white bg-danger rounded" onclick="return banUser('<%-user._id%>')">Ban</i>
+                                                            <i class="p-1 fa fa-ban text-white bg-danger rounded" onclick="return banUser('<%-user._id%>')" style="cursor: pointer;">Ban</i>
                                                         <%}%>
                                                         <%if(user.role == 'seller'){%>
-                                                            <i class="p-1 fa fa-times-circle text-white bg-danger rounded" onclick="return cancel('<%-user._id%>')">Cancel Seller</i>
+                                                            <i class="p-1 fa fa-times-circle text-white bg-danger rounded" onclick="return cancel('<%-user._id%>')" style="cursor: pointer;">Cancel Seller</i>
                                                         <%}%>        
                                                         <%if(user.role == 'buyer'){%>
-                                                                <i class="p-1 fa fa-check text-white bg-success rounded" onclick="return approve('<%-user._id%>')">Approve Seller</i>
+                                                                <i class="p-1 fa fa-check text-white bg-success rounded" onclick="return approve('<%-user._id%>')" style="cursor: pointer;">Approve Seller</i>
                                                         <%}%>
                                                     </td>
                                                 </tr>

@@ -41,9 +41,11 @@ AdminController.getListAccount = async (req, res) => {
 }
 
 AdminController.getListProduct = async (req, res) => {
+    let products = await ProductService.findAll();
     return res.render("main/admin/listProduct",{
+        products,
         data: req.flash("data"),
-        user: req.user,
+        product: req.product,
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: "Admin | Product List"
