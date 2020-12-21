@@ -4,6 +4,7 @@ import Cloudinary from "../configs/cloudinary.config";
 import ProductFactory from "../factory/product.factory";
 import AuctionLogService from "../services/aution.service";
 import UserServices from "../services/user.service";
+import CartService from "../services/cart.service";
 
 /**
  * controller home page
@@ -23,22 +24,13 @@ ProductController.getProducts = async (req, res) => {
         price,
         userId
     );
-    //console.log(criteria);
     let products = await ProductService.find(criteria);
-    let numberBiddingProd = 0;
-<<<<<<< HEAD
-    //console.log(products);
-=======
->>>>>>> origin/master
     if(!req.user){
         return res.render('main/products/products', {
             products,
-            numberBiddingProd,
             title: 'SOAS. - List Products'
         });
     } 
-
-    numberBiddingProd = await AuctionLogService.countNumberOfAuctions(req.user._id);
 
     let phone = req.user.phone;
     let city = req.user.personalInfo.address.city;
@@ -48,7 +40,6 @@ ProductController.getProducts = async (req, res) => {
         let arrErr = ["You must input important information"];
         req.flash("must-enter", arrErr);
         return res.render("main/profile/profile",{
-            numberBiddingProd,
             errors: req.flash("must-enter"),
             title: "profile"
         })
@@ -56,14 +47,12 @@ ProductController.getProducts = async (req, res) => {
 
     return res.render('main/products/products', {
         products,
-        numberBiddingProd,
         title: 'SOAS. - List Products'
     });
 }
 
 ProductController.getAddProduct = async (req, res) => {
     return res.render("main/products/addProduct", {
-        numberBiddingProd: await AuctionLogService.countNumberOfAuctions(req.user._id),
         title: 'SOAS. - Winning Products'
     });
 }
@@ -123,15 +112,10 @@ ProductController.getDetail = async (req, res) => {
         let product = await ProductService.findProductById(id);
         let seller = await UserServices.findUserById(product.userId);
         let currentHighestPriceProduct  = await AuctionLogService.findHighestPrice(product._id);
-        let biddingCouter = 0;
-        if (req.user) {
-            biddingCouter = await AuctionLogService.countNumberOfAuctions(req.user._id);
-        }
         return res.render("main/products/details", {
             product,
             seller: seller[0],
             userWithHighestPrice: currentHighestPriceProduct.length > 0 ? currentHighestPriceProduct[0].userId : 'No User',
-            numberBiddingProd: biddingCouter,
             title: 'SOAS. - '+product.name + ' 😍'
         })
     } catch (error) {
@@ -149,18 +133,15 @@ ProductController.getDetail = async (req, res) => {
 ProductController.getManage = async (req, res) => {
     let currentUser = req.user;
     let products = await AuctionLogService.findNewestBiddingProducts(currentUser._id);
-    let numberBiddingProd = products.length;
     let productIds = [];
     for (let i = 0; i < products.length; i++) {
         const product = products[i];
         productIds.push(product._id.productId);
     }
     let winners = await ProductService.findAllWinnerByProductIds(productIds);
-    //console.log(winners.length, products.length);
     return res.render("main/products/auction", {
         products,
         winners,
-        numberBiddingProd,
         user: {
             avatarUrl: currentUser.avatarUrl,
             _id: currentUser._id
@@ -172,10 +153,8 @@ ProductController.getManage = async (req, res) => {
 ProductController.productManegements = async (req, res) => {
     let sellerId = req.user._id;
     let products = await ProductService.findProductsByUserId(sellerId);
-    console.log(products);
     return res.render("main/products/productsManagement", {
         products,
-        numberBiddingProd: await AuctionLogService.countNumberOfAuctions(sellerId),
         title: "manage products| 🤑"
     })
 }
@@ -191,7 +170,6 @@ ProductController.updateProducts = async (req, res) => {
 
     return res.render('main/products/update', {
         product,
-        numberBiddingProd: await AuctionLogService.countNumberOfAuctions(req.user._id),
         title: 'Edit |'+ product.name
     })
 }
@@ -248,7 +226,14 @@ ProductController.deleteProduct = async (req, res) => {
         console.log(error);
         return res.redirect('/products/manage?errors=true');
     }
+}
 
+ProductController.getCart = async (req, res) => {
+    let products = await CartService.findAll(req.user._id);
+    return res.render('main/cart/cart', {
+        products,
+        title: 'Cart 💲'
+    })
 }
 
 export default ProductController;

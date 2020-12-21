@@ -6,12 +6,13 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
   userId: String,
-  productIds: Array,
+  products: [{
+    id: String,
+    name: String,
+    price: Number,
+    image: String
+  }],
   payment: {
     cardOwner: String,
     cardNumber: String,

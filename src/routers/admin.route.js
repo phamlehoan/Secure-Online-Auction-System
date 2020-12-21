@@ -46,5 +46,6 @@ router.put('/user/cancel/:userId',
     AuthController.checkUser,
     Authorization.isAdmin,
     AdminController.cancelSeller
-)
+);
+
 module.exports = router;

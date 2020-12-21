@@ -44,6 +44,12 @@ router.get('/manage',
     ProductController.productManegements
 )
 
+router.get('/cart', 
+    AuthController.checkUser,
+    LocalVariableForward.localVarsForward,
+    ProductController.getCart
+)
+
 router.get('/edit/:id',
     AuthController.checkUser,
     LocalVariableForward.localVarsForward,
