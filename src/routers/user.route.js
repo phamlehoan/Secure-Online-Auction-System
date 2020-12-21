@@ -51,7 +51,6 @@ router.put("/update-password",
     UserController.putUpdatePass
 );
 
-<<<<<<< HEAD
 router.get("/profile-seller/:sellerId/:productId",
     AuthController.checkLoggedIn,
     AuthController.checkUser,
@@ -64,7 +63,6 @@ router.post("/feedback",
     UserController.postFeedback
 );
 
-=======
 //Router apply to seller
 router.get("/apply-seller",
     AuthController.checkLoggedIn,
@@ -76,5 +74,4 @@ router.put("/update-seller",
     AuthController.checkUser,
     UserController.putApplySeller
 );
->>>>>>> origin/feature/applySeller
 module.exports = router;
