@@ -36,7 +36,10 @@ const UserSchema = new Schema({
   personalInfo: {
     identifyCard: {
       ID: String,
-      dateOfIssue: String,
+      dateOfIssue: {
+        type: String,
+        default: "1900-01-01"
+      },
       address: String,
       fontCardUrl: String,
       backCardUrl: String

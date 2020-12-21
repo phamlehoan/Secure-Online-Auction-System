@@ -72,6 +72,9 @@ UserService.generateAuthToken = async (user) => {
 
   return jwtToken;
 }
+UserService.applySeller =(id,file)=>{
+  return userModel.findByIdAndUpdate(id, file);
+}
 
 /**
  *
