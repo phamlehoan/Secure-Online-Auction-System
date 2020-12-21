@@ -23,8 +23,13 @@ ProductController.getProducts = async (req, res) => {
         price,
         userId
     );
+    //console.log(criteria);
     let products = await ProductService.find(criteria);
     let numberBiddingProd = 0;
+<<<<<<< HEAD
+    //console.log(products);
+=======
+>>>>>>> origin/master
     if(!req.user){
         return res.render('main/products/products', {
             products,
@@ -167,6 +172,7 @@ ProductController.getManage = async (req, res) => {
 ProductController.productManegements = async (req, res) => {
     let sellerId = req.user._id;
     let products = await ProductService.findProductsByUserId(sellerId);
+    console.log(products);
     return res.render("main/products/productsManagement", {
         products,
         numberBiddingProd: await AuctionLogService.countNumberOfAuctions(sellerId),

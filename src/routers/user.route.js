@@ -63,6 +63,17 @@ router.post("/feedback",
     UserController.postFeedback
 );
 
+//Router apply to seller
+router.get("/apply-seller",
+    AuthController.checkLoggedIn,
+    AuthController.checkUser,
+    UserController.getApplySeller
+);
+router.put("/update-seller",
+    AuthController.checkLoggedIn,
+    AuthController.checkUser,
+    UserController.putApplySeller
+);
 router.get('/verify', 
     UserController.verify
 )

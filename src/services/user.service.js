@@ -72,6 +72,9 @@ UserService.generateAuthToken = async (user) => {
 
   return jwtToken;
 }
+UserService.applySeller =(id,file)=>{
+  return userModel.findByIdAndUpdate(id, file);
+}
 
 /**
  *
@@ -96,6 +99,13 @@ UserService.findUserById = async (userId) => {
   return await UserModel.find({_id: userId});
 }
 
+UserService.findAll = async () => {
+  return await UserModel.find({ role: {$ne: 'admin'}});
+}
+
+UserService.banUser =(id,file)=>{
+  return UserModel.findByIdAndUpdate(id, file);
+}
 /**
  * Updating token when user logout
  * @param {String} UserId
