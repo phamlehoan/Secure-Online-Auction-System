@@ -15,6 +15,11 @@ const ProductController = {};
  *
  */
 ProductController.getProducts = async (req, res) => {
+    console.log(req.query.page);
+    let page = parseInt(req.query.page) || 1
+    let perpage = 8
+    let start = (page-1)*perpage
+    let end = page*perpage
     let {category, price, userId} = req.query;
     let name = req.query.q;
     let categoryCode = ProductUtils.retrieveCatByCode(category);
@@ -25,12 +30,18 @@ ProductController.getProducts = async (req, res) => {
         userId
     );
     let products = await ProductService.find(criteria);
+    let lengthPage
+    if(products.length%8 == 0)
+        lengthPage = products.length/8;
+    else
+        lengthPage = products.length/8+1;
     if(!req.user){
         return res.render('main/products/products', {
             products,
-            title: 'SOAS. - List Products'
+            title: 'SOAS. - List Products',
+            page: lengthPage
         });
-    } 
+    }
 
     let phone = req.user.phone;
     let city = req.user.personalInfo.address.city;
@@ -41,13 +52,14 @@ ProductController.getProducts = async (req, res) => {
         req.flash("must-enter", arrErr);
         return res.render("main/profile/profile",{
             errors: req.flash("must-enter"),
-            title: "profile"
+            title: "profile",
         })
     }
 
     return res.render('main/products/products', {
-        products,
-        title: 'SOAS. - List Products'
+        products: products.slice(start,end),
+        title: 'SOAS. - List Products',
+        page: lengthPage
     });
 }
 
