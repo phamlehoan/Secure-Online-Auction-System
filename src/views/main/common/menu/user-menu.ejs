@@ -1,4 +1,4 @@
-<% if (data == "true") { %>
+<% if (isLogged === true) { %>
     <div class="avatar d-block">
         <img src="<%-user.avatarUrl%>" id="avt-pic" alt="Avatar" class="d-inline rounded-circle" style="width: 30px; height: 30px; margin-top:-9px; cursor: pointer;"> 
         <div class="position-absolute usr-control" id="user-profile" style="display: none">
@@ -17,7 +17,7 @@
     <script src="/js/menuProcessing.js"></script>
 <% }  %>
 
-<% if (data == false) { %>
+<% if (isLogged === false) { %>
     <div class="need-account d-block">
         <a href="/login">Login</a>
         <a href="/user/register">Register</a>

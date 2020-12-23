@@ -4,25 +4,15 @@
 import {validationResult} from 'express-validator/check';
 import ProductService from "./../services/product.service"
 import user from './../services/user.service';
-import AuctionLogModel from "../models/auctionlog.model";
 import UserModel from "./../models/user.model";
 import FeedbackModel from "./../models/feedback.model"
 import FeedbackService from "./../services/feedback.service"
 import PRODUCT_CONSTANTS from "../constants/product.constant";
-import AuctionLogService from "../services/aution.service";
-
-let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
 
 const UserController = {};
 
-
 UserController.getProfile = async (req, res) => {
-    let numberBiddingProd = await AuctionLogService.countNumberOfAuctions(req.user._id);
     return res.render("main/profile/profile",{
-        data: req.flash("data"),
-        user: req.user,
-        categories,
-        numberBiddingProd,
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: "profile"
@@ -31,17 +21,12 @@ UserController.getProfile = async (req, res) => {
 
 //infomation seller
 UserController.getInfoSeller = async (req, res) => {
-    let numberBiddingProd = await AuctionLogService.countNumberOfAuctions(req.user._id);
     let seller = await UserModel.findUserById(req.params.sellerId)
     let dataFeedback = await FeedbackService.listFeedbackProduct(req.params.sellerId)
     let countStar = await FeedbackService.statistical(req.params.sellerId)
     return res.render("main/profile/profile_seller", {
-        data: req.flash("data"),
         idProduct: req.params.productId,
         idSeller: req.params.sellerId,
-        user: req.user,
-        categories,
-        numberBiddingProd,
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: "profile",
@@ -85,12 +70,7 @@ UserController.updateProfile = async (req, res) => {
 }
 
 UserController.getChangePass = async (req, res) => {
-    let numberBiddingProd = await AuctionLogService.countNumberOfAuctions(req.user._id);
     return res.render("main/changePassword/changePassword",{
-        data: req.flash("data"),
-        categories,
-        user: req.user,
-        numberBiddingProd,
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: 'SOAS. - Change Password'
@@ -164,8 +144,6 @@ UserController.postFeedback = async (req, res) => {
 // Controller apply to seller
 UserController.getApplySeller = (req,res)=>{
     return res.render("main/users/SaleRegistration",{
-        data: req.flash("data"),
-        user: req.user,
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: 'SOAS. - Apply to Seller'
@@ -206,4 +184,5 @@ UserController.putApplySeller = async(req,res)=>{
 UserController.verify = (req, res) => {
     return res.render('auth/verify/verify');
 }
+
 export default UserController;

@@ -149,6 +149,7 @@ function requestInfo(){
         success: function (response) {
             $(".user-modal-alert-success").find("span").text(response.message);
             $(".user-modal-alert-success").removeClass("d-none")
+            console.log(response);
             // updateInfo();
             userInfoCurrent = Object.assign(userInfoCurrent,userInfo);
             $("#input-btn-reset-user").click();

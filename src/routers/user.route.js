@@ -1,8 +1,10 @@
 import express from "express";
+
 import AuthValid from '../validation/auth.validation';
 import UserValid from '../validation/user.validation';
 import AuthController from "../controllers/auth.controller";
 import UserController from "../controllers/user.controller";
+import LocalVariableForward from "../helpers/product.helper";
 
 
 let router = express.Router();
@@ -28,6 +30,7 @@ router.get("/verify/:token",
 router.get("/profile",
     AuthController.checkLoggedIn,
     AuthController.checkUser,
+    LocalVariableForward.localVarsForward,
     UserController.getProfile
 );
 
@@ -42,6 +45,7 @@ router.put("/update-profile",
 router.get("/change-password",
     AuthController.checkLoggedIn,
     AuthController.checkUser,
+    LocalVariableForward.localVarsForward,
     UserController.getChangePass
 );
 router.put("/update-password",
@@ -54,6 +58,7 @@ router.put("/update-password",
 router.get("/profile-seller/:sellerId/:productId",
     AuthController.checkLoggedIn,
     AuthController.checkUser,
+    LocalVariableForward.localVarsForward,
     UserController.getInfoSeller
 );
 
@@ -67,6 +72,7 @@ router.post("/feedback",
 router.get("/apply-seller",
     AuthController.checkLoggedIn,
     AuthController.checkUser,
+    LocalVariableForward.localVarsForward,
     UserController.getApplySeller
 );
 router.put("/update-seller",
@@ -74,7 +80,7 @@ router.put("/update-seller",
     AuthController.checkUser,
     UserController.putApplySeller
 );
-router.get('/verify', 
+router.get('/verify',
     UserController.verify
 )
 

@@ -1,3 +1,5 @@
+import date from "date-and-time";
+
 import ProductService from "../services/product.service";
 import ProductUtils from "../utils/product.util";
 import Cloudinary from "../configs/cloudinary.config";
@@ -167,9 +169,14 @@ ProductController.updateProducts = async (req, res) => {
     let product = await ProductService.findProductById(prodductId);
     if(product.userId != req.user._id)
         return res.redirect('/products?errors=403')
-
+    let startTime = date.format(product.aucStartTime, 'M/D/YYYY HH:mm:ss');
+    let endTime = date.format(product.aucEndTime, 'M/D/YYYY HH:mm:ss');
     return res.render('main/products/update', {
         product,
+        time: {
+            startTime,
+            endTime
+        },
         title: 'Edit |'+ product.name
     })
 }
@@ -230,6 +237,7 @@ ProductController.deleteProduct = async (req, res) => {
 
 ProductController.getCart = async (req, res) => {
     let products = await CartService.findAll(req.user._id);
+    console.log(products);
     return res.render('main/cart/cart', {
         products,
         title: 'Cart 💲'

@@ -37,6 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <%if(products.length > 0){%>
                             <% products[0].products.forEach(product => {%>
                                 <tr>
                                     <td class="cart__product__item">
@@ -55,7 +56,11 @@
                                     <td class="cart__price">$ <%-product.price%></td>
                                     <td class="cart__close"><span class="icon_close"></span></td>
                                 </tr>
-                            <%})%>
+                            <%})}else{%>
+                                <tr>
+                                    <td class="cart__product__item">No product</td>
+                                </tr>
+                            <%}%>
                         </tbody>
                     </table>
                 </div>
