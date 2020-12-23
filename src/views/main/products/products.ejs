@@ -88,12 +88,19 @@
                         <!-- list product end -->
                         <!-- pagination section start -->
                         <div class="col-lg-12 text-center">
+                            <!--<ul class="pagination pagination-lg">
+                            //     <% for(let i = 1; i<= page; i++) {%>
+                            //         <li class="page-item">
+                            //             <a class="page-link" href="?page=<%- i%>"><%- i%></a>
+                            //         </li>
+                            //     <%}%>
+                            // </ul>-->
                             <div class="pagination__option" id="paging">
-                                <!-- <a href="#"><i class="fa fa-angle-left"></i></a>
-                                <a href="?page=1" id="1">1</a>
-                                <a href="?page=2">2</a>
-                                <a href="?page=3">3</a>
-                                <a href="#"><i class="fa fa-angle-right"></i></a> -->
+                                <a href="#"><i class="fa fa-angle-left"></i></a>
+                                <% for(let i = 1; i<= page; i++) {%>
+                                    <a href="?page=<%- i%>" id="<%- i%>"><%- i%></a>
+                                <%}%>
+                                <a href="#"><i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                         <!-- pagination section end -->
@@ -107,4 +114,3 @@
 <!-- footer -->
 <%- include("../common/footer/footer.ejs"); %>
 <script src="/js/pagination.min.js"></script>
-<script src="/js/paging.js"></script>
