@@ -1,5 +1,28 @@
 let socket = io();
 
+socket.on('connection', () => {
+    console.log('connected');
+})
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    let productIdPage = window.location.pathname.split('/')[2];
+    let productDetailPage = document.getElementById('product_' + productIdPage);
+    let counter = 0;
+    productDetailPage.onmouseover = () => {
+        if (counter <= 1) {
+            socket.emit('join', productIdPage);
+            counter++;
+        }
+        counter++;
+        productDetailPage.removeAttribute('onmouseover');
+    }
+
+    socket.on(productIdPage, (res) => {
+        document.getElementById('product_watching_' + productIdPage).innerHTML = `${res.users.count} bidders is watching ...`;
+    })
+});
+
+
 let onBiddingProduct = (productId) => {
 
     if (!socket.connected) {
@@ -95,6 +118,7 @@ socket.on("res-product-bidding-price", (data) => {
         inputPrice.min = data.price;
     }
     document.getElementById('number-product-bidding').innerHTML = data.biddingCount;
+    document.getElementById('details_'+data.productId).innerHTML = data.winner;
     anime({
         targets: price,
         innerHTML: [0, data.price],

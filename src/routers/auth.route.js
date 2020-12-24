@@ -18,7 +18,9 @@ router.post("/login",
     AuthValidation.isExistsSession,
     passport.authenticate("local",{
         successRedirect: '/products',
-        failureRedirect: '/login'
+        failureRedirect: '/login',
+        failureFlash: true,
+        successFlash: true
     })
 );
 

@@ -75,11 +75,13 @@ router.get("/apply-seller",
     LocalVariableForward.localVarsForward,
     UserController.getApplySeller
 );
+
 router.put("/update-seller",
     AuthController.checkLoggedIn,
     AuthController.checkUser,
     UserController.putApplySeller
 );
+
 router.get('/verify',
     UserController.verify
 )

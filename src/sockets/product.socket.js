@@ -44,15 +44,36 @@ ProductSocket.bidding = (io) => {
             await ProductService.updatePrice(data.productId, data.newPrice);
 
             let counter = await AuctionService.countNumberOfAuctions(product.userId);
+            const winner = await ProductService.findProductById(data.productId);
             return io.emit("res-product-bidding-price", {
                 productId: data.productId,
                 price: data.newPrice,
                 biddingCount: counter,
                 priceStep: product.priceStep,
-                nextPrice: parseInt(data.newPrice) + parseInt(product.priceStep)
+                nextPrice: parseInt(data.newPrice) + parseInt(product.priceStep),
+                winner: winner.winnerId
             });
         });
 
+    })
+}
+
+ProductSocket.onJoinRoom = (io) => {
+    let users = [];
+    io.sockets.on('connection', (socket) => {
+        socket.on('join', (room) => {
+            let userId = socket.request.user._id.toString();
+            let user = users.find(user => user === userId);
+            if (!user) {
+                users.push(userId);
+                socket.join(room);
+                io.emit(room, {
+                    "users": {
+                        count: users.length
+                    }
+                });
+            }
+        });
     })
 }
 

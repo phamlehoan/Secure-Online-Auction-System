@@ -10,7 +10,6 @@ CronService.findDoneTasks = async () => {
             console.log(err);
             return;
         }
-        //console.log(collection);
         await collection.aggregate([
             {
                 $project: {
@@ -36,7 +35,7 @@ CronService.findDoneTasks = async () => {
                 const job = jobs[i];
                 let interval = job.repeatInterval.split(' ')[0];
                 let times = TimeUtils.convertToMinutes((job.nextRunAt - job.lastRunAt) / interval);
-                if (times > 2) {
+                if (times >= 1) {
                     await collection.findOneAndDelete({
                         _id: job._id
                     });

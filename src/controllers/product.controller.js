@@ -17,7 +17,6 @@ const ProductController = {};
  *
  */
 ProductController.getProducts = async (req, res) => {
-    console.log(req.query.page);
     let page = parseInt(req.query.page) || 1
     let perpage = 8
     let start = (page-1)*perpage
@@ -249,7 +248,6 @@ ProductController.deleteProduct = async (req, res) => {
 
 ProductController.getCart = async (req, res) => {
     let products = await CartService.findAll(req.user._id);
-    console.log(products);
     return res.render('main/cart/cart', {
         products,
         title: 'Cart 💲'

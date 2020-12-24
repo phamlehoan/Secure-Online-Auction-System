@@ -28,12 +28,13 @@ ProductJobs.handleProductExpiration = async (agenda) => {
     });
     (async () => {
         await agenda.start();
-        await agenda.every('10 minutes', 'onExpirationProduct');
+        await agenda.every('15 minutes', 'onExpirationProduct');
     })();
 }
 
 ProductJobs.handleDoneExpiration = async (agenda) => {
     await agenda.define('findDoneJobs', async job => {
+        console.log('on clearing done task...');
         await CronService.findDoneTasks();
     });
     (async () => {

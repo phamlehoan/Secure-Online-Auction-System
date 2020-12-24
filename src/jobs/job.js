@@ -3,9 +3,9 @@ import CronConfig from "../configs/cron.config";
 
 let initializeJobs = () => {
     CronConfig()
-    .then(agenda => {
-        ProductJobs.handleProductExpiration(agenda);
-        ProductJobs.handleDoneExpiration(agenda);
+    .then(async agenda => {
+        await ProductJobs.handleProductExpiration(agenda);
+        await ProductJobs.handleDoneExpiration(agenda);
     })
 }
 

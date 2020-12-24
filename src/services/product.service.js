@@ -60,7 +60,9 @@ ProductService.findProductsByUserId = async (userId) => {
  * @returns {ProductModel} Products
  */
 ProductService.find = async (criteria) => {
-    return await ProductModel.find(criteria);
+    return await ProductModel
+        .find(criteria)
+        .sort({createdAt: -1});
 }
 
 /**

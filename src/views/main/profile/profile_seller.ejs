@@ -173,7 +173,9 @@
               </div>
               <h5><%-item.user[0].username%></h5>
               <p>2020-11-30 17:35</p>
-              <p><a class="text-success" href="/products/<%-item.product[0]._id%>"><%-item.product[0].productName%></a></p>
+              <%if(item.product .length > 0){%>
+                <p><a class="text-success" href="/products/<%-item.product[0]._id%>"><%-item.product[0].productName%></a></p>
+              <%}%>
           </div>
           <div class="col-8">
             <div class="rating-star">

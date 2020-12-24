@@ -21,9 +21,9 @@ UserController.getProfile = async (req, res) => {
 
 //infomation seller
 UserController.getInfoSeller = async (req, res) => {
-    let seller = await UserModel.findUserById(req.params.sellerId)
-    let dataFeedback = await FeedbackService.listFeedbackProduct(req.params.sellerId)
-    let countStar = await FeedbackService.statistical(req.params.sellerId)
+    let seller = await UserModel.findUserById(req.params.sellerId);
+    let dataFeedback = await FeedbackService.listFeedbackProduct(req.params.sellerId);
+    let countStar = await FeedbackService.statistical(req.params.sellerId);
     return res.render("main/profile/profile_seller", {
         idProduct: req.params.productId,
         idSeller: req.params.sellerId,
@@ -35,6 +35,7 @@ UserController.getInfoSeller = async (req, res) => {
         star:countStar
     })
 }
+
 
 UserController.updateProfile = async (req, res) => {
     //Kiểm tra validation của form đăng ký
