@@ -56,8 +56,9 @@ let ServerApplication = async (app) => {
 
   const APP_HOST = process.env.APP_HOST || "localhost";
   const APP_PORT = process.env.APP_PORT || 3000;
-  const REDIS_PORT = process.env.REDIS_PORT || 6379;
-  const REDIS_HOST =  process.env.REDIS_HOST || "localhost";
+  const REDIS_PORT = process.env.REDIS_PORT;
+  const REDIS_HOST =  process.env.REDIS_HOST;
+  const REDIS_PASSWORD = process.env.REDIS_PASSWORD;
 
 
   let server =  http.createServer(app);
@@ -75,6 +76,12 @@ let ServerApplication = async (app) => {
   initializeJobs();
 
   let redis = redisConfig(REDIS_HOST, REDIS_PORT);
+  redis.auth(REDIS_PASSWORD, (err, reply) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log('redis is ready', reply);
+  })
 
   RedisService.initial(redis);
 
