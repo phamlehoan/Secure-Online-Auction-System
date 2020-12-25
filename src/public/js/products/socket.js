@@ -111,6 +111,13 @@ socket.on("res-product-bidding-price", (data) => {
     let price = document.getElementById(data.productId);
     price.classList.remove('text-danger');
     price.classList.add('text-success');
+
+    anime({
+        targets: price,
+        innerHTML: [0, data.price],
+        easing: 'linear',
+        round: 10
+    });
     //details page
     let inputPrice = document.getElementById('input-price' + data.productId);
     if (inputPrice) {
@@ -118,11 +125,6 @@ socket.on("res-product-bidding-price", (data) => {
         inputPrice.min = data.price;
     }
     document.getElementById('number-product-bidding').innerHTML = data.biddingCount;
-    document.getElementById('details_'+data.productId).innerHTML = data.winner;
-    anime({
-        targets: price,
-        innerHTML: [0, data.price],
-        easing: 'linear',
-        round: 10
-    });
+    document.getElementById('details_' + data.productId).innerHTML = data.winner;
+    document.getElementById('auction__price_' + data.productId).innerHTML = data.price;
 })

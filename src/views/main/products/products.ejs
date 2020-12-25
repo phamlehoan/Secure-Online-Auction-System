@@ -46,10 +46,10 @@
                                                 <%if(product.winnerId) {%>
                                                     <div class="auction__winner">
                                                         <i class="fa fa-trophy text-warning" aria-hidden="true"></i>
-                                                        ID: <span style="background-color: #6495ed;"><%-product.winnerId%></span>
+                                                        ID: <span style="background-color: #6495ed;" id="details_<%-product._id%>"><%-product.winnerId%></span>
                                                     </div>
                                                 <%}%>
-                                                <div class="auction__price h1">$ <%-product.price%></div>
+                                                <div class="auction__price h1" id="auction__price_<%-product._id%>">$ <%-product.price%></div>
                                             </div>
                                             <ul class="product__hover">
                                                 <li><a href="<%-product.image%>" class="image-popup"><span class="arrow_expand"></span></a></li>

@@ -11,12 +11,6 @@ const mongoDBStrore = MongoDBStore(session);
 const redisStore = ConnectRedis(session);
 
 const redisClient = Redis.createClient();
-redisClient.auth(process.env.REDIS_PASSWORD, (err, reply) => {
-    if (err) {
-        console.log(err);
-    }
-    console.log('redis store is ', reply);
-})
 
 const {
     MONGO_USERNAME,
@@ -40,9 +34,10 @@ let sessionStore = new mongoDBStrore({
 });
 
 let sessionRedisStore = new redisStore({
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
+    host: process.env.REDIS_HOST || 'localhost',
+    port: process.env.REDIS_PORT || 6379,
     client: redisClient,
+    ttl: process.env.REDIS_TTL || 260
 });
 
 //Cấu hình session

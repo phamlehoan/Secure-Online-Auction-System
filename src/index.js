@@ -56,8 +56,8 @@ let ServerApplication = async (app) => {
 
   const APP_HOST = process.env.APP_HOST || "localhost";
   const APP_PORT = process.env.APP_PORT || 3000;
-  const REDIS_PORT = process.env.REDIS_PORT;
-  const REDIS_HOST =  process.env.REDIS_HOST;
+  const REDIS_PORT = process.env.REDIS_PORT || 6379;
+  const REDIS_HOST =  process.env.REDIS_HOST || "localhost";
   const REDIS_PASSWORD = process.env.REDIS_PASSWORD;
 
 
