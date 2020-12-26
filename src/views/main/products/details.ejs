@@ -18,7 +18,7 @@
 <!-- Breadcrumb End -->
 
 <!-- Product Details Section Begin -->
-<section class="top__area spad">
+<section class="top__area spad" id="product_<%-product._id%>">
     <div class="container bg-white p-5 rounded">
         <div class="row">
             <div class="col-lg-6">
@@ -61,76 +61,53 @@
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
-                        <span>( 138 watches )</span>
+                        <span id="product_watching_<%-product._id%>">
+                            <img src="/gif/loading.gif" alt="" width="100" height="auto">
+                        </span>
                     </div>
-                    <div class="product__details__widget">
-                        <ul>
-                            <li>
-                                <span>Time:</span>
-                                <input type="hidden" id="timerdate" value="<%-product.aucEndTime%>">
-                                <p id="countdown-time"></p>
-                            </li>
-                            <li>
-                                <span>Current winner:</span>
-                                <p><%-userWithHighestPrice%></p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="product__details__price pt-5">
-                        <span class="text-danger">$</span>
-                        <span id="<%-product._id%>" style="text-decoration: none;" class="text-danger"><%-product.price%></span>
-                    </div>
-                    <div class="product__details__button">
-                        <div class="quantity">
-                            <span>Expected price:</span>
-                            <div class="pro-qty">
-                                <input
-                                    type="text"
-                                    value="<%-product.nextPrice%>"
-                                    min="<%-product.nextPrice%>"
-                                    step="<%-product.priceStep%>"
-                                    id="input-price<%-product._id%>"
-                                >
+                    <%if(product.status === '2'){%>
+                        <div class="product__details__widget">
+                            <ul>
+                                <li>
+                                    <h4>Product now is time out if you had bidded this product please check your email !</h4>
+                                    <p class="text-success">Online secure auction team thank you.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    <%}else{%>
+                        <div class="product__details__widget">
+                            <ul>
+                                <li>
+                                    <span>Time:</span>
+                                    <input type="hidden" id="timerdate" value="<%-product.aucEndTime%>">
+                                    <p class="bg-light text-secondary text-monospace font-weight-bold" id="countdown-time"></p>
+                                </li>
+                                <li>
+                                    <span>Current winner:</span>
+                                    <p id="details_<%-product._id%>"><%-userWithHighestPrice%></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product__details__price pt-5">
+                            <span class="text-danger">$</span>
+                            <span id="<%-product._id%>" style="text-decoration: none;" class="text-danger"><%-product.price%></span>
+                        </div>
+                        <div class="product__details__button">
+                            <div class="quantity">
+                                <span>Expected price:</span>
+                                <div class="pro-qty">
+                                    <input
+                                        type="text"
+                                        value="<%-product.nextPrice%>"
+                                        min="<%-product.nextPrice%>"
+                                        step="<%-product.priceStep%>"
+                                        id="input-price<%-product._id%>"
+                                    >
+                                </div>
                             </div>
+                            <button class="cart-btn" onclick="onBiddingProduct('<%-product._id%>')"><span class="icon_bag_alt"></span> Bid</button>
                         </div>
-                        <button class="cart-btn" onclick="onBiddingProduct('<%-product._id%>')"><span class="icon_bag_alt"></span> Bid</button>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="product__details__tab">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Delivery</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews (<span>2</span>)</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                            <h6>Description</h6>
-                            <p><%-product.description%></p>
-                        </div>
-                        <div class="tab-pane" id="tabs-2" role="tabpanel">
-                            <h6>Delivery</h6>
-                            <p>Chúng tôi sẽ vận chuyển đơn hàng này trong 15 ngày làm việc gần nhất.</p>
-                            <p>Vui lòng chuẩn bị sẵn số tiền trên.</p>
-                        </div>
-                        <div class="tab-pane" id="tabs-3" role="tabpanel">
-                            <h6>Reviews (<span>2</span>)</h6>
-                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                consequat massa quis enim.</p>
-                        </div>
-                    </div>
+                    <%}%>
                 </div>
             </div>
         </div>

@@ -23,29 +23,30 @@
         <div class="row">
             <div class="col-lg-4 col-md-4">
                 <div class="section-title">
-                    <h4>Cart</h4>
+                    <h4>Bidding Products</h4>
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="shop__cart__table">
-                    <table>
+                    <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Product</th>
-                                <th>Current Price</th>
-                                <th>Your Price</th>
-                                <th>Current Winner</th>
+                                <th scope="col">Products</th>
+                                <th scope="col">Current Price</th>
+                                <th scope="col">Your Price</th>
+                                <th scope="col">Current Winner</th>
                             </tr>
                         </thead>
                         <tbody>
                             <%if(products){%>
-                                <%for(let i = 0; i < products.length; i++){%>
+                                <%for(let i = 0; i < winners.length; i++){%>
                                     <%const product = products[i];%>
+                                    <%const winner = winners[i];%>
                                     <tr>
-                                        <td class="cart__product__item">
+                                        <th scope="row" class="cart__product__item">
                                             <img src="<%-product._id.productImage%>" alt="<%-product._id.productName%>" height='auto' width='100'>
                                             <div class="cart__product__item__title">
-                                                <h6><a href="/products/<%-product._id.productId%>"><%-product._id.productName%></a></h6>
+                                                <h6><a class="text-primary" href="/products/<%-product._id.productId%>"><%-product._id.productName%></a></h6>
                                                 <div class="rating">
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
@@ -54,18 +55,19 @@
                                                     <i class="fa fa-star"></i>
                                                 </div>
                                             </div>
-                                        </td>
-                                        <td class="cart__price">$ <p id="<%-product._id.productId%>"><%-winners[i].price%></p></td>
+                                        </th>
+                                        <td class="cart__price">$ <p class="d-inline-block font-weight-bold" id="<%-product._id.productId%>"><%-winner.price%></p></td>
                                         <td class="cart__price">
-                                            $ <p><%-product.price%></p>
+                                            $ <p class="d-inline-block font-weight-bold"><%-product.price%></p>
                                         </td>
-                                        <%if(user._id == winners[i].winnerId){%>
+                                        <%if(user._id == winner.winnerId){%>
                                             <td class="cart__total" class="text-success">You</td>
                                         <%}else{%>
-                                            <td class="cart__total"><%-winners[i].winnerId%></td>
+                                            <td class="cart__total"><%-winner.winnerId%></td>
                                         <%}%>
                                     </tr>
-                            <%}}else{%>
+                                <%}%>
+                            <%}else{%>
                                 <tr>
                                     <h3>No Product is Bidding.<a href="/products">let's Bidding</a></h3>
                                 </tr>

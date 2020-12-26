@@ -104,7 +104,6 @@ AdminController.approveUser = async (req, res) => {
     }
 }
 AdminController.getUser = async (req, res) => {
-    console.log(req)
     let banUserItem = req.params;
     let user = await UserService.findUserById(banUserItem.userId);
     try {
@@ -115,6 +114,21 @@ AdminController.getUser = async (req, res) => {
         let result = {
             message:"Approved",
             user:user[0]
+        }
+        return res.status(200).send(result)
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send(error);
+    }
+}
+AdminController.getProduct = async (req, res) => {
+    let productItem = req.params;
+    let product = await ProductService.findProductById(productItem.productId);
+    try {
+        //Thành công thì gửi về messenger thông báo
+        let result = {
+            message:"Approved",
+            product:product
         }
         return res.status(200).send(result)
     } catch (error) {

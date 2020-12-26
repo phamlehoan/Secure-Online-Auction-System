@@ -687,7 +687,7 @@ ol {
 }
 
 .top__area {
-    padding-top: 30px;
+    padding-top: 10px;
     padding-bottom: 50px;
 }
 
@@ -951,7 +951,7 @@ ol {
 -----------------------*/
 
 .breadcrumb-option {
-  padding-top: 35px;
+  padding-top: 20px;
 }
 
 .breadcrumb__links a {
@@ -1607,6 +1607,12 @@ ol {
   color: #ffffff;
 }
 
+.pagination__active {
+  color: #ffffff !important;
+  background: #0d0d0d;
+  border-color: #0d0d0d;
+}
+
 /*---------------------
   Product Details
 -----------------------*/
@@ -2093,8 +2099,8 @@ ol {
 -----------------------*/
 
 .shop-cart {
-  padding-top: 70px;
-  padding-bottom: 90px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .shop__cart__table {

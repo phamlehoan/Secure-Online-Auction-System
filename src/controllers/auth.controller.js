@@ -1,6 +1,8 @@
 import authService from './../services/auth.service';
 import {validationResult} from 'express-validator';
 import {loginSucc} from './../langs/us/notification.us'
+import UserService from "../services/user.service";
+import RedisService from "../redis/redis";
 
 const AuthController = {};
 
@@ -68,11 +70,21 @@ AuthController.activeAccount = async(req,res)=>{
 }
 
 //Controller của router đăng xuất
-AuthController.getLogout = (req, res) => {
-    req.logout();
-    req.flash("success", loginSucc.logoutSuccess);
-    res.clearCookie();
-    return res.redirect("/login");
+AuthController.getLogout = async (req, res) => {
+    try {
+        let { _id } = req.user;
+        await UserService.updateToken(_id, null);
+        await UserService.updateLoginTimes(-1, _id);
+        await RedisService.delHashCache('users', _id+'')
+        .catch(err => console.log(err))
+        req.logOut();
+        req.session.destroy(req.session.sid);
+        res.clearCookie();
+        return res.redirect("/login");
+    } catch (error) {
+        console.log(error);
+        return res.redirect('/login?error=error');
+    }
 }
 
 //Kiểm tra xem đã Login hay chưa
@@ -90,15 +102,28 @@ AuthController.checkLoggedOut = (req, res, next) => {
 }
 
 AuthController.checkUser = (req, res, next) => {
-    if(req.user)
-    {
+    if(req.user){
         req.flash("data", true);
-    }
-    else
-    {
+    }else{
         req.flash("data", false);
     }
     next();
+}
+
+AuthController.verifyToken = async (req, res) => {
+    let { id } = req.signedCookies;
+    let { otp } = req.body;
+    let isTrue = await authService.verifyToken(id, otp);
+    if (isTrue) {
+        res.clearCookie('id');
+        await UserService.updateToken(id, null);
+        await UserService.updateLoginTimes(-1, id);
+        await RedisService.delHashCache('users', _id+'')
+        req.flash('success', 'please login again');
+    }else{
+        req.flash('errors', 'Wrong OTP');
+    }
+    return res.redirect('/login');
 }
 
 export default AuthController;

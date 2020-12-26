@@ -49,7 +49,6 @@
                     <a class="navbar-brand" href="/products">
                         <!-- Logo icon -->
                         <b class="logo-icon">
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
                             <img src="/img/logo.png" alt="homepage" class="dark-logo" />
                             <!-- Light Logo icon -->
@@ -61,8 +60,8 @@
                     <!-- End Logo -->
                     <!-- ============================================================== -->
                     <!-- This is for the sidebar toggle which is visible on mobile only -->
-                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
-                            class="ti-menu ti-close"></i></a>
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
+                        <i class="ti-menu ti-close"></i></a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -234,7 +233,7 @@
                                             <div class="p-2"><img src="<%-product.image%>" alt="user" width="50"
                                                     class="rounded-circle"></div>
                                             <div class="comment-text w-100">
-                                                <h6 class="font-medium"><%-product.name%></h6>
+                                                <h6 class="font-medium" onclick="showProduct('<%-product._id%>')" style="cursor: pointer;"><%-product.name%></h6>
                                                 <div class="m-b-15 d-block">
                                                     <span>
                                                         <b>???</b>
@@ -474,6 +473,11 @@
     <!--Custom JavaScript -->
     <script src="/js/custom.js"></script>
     <!--This page JavaScript -->
+    <script src="/js/admin.script.js"></script>
+    <script src="/js/alertify.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/alertify.js"></script>
+    <script src="/js/sweetalert2.all.min.js"></script>
 </body>
 
 </html>

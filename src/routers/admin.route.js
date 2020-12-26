@@ -47,4 +47,9 @@ router.get('/user/:userId',
     Authorization.isAdmin,
     AdminController.getUser
 )
+router.get('/product/:productId',
+    AuthController.checkUser,
+    Authorization.isAdmin,
+    AdminController.getProduct
+)
 module.exports = router;

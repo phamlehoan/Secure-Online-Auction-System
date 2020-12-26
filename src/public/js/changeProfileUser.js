@@ -149,9 +149,11 @@ function requestInfo(){
         success: function (response) {
             $(".user-modal-alert-success").find("span").text(response.message);
             $(".user-modal-alert-success").removeClass("d-none")
+            console.log(response);
             // updateInfo();
             userInfoCurrent = Object.assign(userInfoCurrent,userInfo);
             $("#input-btn-reset-user").click();
+            location.reload();
         },
         error: function (error){
             $(".user-modal-alert-error").find("span").text(error.responseText);
@@ -159,7 +161,6 @@ function requestInfo(){
             // //Reset lại mọi thứ.
             $("#input-btn-reset-user").click();
             // console.log("That bai");
-            console.log(error);
         }
     });
 

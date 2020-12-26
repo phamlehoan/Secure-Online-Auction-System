@@ -6,6 +6,7 @@ import ProductSocket from "../sockets/product.socket";
  */
 let socketInitials = (io) => {
     ProductSocket.bidding(io);
+    ProductSocket.onJoinRoom(io);
 }
 
 module.exports = socketInitials;

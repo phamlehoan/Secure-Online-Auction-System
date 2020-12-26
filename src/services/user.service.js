@@ -72,6 +72,9 @@ UserService.generateAuthToken = async (user) => {
 
   return jwtToken;
 }
+UserService.applySeller =(id,file)=>{
+  return UserModel.findByIdAndUpdate(id, file);
+}
 
 /**
  *
@@ -103,4 +106,40 @@ UserService.findAll = async () => {
 UserService.banUser =(id,file)=>{
   return UserModel.findByIdAndUpdate(id, file);
 }
+/**
+ * Updating token when user logout
+ * @param {String} UserId
+ */
+UserService.updateToken = async (id, token) => {
+  return await UserModel.findOneAndUpdate(
+    {_id: id}, 
+    {'local.token': token}
+  );
+}
+
+/**
+ * 
+ * @param {String} email
+ */
+UserService.findUserByEmail = async (email) => {
+  let user =  await UserModel.findOne({'local.email': email});
+  if (!user) {
+    throw new UserNotFoundException('User not found with email'+ email);
+  }
+  return user;
+}
+
+/**
+ * 
+ * @param {Number} times 
+ * @param {String} userId 
+ */
+UserService.updateLoginTimes = async (times, userId) => {
+  let counter = parseInt(times) + 1;
+  return await UserModel.findOneAndUpdate(
+    {_id: userId}, 
+    {'local.loginTimes': counter}
+  );
+}
+
 export default UserService;

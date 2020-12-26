@@ -4,9 +4,6 @@
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt';
 
-import userErrorMessage from "../langs/us/notification.us";
-import {UserNotFoundException, UserNotVerifyException} from "../exceptions/user.exception";
-
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -36,7 +33,10 @@ const UserSchema = new Schema({
   personalInfo: {
     identifyCard: {
       ID: String,
-      dateOfIssue: String,
+      dateOfIssue: {
+        type: String,
+        default: "1900-01-01"
+      },
       address: String,
       fontCardUrl: String,
       backCardUrl: String
@@ -71,6 +71,10 @@ const UserSchema = new Schema({
       default: false,
     },
     token: String,
+    loginTimes: {
+      type: Number,
+      default: 0
+    }
   },
   facebook: {
     uid: String,

@@ -4,25 +4,15 @@
 import {validationResult} from 'express-validator/check';
 import ProductService from "./../services/product.service"
 import user from './../services/user.service';
-import AuctionLogModel from "../models/auctionlog.model";
 import UserModel from "./../models/user.model";
 import FeedbackModel from "./../models/feedback.model"
 import FeedbackService from "./../services/feedback.service"
 import PRODUCT_CONSTANTS from "../constants/product.constant";
-import AuctionLogService from "../services/aution.service";
-
-let { categories, priceMethod, productStatus } = PRODUCT_CONSTANTS;
 
 const UserController = {};
 
-
 UserController.getProfile = async (req, res) => {
-    let numberBiddingProd = await AuctionLogService.countNumberOfAuctions(req.user._id);
     return res.render("main/profile/profile",{
-        data: req.flash("data"),
-        user: req.user,
-        categories,
-        numberBiddingProd,
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: "profile"
@@ -31,17 +21,12 @@ UserController.getProfile = async (req, res) => {
 
 //infomation seller
 UserController.getInfoSeller = async (req, res) => {
-    let numberBiddingProd = await AuctionLogService.countNumberOfAuctions(req.user._id);
-    let seller = await UserModel.findUserById(req.params.sellerId)
-    let dataFeedback = await FeedbackService.listFeedbackProduct(req.params.sellerId)
-    let countStar = await FeedbackService.statistical(req.params.sellerId)
+    let seller = await UserModel.findUserById(req.params.sellerId);
+    let dataFeedback = await FeedbackService.listFeedbackProduct(req.params.sellerId);
+    let countStar = await FeedbackService.statistical(req.params.sellerId);
     return res.render("main/profile/profile_seller", {
-        data: req.flash("data"),
         idProduct: req.params.productId,
         idSeller: req.params.sellerId,
-        user: req.user,
-        categories,
-        numberBiddingProd,
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: "profile",
@@ -50,6 +35,7 @@ UserController.getInfoSeller = async (req, res) => {
         star:countStar
     })
 }
+
 
 UserController.updateProfile = async (req, res) => {
     //Kiểm tra validation của form đăng ký
@@ -85,12 +71,7 @@ UserController.updateProfile = async (req, res) => {
 }
 
 UserController.getChangePass = async (req, res) => {
-    let numberBiddingProd = await AuctionLogService.countNumberOfAuctions(req.user._id);
     return res.render("main/changePassword/changePassword",{
-        data: req.flash("data"),
-        categories,
-        user: req.user,
-        numberBiddingProd,
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: 'SOAS. - Change Password'
@@ -159,6 +140,50 @@ UserController.postFeedback = async (req, res) => {
         console.log(error);
         return res.status(500).send(error);
     }
+}
+
+// Controller apply to seller
+UserController.getApplySeller = (req,res)=>{
+    return res.render("main/users/SaleRegistration",{
+        errors: req.flash("errors"),
+        success:req.flash("success"),
+        title: 'SOAS. - Apply to Seller'
+    })
+}
+UserController.putApplySeller = async(req,res)=>{
+    //Kiểm tra validation của form đăng ký
+    let valid = validationResult(req);
+    let arrErr= []; //Create arrray to contain err
+    //Kiểm tra xem có tồn tại lỗi sau khi kiểm tra validation hay không
+    if(!valid.isEmpty())
+    {
+        //Đẩy tất cả các lỗi vào mảng Error
+        valid.array().forEach(item =>{
+            arrErr.push(item.msg);
+        })
+        //Lưu mảng lỗi vào flash để đẩy lên phía client
+        return res.status(500).send(arrErr);
+    }
+    //Lấy thông tin của client gửi lên
+    let applySellerItem = req.body;
+    try {
+        //Gọi service để kiểm tra các điều kiện
+        console.log(applySellerItem);
+        await user.applySeller(req.user._id,applySellerItem);
+
+        //Thành công thì gửi về messenger thông báo
+        let result = {
+            message:"Applyed to seller successfully, please wait for administrator to accept you application",
+        }
+        return res.status(200).send(result)
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send(error);
+    }
+}
+
+UserController.verify = (req, res) => {
+    return res.render('auth/verify/verify');
 }
 
 export default UserController;

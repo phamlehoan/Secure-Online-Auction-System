@@ -80,3 +80,20 @@ function showUser(user_id){
         }
     });
 }
+
+
+function showProduct(product_id){
+    $.ajax({
+        type: "get",
+        url: "/admin/product/"+product_id,
+        success: function (response) {
+            console.log("sc",response);
+        },
+        error: function (error){
+            $(".user-modal-alert-error").find("span").text(error.responseText);
+            $(".user-modal-alert-error").removeClass("d-none")
+            // console.log("That bai");
+            console.log(error);
+        }
+    });
+}

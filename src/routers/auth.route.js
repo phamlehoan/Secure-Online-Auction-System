@@ -3,6 +3,7 @@ import passport from "passport";
 
 import AuthController from "../controllers/auth.controller";
 import HomeController  from "../controllers/home.controller";
+import AuthValidation from "../validation/auth.validation";
 
 let router = express.Router();
 
@@ -13,11 +14,13 @@ router.get("/login",
 );
 
 //Router post from login
-router.post("/login", passport.authenticate("local",{
-    successRedirect: "/products",
-    failureRedirect: "/login",
-    successFlash: true,
-    failureFlash: true
+router.post("/login",
+    AuthValidation.isExistsSession,
+    passport.authenticate("local",{
+        successRedirect: '/products',
+        failureRedirect: '/login',
+        failureFlash: true,
+        successFlash: true
     })
 );
 
@@ -31,5 +34,9 @@ router.get("/",
     AuthController.checkUser,
     HomeController.getHomepage
 );
+
+router.post('/login/verify',
+    AuthController.verifyToken
+)
 
 module.exports = router;

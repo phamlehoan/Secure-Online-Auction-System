@@ -18,4 +18,8 @@ router.get('/:id',
     productApi.getProduct
 )
 
+router.post('/timeout', 
+    productApi.getProductAndWinner
+)
+
 module.exports = router;

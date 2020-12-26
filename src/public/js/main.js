@@ -131,6 +131,10 @@
         var dd = String(date.getDate()).padStart(2, '0');
         var mm = String(date.getMonth()).padStart(2, '0');
         var yyyy = date.getFullYear();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+
 
         if(mm == 12) {
             mm = '01';
@@ -139,9 +143,50 @@
             mm = parseInt(mm) + 1;
             mm = String(mm).padStart(2, '0');
         }
+        var timeOut = date.getTime() - Date.now();
+        setTimeout(() => {
+            const data = { id: window.location.pathname.split('/')[2] };
 
-        var timerdate = mm + '/' + dd + '/' + yyyy;
+            fetch('http://localhost:8080/api/v1/products/timeout', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.winner.length > 0) {
+                    var content = `<div class="blog__sidebar__item">
+                    <div class="section-title">
+                        <h4>Details</h4>
+                    </div>
+                    <ul>
+                        <li>${data.winner[0]._id} <span>Winner</span></li>
+                        <li>${data.winner[0].price}<span>Highest price</span></li>
+                        <li>75<span>Total bided</span></li>
+                        <li>35<span>Total users bided</span></li>
+                    </ul>
+                  </div>`;
+                    document.querySelectorAll('.product__details__widget')[0].innerHTML = content;
+                }else{
+                    document.querySelectorAll('.product__details__widget')[0].innerHTML = `<ul>
+                    <li>Product have 0 bid.<span>Winner</span></li>
+                    </ul>`;
+                }
+
+                document.querySelectorAll('.product__details__price')[0].innerHTML = '';
+                document.querySelectorAll('.product__details__button')[0].innerHTML = '';
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+
+        }, timeOut);
+        
+        var timerdate = mm + '/' + dd + '/' + yyyy +' '+ hours + ':' + minutes + ':' + seconds;
         $("#countdown-time").countdown(timerdate, function(event) {
+
             $(this).html(event.strftime("%DDays : %HHours : %MMin : %Ss"));
         });
     }

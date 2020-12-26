@@ -1,5 +1,6 @@
 import ProductModel from "../models/product.model";
 import AuctionLogService from "../services/aution.service";
+import { ProductNotFoundException } from "../exceptions/product.exception";
 /**
  * Define all services for home route
  */
@@ -59,7 +60,9 @@ ProductService.findProductsByUserId = async (userId) => {
  * @returns {ProductModel} Products
  */
 ProductService.find = async (criteria) => {
-    return await ProductModel.find(criteria);
+    return await ProductModel
+        .find(criteria)
+        .sort({createdAt: -1});
 }
 
 /**
@@ -91,6 +94,71 @@ ProductService.findAllWinnerByProductIds = async (listIds) => {
             $in: listIds
         }
     }).select('_id winnerId price');
+}
+
+/**
+ * find product by ID and update
+ * 
+ * @param {String} id 
+ * @param {Product} product 
+ */
+ProductService.update = async (id, product) => {
+    return await ProductModel.findOneAndUpdate(
+        {_id: id},
+        product
+    );
+}
+
+
+/**
+ * 
+ * @param {String} id 
+ */
+ProductService.delete = async (id) => {
+    return await ProductModel.findByIdAndDelete({
+        _id: id
+    });
+}
+
+/**
+ * 
+ * @param {Object} object
+ * @returns encrypted object
+ */
+ProductService.encrypt = async (object) => {
+    
+}
+
+/**
+ * 
+ */
+ProductService.findProductsExpiration = async () => {
+    return await ProductModel.aggregate([
+        {
+            $project: {
+                time: {
+                    $subtract: ['$aucEndTime', '$$NOW']
+                },
+                status: 1
+            }
+        },
+        {
+            $match: {
+                status: '1',
+                time: {
+                  $lte: 900000,
+                  $gt: 0
+                }
+            }
+        }
+    ]);
+}
+
+ProductService.changeStatus = async (productId) => {
+    return await ProductModel.findOneAndUpdate(
+        {_id: productId},
+        {status: '2'}
+    )
 }
 
 export default ProductService;
