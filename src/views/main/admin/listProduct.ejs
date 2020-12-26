@@ -269,14 +269,17 @@
                                                 </div>
                                                 <div class="comment-footer">
                                                     <span class="text-muted float-right"></span>
-                                                    <%if(product.status == 1){%>  
-                                                        <span class="label label-rounded label-primary">Approved</span>
+                                                    <%if(product.status == 1){%>
+                                                        <span id="<%-product._id%>_stt" class="label label-rounded label-primary">Approved</span>
+                                                    <%}else if(product.status == 2){%>
+                                                        <span id="<%-product._id%>_stt" class="label label-rounded label-primary">Ended</span>
                                                     <%}else{%>
-                                                        <span class="label label-rounded label-danger">Rejected</span>
+                                                        <span id="<%-product._id%>_stt" class="label label-rounded label-danger">Rejected</span>
                                                     <%}%>
                                                     <span class="action-icons">
-                                                        <a href="javascript:void(0)"><i class="ti-na"></i></a>
-                                                        <a href="javascript:void(0)"><i class="ti-check"></i></a>
+                                                        <%if(product.status == 1){%>  
+                                                            <i id="<%-product._id%>_ban" class="ti-na" onclick="return banProduct('<%-product._id%>')" style="cursor: pointer;"></i>
+                                                        <%}%>
                                                     </span>
                                                 </div>
                                             </div>

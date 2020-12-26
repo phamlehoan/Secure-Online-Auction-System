@@ -52,4 +52,9 @@ router.get('/product/:productId',
     Authorization.isAdmin,
     AdminController.getProduct
 )
+router.put('/product/ban/:productId',
+    AuthController.checkUser,
+    Authorization.isAdmin,
+    AdminController.banProduct
+)
 module.exports = router;

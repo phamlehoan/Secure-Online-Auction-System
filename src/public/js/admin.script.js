@@ -106,3 +106,26 @@ function showProduct(product_id){
         }
     });
 }
+
+function banProduct(product_id){
+    console.log(product_id);
+    $.ajax({
+        type: "put",
+        url: "/admin/product/ban/"+product_id,
+        success: function (response) {
+            console.log(response);
+            document.getElementById(product_id+'_'+'stt').setAttribute("class", "label label-rounded label-danger");
+            document.getElementById(product_id+'_'+'stt').innerHTML = "Rejected";
+            document.getElementById(product_id+'_'+'ban').remove();
+            $(".user-modal-alert-success").find("span").text(response.message);
+            $(".user-modal-alert-success").removeClass("d-none");
+            userInfoCurrent = Object.assign(user_id);
+        },
+        error: function (error){
+            $(".user-modal-alert-error").find("span").text(error.responseText);
+            $(".user-modal-alert-error").removeClass("d-none")
+            // console.log("That bai");
+            console.log(error);
+        }
+    });
+}

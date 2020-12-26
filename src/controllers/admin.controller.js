@@ -136,4 +136,22 @@ AdminController.getProduct = async (req, res) => {
         return res.status(500).send(error);
     }
 }
+AdminController.banProduct = async (req, res) => {
+    let productItem = req.params;
+    let product = await ProductService.findProductById(productItem.productId);
+    product.status = '3';
+    try {
+        //Gọi service để kiểm tra các điều kiện
+        await ProductService.banProduct(productItem.productId,product);
+
+        //Thành công thì gửi về messenger thông báo
+        let result = {
+            message:"Banned",
+        }
+        return res.status(200).send(result)
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send(error);
+    }
+}
 export default AdminController;
