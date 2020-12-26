@@ -16,9 +16,10 @@
     <!-- Favicon icon -->
     <link rel="shortcut icon" href="/favicon.ico" />
     <!-- Custom CSS -->
-    <link href="/vendors/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="/adminvendors/chartist/dist/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="/css/style.min.css" rel="stylesheet">
+    <link href="/admincss/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/admincss/alertify/alertify.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -27,11 +28,11 @@
 <![endif]-->
 </head>
 
-<body>
+<body onload="return showProduct('<%-products[0]._id%>')">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
-
+    
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -49,6 +50,7 @@
                     <a class="navbar-brand" href="/products">
                         <!-- Logo icon -->
                         <b class="logo-icon">
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
                             <img src="/img/logo.png" alt="homepage" class="dark-logo" />
                             <!-- Light Logo icon -->
@@ -60,8 +62,8 @@
                     <!-- End Logo -->
                     <!-- ============================================================== -->
                     <!-- This is for the sidebar toggle which is visible on mobile only -->
-                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)">
-                        <i class="ti-menu ti-close"></i></a>
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
+                            class="ti-menu ti-close"></i></a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -91,7 +93,7 @@
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img hidden
                                     src="/img/users/5.jpg" alt="user" class="rounded-circle"
                                     width="31"></a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
@@ -126,12 +128,12 @@
                         <li>
                             <!-- User Profile-->
                             <div class="user-profile d-flex no-block dropdown m-t-20">
-                                <div class="user-pic"><img src="/img/users/5.jpg" alt="users"
+                                <div hidden class="user-pic"><img src="/img/users/5.jpg" alt="users"
                                         class="rounded-circle" width="40" /></div>
                                 <div class="user-content hide-menu m-l-10">
-                                    <a href="javascript:void(0)" class="" id="Userdd" role="button"
+                                    <!-- <a href="javascript:void(0)" class="" id="Userdd" role="button"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <h5 class="m-b-0 user-name font-medium">Hoan Glad <i
+                                        <h5 class="m-b-0 user-name font-medium"><i
                                                 class="fa fa-angle-down"></i></h5>
                                         <span class="op-5 user-email">hoanvn1999@gmail.com</span>
                                     </a>
@@ -148,7 +150,7 @@
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="javascript:void(0)"><i
                                                 class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <!-- End User Profile-->
@@ -236,7 +238,7 @@
                                                 <h6 class="font-medium" onclick="showProduct('<%-product._id%>')" style="cursor: pointer;"><%-product.name%></h6>
                                                 <div class="m-b-15 d-block">
                                                     <span>
-                                                        <b>???</b>
+                                                        <b><%-product.userId%></b>
                                                         <div class="text-warning d-inline">
                                                             <i class="fa fa-star"></i>
                                                             <i class="fa fa-star"></i>
@@ -266,7 +268,7 @@
                                                     </div>      
                                                 </div>
                                                 <div class="comment-footer">
-                                                    <span class="text-muted float-right">April 14, 2016</span>
+                                                    <span class="text-muted float-right"></span>
                                                     <%if(product.status == 1){%>  
                                                         <span class="label label-rounded label-primary">Approved</span>
                                                     <%}else{%>
@@ -310,16 +312,7 @@
                                                 </ol>
                                                 <div class="carousel-inner" role="listbox">
                                                     <div class="carousel-item active">
-                                                        <img src="/img/product/product-1.jpg" class="img-fluid" alt="First image">
-                                                    </div>
-                                                    <div class="carousel-item">
-                                                        <img src="/img/product/product-2.jpg" class="img-fluid"  alt="Second image">
-                                                    </div>
-                                                    <div class="carousel-item">
-                                                        <img src="/img/product/product-3.jpg" class="img-fluid" alt="Third image">
-                                                    </div>
-                                                    <div class="carousel-item">
-                                                        <img src="/img/product/product-4.jpg" class="img-fluid" alt="Fourth image">
+                                                        <img src="/img/product/product-1.jpg" class="img-fluid ava_img" alt="First image">
                                                     </div>
                                                 </div>
                                                 <a class="carousel-control-prev" href="#product_img" role="button" data-slide="prev">
@@ -334,10 +327,10 @@
                                         </div>
                                         <div class="col-8">
                                             <div class="col-12">
-                                                <h6 class="font-medium">Essential structured blazer</h6>
+                                                <h6 id="p_name" class="font-medium">Essential structured blazer</h6>
                                                 <div class="m-b-15 d-block">
                                                     <span>
-                                                        <b>ABC Store</b>
+                                                        <b id="user_id">ABC Store</b>
                                                         <div class="text-warning d-inline">
                                                             <i class="fa fa-star"></i>
                                                             <i class="fa fa-star"></i>
@@ -352,22 +345,22 @@
                                                     </div>
                                                     <div>
                                                         <b>Start time:</b>
-                                                        <span>December 14, 2020 16:30:00</span></div>
+                                                        <span id="start_p">December 14, 2020 16:30:00</span></div>
                                                     <div>
                                                         <b>End time:</b>
-                                                        <span>December 14, 2020 18:30:00</span>
+                                                        <span id="end_p">December 14, 2020 18:30:00</span>
                                                     </div>
                                                     <div>
                                                         <b>Current Price:</b>
-                                                        <span>$30</span>
+                                                        <span id="current_price">$30</span>
                                                     </div>
                                                     <div>
                                                         <b>Step:</b>
-                                                        <span>$10</span>
+                                                        <span id="price_step">$10</span>
                                                     </div>
                                                     <div>
                                                         <b>Expected Price:</b>
-                                                        <span>$300</span>
+                                                        <span id="reserve_price"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -379,45 +372,9 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Description</a>
                                                 </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Delivery</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Reviews (<span>2</span>)</a>
-                                                </li>
                                             </ul>
                                             <div class="tab-content">
-                                                <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                                                    <h6>Description</h6>
-                                                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                                        quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                                        Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                                        voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                                        consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                                        consequat massa quis enim.</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                                        dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                                        nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                                        quis, sem.</p>
-                                                </div>
-                                                <div class="tab-pane" id="tabs-2" role="tabpanel">
-                                                    <h6>Delivery</h6>
-                                                    <p>Chúng tôi sẽ vận chuyển đơn hàng này trong 15 ngày làm việc gần nhất.</p>
-                                                    <p>Vui lòng chuẩn bị sẵn số tiền trên.</p>
-                                                </div>
-                                                <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                                    <h6>Reviews (<span>2</span>)</h6>
-                                                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                                                        quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                                                        Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                                                        voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                                                        consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                                                        consequat massa quis enim.</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                                                        dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                                                        nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                                                        quis, sem.</p>
-                                                </div>
+
                                             </div>
                                         </div>
                                 </div>

@@ -113,7 +113,7 @@ AdminController.getUser = async (req, res) => {
         //Thành công thì gửi về messenger thông báo
         let result = {
             message:"Approved",
-            user:user[0]
+            user:user[0],
         }
         return res.status(200).send(result)
     } catch (error) {

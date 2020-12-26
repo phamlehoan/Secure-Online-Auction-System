@@ -87,7 +87,16 @@ function showProduct(product_id){
         type: "get",
         url: "/admin/product/"+product_id,
         success: function (response) {
-            console.log("sc",response);
+            console.log(response)
+            $(".ava_img").attr("src",response.product.image);
+            $("#p_name").text(response.product.name);
+            $("#start_p").text(response.product.aucStartTime);
+            $("#end_p").text(response.product.aucEndTime);
+            $("#current_price").text(response.product.price);
+            $("#price_step").text(response.product.priceStep);
+            $("#reserve_price").text(response.product.reservePrice);
+            $("#p_des").text(response.product.description);
+            $("#user_id").text(response.product.userId);
         },
         error: function (error){
             $(".user-modal-alert-error").find("span").text(error.responseText);
