@@ -83,7 +83,11 @@ AdminController.banUser = async (req, res) => {
 AdminController.approveUser = async (req, res) => {
     let banUserItem = req.params;
     let user = await UserService.findUserById(banUserItem.userId);
-    user[0].role = 'seller';
+    if(user[0].role == 'seller'){
+        user[0].role = 'buyer';
+    }else{
+        user[0].role = 'seller'
+    }
     try {
         //Gọi service để kiểm tra các điều kiện
         await UserService.banUser(banUserItem.userId,user[0]);
@@ -91,6 +95,7 @@ AdminController.approveUser = async (req, res) => {
         //Thành công thì gửi về messenger thông báo
         let result = {
             message:"Approved",
+            role:user[0].role
         }
         return res.status(200).send(result)
     } catch (error) {
@@ -98,10 +103,9 @@ AdminController.approveUser = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-AdminController.cancelSeller = async (req, res) => {
+AdminController.getUser = async (req, res) => {
     let banUserItem = req.params;
     let user = await UserService.findUserById(banUserItem.userId);
-    user[0].role = 'buyer';
     try {
         //Gọi service để kiểm tra các điều kiện
         await UserService.banUser(banUserItem.userId,user[0]);
@@ -109,6 +113,22 @@ AdminController.cancelSeller = async (req, res) => {
         //Thành công thì gửi về messenger thông báo
         let result = {
             message:"Approved",
+            user:user[0],
+        }
+        return res.status(200).send(result)
+    } catch (error) {
+        console.log(error);
+        return res.status(500).send(error);
+    }
+}
+AdminController.getProduct = async (req, res) => {
+    let productItem = req.params;
+    let product = await ProductService.findProductById(productItem.productId);
+    try {
+        //Thành công thì gửi về messenger thông báo
+        let result = {
+            message:"Approved",
+            product:product
         }
         return res.status(200).send(result)
     } catch (error) {
