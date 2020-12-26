@@ -36,9 +36,9 @@ MailService.winningBid = async (email, product) => {
                             <tbody>
                                 <tr>
                                     <td class="cart__product__item">
-                                        <img src="${product.image}" alt="">
+                                        <img src="${product.image}" alt="" width="100" height="auto">
                                         <div class="cart__product__item__title">
-                                            <h6>${product.name}</h6>
+                                            <h3>${product.name}</h3>
                                             <div class="rating">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -49,7 +49,7 @@ MailService.winningBid = async (email, product) => {
                                         </div>
                                     </td>
                                     <td class="cart__price">$ ${product.price}</td>
-                                    <td class="cart__total">$ 300.0</td>
+                                    <td class="cart__total"></td>
                                     <td class="cart__close"><span class="icon_close"></span></td>
                                 </tr>
                             </tbody>

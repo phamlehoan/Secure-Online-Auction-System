@@ -169,6 +169,7 @@
                     </ul>
                   </div>`;
                     document.querySelectorAll('.product__details__widget')[0].innerHTML = content;
+                    document.getElementById('cart_count').innerHTML = data.cart;
                 }else{
                     document.querySelectorAll('.product__details__widget')[0].innerHTML = `<ul>
                     <li>Product have 0 bid.<span>Winner</span></li>

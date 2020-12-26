@@ -14,14 +14,12 @@ CartService.count = async (userId) => {
 
 CartService.findAndUpdate = async (userId, product) => {
     return await CartModel.findByIdAndUpdate({userId}, {
-        $push : {
-            products: {
+            product: {
                 id: product._id,
                 name: product.name,
                 price: product.price,
                 image: product.image
             }
-        }
     });
 }
 
@@ -29,10 +27,10 @@ CartService.findAll = async (userId) => {
     return await CartModel.find({userId});
 }
 
-CartService.findByUserId = async (userId) => {
-    console.log(userId);
+CartService.findByUserIdAndProductId = async (userId, productId) => {//need to be updated
     return await CartModel.find({
-        "userId": userId
+        userId,
+        "product.id": productId
     });
 }
 

@@ -27,31 +27,20 @@ ProductApi.getProductAndWinner = async (req, res) => {
     let { id } = req.body;//productId
     let product = await ProductService.findProductById(id);
     let winner = await AuctionService.findHighestPrice(id);
-    let existCart = await CartService.findByUserId(winner[0]._id);
+    let existCart = await CartService.findByUserIdAndProductId(winner[0]._id, id);//bug
     console.log("existCart", existCart);
     if (existCart) {
-        await CartService.findAndUpdate(winner[0]._id, {
-            id: id,
-            name: product.name,
-            price: product.price,
-            image: product.image
+        await CartService.save({
+            userId: winner[0].userId.toString(),
+            product: {
+                id: id,
+                name: product.name,
+                price: product.price,
+                image: product.image
+            }
         });
         
-        return res.json({
-            message: 'Product is timeout',
-            product
-        })
     }
-
-    await CartService.save({
-        userId: winner[0].userId.toString(),
-        products: [{
-            id: id,
-            name: product.name,
-            price: product.price,
-            image: product.image
-        }]
-    });
 
     let user = await UserService.findUserById(winner[0].userId);
     await MailService.winningBid(user[0].local.email, {
@@ -59,10 +48,11 @@ ProductApi.getProductAndWinner = async (req, res) => {
         name: product.name,
         price: product.price
     });
-
+    let cart = await CartService.count(req.user._id);
     return res.json({
         product,
-        winner
+        winner,
+        cart
     });
 }
 

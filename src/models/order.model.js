@@ -7,12 +7,12 @@ const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
   userId: String,
-  products: [{
+  product: {
     id: String,
     name: String,
     price: Number,
     image: String
-  }],
+  },
   payment: {
     cardOwner: String,
     cardNumber: String,

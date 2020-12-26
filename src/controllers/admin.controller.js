@@ -129,6 +129,7 @@ AdminController.getProduct = async (req, res) => {
         let result = {
             message:"Approved",
             product:product
+<<<<<<< HEAD
         }
         return res.status(200).send(result)
     } catch (error) {
@@ -147,6 +148,8 @@ AdminController.banProduct = async (req, res) => {
         //Thành công thì gửi về messenger thông báo
         let result = {
             message:"Banned",
+=======
+>>>>>>> origin
         }
         return res.status(200).send(result)
     } catch (error) {
