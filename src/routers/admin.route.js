@@ -42,9 +42,9 @@ router.put('/user/approve/:userId',
     Authorization.isAdmin,
     AdminController.approveUser
 )
-router.put('/user/cancel/:userId',
+router.get('/user/:userId',
     AuthController.checkUser,
     Authorization.isAdmin,
-    AdminController.cancelSeller
+    AdminController.getUser
 )
 module.exports = router;

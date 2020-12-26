@@ -41,9 +41,11 @@ AdminController.getListAccount = async (req, res) => {
 }
 
 AdminController.getListProduct = async (req, res) => {
+    let products = await ProductService.findAll();
     return res.render("main/admin/listProduct",{
+        products,
         data: req.flash("data"),
-        user: req.user,
+        product: req.product,
         errors: req.flash("errors"),
         success:req.flash("success"),
         title: "Admin | Product List"
@@ -81,7 +83,11 @@ AdminController.banUser = async (req, res) => {
 AdminController.approveUser = async (req, res) => {
     let banUserItem = req.params;
     let user = await UserService.findUserById(banUserItem.userId);
-    user[0].role = 'seller';
+    if(user[0].role == 'seller'){
+        user[0].role = 'buyer';
+    }else{
+        user[0].role = 'seller'
+    }
     try {
         //Gọi service để kiểm tra các điều kiện
         await UserService.banUser(banUserItem.userId,user[0]);
@@ -89,6 +95,7 @@ AdminController.approveUser = async (req, res) => {
         //Thành công thì gửi về messenger thông báo
         let result = {
             message:"Approved",
+            role:user[0].role
         }
         return res.status(200).send(result)
     } catch (error) {
@@ -96,10 +103,10 @@ AdminController.approveUser = async (req, res) => {
         return res.status(500).send(error);
     }
 }
-AdminController.cancelSeller = async (req, res) => {
+AdminController.getUser = async (req, res) => {
+    console.log(req)
     let banUserItem = req.params;
     let user = await UserService.findUserById(banUserItem.userId);
-    user[0].role = 'buyer';
     try {
         //Gọi service để kiểm tra các điều kiện
         await UserService.banUser(banUserItem.userId,user[0]);
@@ -107,6 +114,7 @@ AdminController.cancelSeller = async (req, res) => {
         //Thành công thì gửi về messenger thông báo
         let result = {
             message:"Approved",
+            user:user[0]
         }
         return res.status(200).send(result)
     } catch (error) {

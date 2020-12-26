@@ -14,11 +14,12 @@
     <title>SOAS Admin</title>
     <link rel="canonical" href="https://www.wrappixel.com/templates/xtreme-admin-lite/" />
     <!-- Favicon icon -->
-    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
     <!-- Custom CSS -->
     <link href="/vendors/chartist/dist/chartist.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/alertify/alertify.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -27,7 +28,7 @@
 <![endif]-->
 </head>
 
-<body>
+<body onload="return showUser('<%-users[0]._id%>')">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -225,9 +226,9 @@
                         <div id="info-details" class="card">
                             <div class="card-body">
                                 <center class="m-t-10"> <img src="/img/users/2.jpg"
-                                        class="rounded-circle" width="150" />
-                                    <h4 class="card-title mt-3">Thanh Long</h4>
-                                    <h6 class="card-subtitle">Buyer</h6>
+                                        class="rounded-circle ava_img" width="150" />
+                                    <h4 id="user_name" class="card-title mt-3">Thanh Long</h4>
+                                    <h6 id="user_role" class="card-subtitle">Buyer</h6>
                                 </center>
                             </div>
                             <div>
@@ -235,11 +236,11 @@
                             </div>
                             <div class="card-body">                                                                
                                 <small class="text-muted p-t-30 db">Email address</small>
-                                <h6>long@example.com</h6> 
+                                <h6 id="user_email">long@example.com</h6> 
                                 <div class="row">
                                     <div class="col-6">
                                         <small class="text-muted p-t-30 db">Phone</small>
-                                        <h6>0912345678</h6>
+                                        <h6 id="user_phone">0912345678</h6>
                                     </div>
                                     <div class="col-6">
                                         <small class="text-muted">Account type</small>
@@ -249,21 +250,20 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <small class="text-muted p-t-30 db">Birthday</small>
-                                    <h6>30/04/1998</h6>
+                                    <h6 id="user_birthday">30/04/1998</h6>
                                     </div>
                                     <div class="col-6">
                                         <small class="text-muted p-t-30 db">Gender</small>
-                                        <h6>Male</h6>
+                                        <h6 id="user_gender">Male</h6>
                                     </div>
                                 </div>  
                                 <small class="text-muted p-t-30 db">Address</small>
-                                <h6>Hoa Khanh - Da Nang</h6>
+                                <h6 id="user_address">Hoa Khanh - Da Nang</h6>
                                 <small class="text-muted p-t-30 db">Identify card</small>
                                 <div class="row pb-2">
-                                    <div class="col-6"><img src="" class="img-fluid" alt="Identify card front"></div> 
-                                    <div class="col-6"><img src="" class="img-fluid" alt="Identify card back"></div>
+                                    <div class="col-6"><img src="" class="img-fluid f" alt="Identify card front"></div> 
+                                    <div class="col-6"><img src="" class="img-fluid b" alt="Identify card back"></div>
                                 </div> 
-                                <small class="text-muted p-t-50 db">This person want to be a seller</small>
                                 <div class="pt-1 row">
                                     <div class="col-6 text-right">
                                         <button type="button" class="btn btn-success">Accept</button>
@@ -304,40 +304,42 @@
                                         <%if(users){%>
                                             <%users.forEach(user => {%>
                                                 <tr>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="m-r-10">
-                                                                    <img src= <%-user.avatarUrl%> class="btn btn-circle d-flex btn-secondary text-white" alt="Product item" style="padding: 0px;">
+                                                    <div>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="m-r-10">
+                                                                        <img src= <%-user.avatarUrl%> class="btn btn-circle d-flex btn-secondary text-white" alt="Product item" style="padding: 0px;">
+                                                                </div>
+                                                                <div class="">
+                                                                    <h4 class="m-b-0 font-16" id=<%-user._id%> onclick="showUser('<%-user._id%>');" style="cursor: pointer;"><%-user.personalInfo.firstname + ' ' + user.personalInfo.lastname%></h4>
+                                                                </div>
                                                             </div>
-                                                            <div class="">
-                                                                <h4 class="m-b-0 font-16"><%-user.personalInfo.firstname + ' ' + user.personalInfo.lastname%></h4>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td><%-user.local.email%></td>
-                                                    <td><%-user.role%></td>
-                                                    <%if(user.role == 'seller'){%>
-                                                        <td><label class="label label-success">Accepted</label></td>
-                                                    <%}else if(user.role == 'buyer'){%>
-                                                        <%if(user.identifyCard){%>
-                                                            <td><label class="label label-warning">Pending</label></td>
-                                                        <%}else{%>   
-                                                            <td><label class="label label-primary">Actived</label></td>
+                                                        </td>
+                                                        <td><%-user.local.email%></td>
+                                                        <td id="<%-user._id%>_role"><%-user.role%></td>
+                                                        <%if(user.role == 'seller'){%>
+                                                            <td><label id="<%-user._id%>_stt" class="label label-success">Accepted</label></td>
+                                                        <%}else if(user.role == 'buyer'){%>
+                                                            <%if(user.identifyCard){%>
+                                                                <td><label id="<%-user._id%>_stt" class="label label-warning">Pending</label></td>
+                                                            <%}else{%>   
+                                                                <td><label id="<%-user._id%>_stt" class="label label-primary">Actived</label></td>
+                                                            <%}%>
+                                                        <%}else{%>
+                                                            <td><label id="<%-user._id%>_stt" class="label label-danger">Banned</label></td>
                                                         <%}%>
-                                                    <%}else{%>
-                                                        <td><label class="label label-danger">Banned</label></td>
-                                                    <%}%>
+                                                    </div>    
                                                     <td>
                                                         <%if(user.role == 'banned'){%>
-                                                            <a href="javascript:void(0)"><i class="p-1 fa fa-eye text-white bg-primary rounded"></i>???</a>
+                                                            <i id="<%-user._id%>_test" class="p-1 fa fa-eye text-white bg-primary rounded" onclick="return show('<%-user._id%>')" style="cursor: pointer;"></i>
                                                         <%}else{%>
-                                                            <i class="p-1 fa fa-ban text-white bg-danger rounded" onclick="return banUser('<%-user._id%>')">Ban</i>
+                                                            <i id="<%-user._id%>_ban" class="p-1 fa fa-ban text-white bg-danger rounded" onclick="return banUser('<%-user._id%>')" style="cursor: pointer;"></i>
                                                         <%}%>
                                                         <%if(user.role == 'seller'){%>
-                                                            <i class="p-1 fa fa-times-circle text-white bg-danger rounded" onclick="return cancel('<%-user._id%>')">Cancel Seller</i>
+                                                            <i id="<%-user._id%>_approve" class="p-1 fa fa-times-circle text-white bg-danger rounded" onclick="return approve('<%-user._id%>')" style="cursor: pointer;"></i>
                                                         <%}%>        
                                                         <%if(user.role == 'buyer'){%>
-                                                                <i class="p-1 fa fa-check text-white bg-success rounded" onclick="return approve('<%-user._id%>')">Approve Seller</i>
+                                                            <i id="<%-user._id%>_approve" class="p-1 fa fa-check text-white bg-success rounded" onclick="return approve('<%-user._id%>')" style="cursor: pointer;"></i>
                                                         <%}%>
                                                     </td>
                                                 </tr>
@@ -385,21 +387,23 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="vendors/jquery/dist/jquery.min.js"></script>
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
-    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="js/app-style-switcher.js"></script>
+    <script src="/vendors/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/js/app-style-switcher.js"></script>
     <!--Wave Effects -->
-    <script src="js/waves.js"></script>
+    <script src="/js/waves.js"></script>
     <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
+    <script src="/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="js/custom.js"></script>
+    <script src="/js/custom.js"></script>
     <!--This page JavaScript -->
     <script src="/js/admin.script.js"></script>
     <script src="/js/alertify.js"></script>
     <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/alertify.js"></script>
+    <script src="/js/sweetalert2.all.min.js"></script>
 </body>
 
 </html>
