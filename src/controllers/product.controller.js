@@ -248,6 +248,7 @@ ProductController.deleteProduct = async (req, res) => {
 
 ProductController.getCart = async (req, res) => {
     let products = await CartService.findAll(req.user._id);
+    console.log(products);
     return res.render('main/cart/cart', {
         products,
         title: 'Cart 💲'
