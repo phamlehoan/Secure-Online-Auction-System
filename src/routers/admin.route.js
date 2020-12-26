@@ -52,4 +52,12 @@ router.get('/product/:productId',
     Authorization.isAdmin,
     AdminController.getProduct
 )
+<<<<<<< HEAD
+router.put('/product/ban/:productId',
+    AuthController.checkUser,
+    Authorization.isAdmin,
+    AdminController.banProduct
+)
+=======
+>>>>>>> origin
 module.exports = router;

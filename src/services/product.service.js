@@ -161,4 +161,8 @@ ProductService.changeStatus = async (productId) => {
     )
 }
 
+ProductService.banProduct = async (id,file) => {
+    return ProductModel.findByIdAndUpdate(id, file);
+}
+
 export default ProductService;
